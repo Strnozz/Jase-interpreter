@@ -1,0 +1,180 @@
+{
+  "dataset_version": "v19_clean",
+  "training_seed": 2026,
+  "generation_seed": {
+    "value": null,
+    "note": "Original v19 invocation was not persisted; generator default is 2026"
+  },
+  "source_manifest_sha256": null,
+  "splits": {
+    "train": {
+      "path": "data\\v19_clean\\train.jsonl",
+      "sha256": "be60aeff915621af70be3d786de8f1712af9354a1394e6918701d52118f3a4a9",
+      "rows": 27504,
+      "unique_prompts": 24489,
+      "duplicate_prompt_rows": 3015,
+      "actions": {
+        "book": 4353,
+        "buy": 2593,
+        "cancel": 161,
+        "compare": 972,
+        "contact": 668,
+        "find": 17700,
+        "hire": 275,
+        "monitor": 578,
+        "notify": 65,
+        "order": 391,
+        "rent": 638
+      },
+      "tags": {},
+      "rare_actions_under_1pct": [
+        "cancel",
+        "hire",
+        "notify"
+      ],
+      "mean_input_chars": 60.59,
+      "mean_output_chars": 438.94,
+      "families": 0
+    },
+    "validation": {
+      "path": "data\\v19_clean\\valid.jsonl",
+      "sha256": "cc21ce6ef600d09b30078674ae0ed8d7f0f3fa7956b5f65720e7c2ca11ea83f2",
+      "rows": 2310,
+      "unique_prompts": 2148,
+      "duplicate_prompt_rows": 162,
+      "actions": {
+        "book": 411,
+        "buy": 194,
+        "cancel": 14,
+        "compare": 67,
+        "contact": 59,
+        "find": 1504,
+        "hire": 29,
+        "monitor": 21,
+        "order": 36,
+        "rent": 53
+      },
+      "tags": {},
+      "rare_actions_under_1pct": [
+        "cancel",
+        "monitor"
+      ],
+      "mean_input_chars": 62.13,
+      "mean_output_chars": 444.1,
+      "families": 0
+    },
+    "dev_panel": {
+      "path": "data\\v20_quality\\dev.jsonl",
+      "sha256": "cbb5906ce72196f28358be57d51ce3bd47ea4b99152325a821bfe0d16be999ad",
+      "rows": 256,
+      "unique_prompts": 253,
+      "duplicate_prompt_rows": 3,
+      "actions": {
+        "book": 27,
+        "buy": 28,
+        "compare": 11,
+        "contact": 7,
+        "find": 168,
+        "monitor": 6,
+        "order": 3,
+        "rent": 16
+      },
+      "tags": {
+        "clarification": 10,
+        "gate": 28,
+        "implicit-action": 27,
+        "multi-goal": 10,
+        "negation": 15,
+        "preference": 39,
+        "three-plus-facts": 103,
+        "v19-exact-seen": 10,
+        "v19-exact-unseen": 246
+      },
+      "rare_actions_under_1pct": [],
+      "mean_input_chars": 64.83,
+      "mean_output_chars": 449.84,
+      "families": 0
+    },
+    "test_holdout": {
+      "path": "benchmarks\\release_holdout_v1.jsonl",
+      "sha256": "c625dc1fe83cd82b2f01b509f5e4ef4d90700c06f53d6a6fbb6ff30a7e9c7638",
+      "rows": 27,
+      "unique_prompts": 27,
+      "duplicate_prompt_rows": 0,
+      "actions": {
+        "book": 2,
+        "buy": 2,
+        "find": 23,
+        "monitor": 1,
+        "rent": 1
+      },
+      "tags": {
+        "ambigua": 2,
+        "anafora": 1,
+        "availability": 1,
+        "azione-implicita": 2,
+        "chiarimento": 3,
+        "condizionale": 2,
+        "contrasto": 1,
+        "ellissi": 1,
+        "gate": 1,
+        "lista": 2,
+        "monitor": 1,
+        "multi-frase": 1,
+        "multi-goal": 2,
+        "negazione": 4,
+        "non-rappresentabile": 1,
+        "numeri-ruoli": 3,
+        "obbligo": 1,
+        "preferenza": 4,
+        "pronome": 2,
+        "quantita": 2,
+        "refuso": 3,
+        "ripensamento": 3,
+        "slang": 2,
+        "soglia": 1,
+        "spontaneo": 3,
+        "target-vago": 2,
+        "unita": 2,
+        "vincolo-condiviso": 1,
+        "vocabolario-aperto": 1
+      },
+      "rare_actions_under_1pct": [],
+      "mean_input_chars": 61.67,
+      "mean_output_chars": 433.78,
+      "families": 0
+    }
+  },
+  "canonical_lf_sha256": {
+    "train": "7c5ad4add63497a48f6e71b13939e069a9ce99d27312023074d81952aa1891b1",
+    "validation": "8fa3027fadc51566d357937511eaedb454fba0886fa5aa55f9cc03cc2e2a63bb",
+    "dev_panel": "fd5ca08016fd72a92376aa5aa5dfcfdfb9dd33de77a0b9acd1fb44ed1ad13c64",
+    "test_holdout": "4477fa1c753af509ad50e316859f2b07ff1d030cd25250b99ac30be117722137"
+  },
+  "exact_text_intersections": {
+    "train_x_validation": 4,
+    "train_x_dev_panel": 8,
+    "train_x_test_holdout": 0,
+    "validation_x_test_holdout": 0
+  },
+  "effective_validation_rows": 2143,
+  "validation_cleaning": {
+    "source_rows": 2310,
+    "effective_rows": 2143,
+    "overlap_prompts_removed": 4,
+    "conflicting_prompts_removed": 1,
+    "duplicate_rows_removed": 160
+  },
+  "roles": {
+    "train": "training",
+    "validation": "loss and tuning",
+    "dev_panel": "v20 validation subset; 10 cases overlap v19 training and are excluded from the primary panel",
+    "test_holdout": "independent release set; sealed, never for tuning"
+  },
+  "limitations": [
+    "Four historical train-validation text overlaps are filtered from validation in the new trainer; the 2B training corpus is untouched",
+    "Synthetic train and validation share a generator",
+    "Release holdout has 27 examples and was written by the project author",
+    "No human-sourced independent test set is present"
+  ]
+}

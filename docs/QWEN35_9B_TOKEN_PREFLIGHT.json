@@ -1,0 +1,32 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "max_length": 512,
+  "validation_cleaning": {
+    "source_rows": 2310,
+    "effective_rows": 2143,
+    "overlap_prompts_removed": 4,
+    "conflicting_prompts_removed": 1,
+    "duplicate_rows_removed": 160
+  },
+  "data_sha256": {
+    "train": "be60aeff915621af70be3d786de8f1712af9354a1394e6918701d52118f3a4a9",
+    "valid": "cc21ce6ef600d09b30078674ae0ed8d7f0f3fa7956b5f65720e7c2ca11ea83f2"
+  },
+  "train": {
+    "rows": 27504,
+    "min_tokens": 111,
+    "median_tokens": 159,
+    "p99_tokens": 252,
+    "max_tokens": 327,
+    "truncated": 0
+  },
+  "validation": {
+    "rows": 2143,
+    "min_tokens": 115,
+    "median_tokens": 161,
+    "p99_tokens": 254,
+    "max_tokens": 304,
+    "truncated": 0
+  }
+}

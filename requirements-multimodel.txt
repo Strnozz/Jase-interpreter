@@ -1,0 +1,10 @@
+# Install torch==2.9.1 and torchvision==0.24.1 from
+# https://download.pytorch.org/whl/cu128 first (CUDA 12.8 wheels).
+transformers==5.17.0
+accelerate==1.15.0
+peft==0.21.0
+bitsandbytes==0.50.2
+huggingface-hub==1.33.0
+jsonschema==4.26.0
+safetensors==0.8.0
+psutil==7.2.2

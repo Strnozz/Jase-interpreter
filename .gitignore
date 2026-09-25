@@ -1,4 +1,15 @@
 .venv/
+.venv-nvidia/
+hf-cache/
+models/original/
+models/merged/
+models/quantized/
+benchmarks/outputs/
+training/runs/
+*.safetensors
+*.pt
+*.pth
+*.gguf
 __pycache__/
 *.pyc
 .DS_Store

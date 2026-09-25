@@ -1,0 +1,13 @@
+{
+  "name": "qwen35-2b",
+  "model_id": "mlx-community/Qwen3.5-2B-4bit",
+  "backend": "mlx",
+  "params_billion": 2,
+  "quantization_label": "MLX 4-bit",
+  "adapter": "adapters/jase-v19-cap16",
+  "baseline": true,
+  "dataset": "data/v19_clean",
+  "benchmark": "benchmarks/gold_v1.jsonl",
+  "schema": "schema/goal_contract_v1_1.schema.json",
+  "status": "historical_adapter_not_present_on_this_host"
+}

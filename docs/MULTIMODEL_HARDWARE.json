@@ -1,0 +1,23 @@
+{
+  "os": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14",
+  "pip": "pip 25.0.1 from C:\\Users\\jerry\\Desktop\\jase-interpreter\\.venv-nvidia\\Lib\\site-packages\\pip (python 3.12)",
+  "torch": "2.9.1+cu128",
+  "gpu": {
+    "available": true,
+    "torch_cuda": "12.8",
+    "name": "NVIDIA GeForce RTX 4080 SUPER",
+    "total_vram_bytes": 17170956288,
+    "bf16": true,
+    "compute_capability": [
+      8,
+      9
+    ],
+    "matmul_sample": -14.662402153015137,
+    "matmul_passed": true
+  },
+  "nvidia_smi": "596.49, 14358",
+  "ram_bytes": 33514676224,
+  "disk_free_bytes": 133323223040,
+  "disk_total_bytes": 999172337664
+}

@@ -1,0 +1,7 @@
+{"id":"simple-search","category":"simple","text":"Cercami una farmacia aperta ora a Torino."}
+{"id":"multi-constraints","category":"constraints","text":"Trova un ristorante vegetariano a Firenze, aperto dopo le 21 e con spesa massima di 35 euro."}
+{"id":"ambiguous-booking","category":"ambiguous","text":"Prenotami un tavolo per stasera."}
+{"id":"multi-step-travel","category":"multi-step","text":"Cerca un treno per Bologna domani mattina, confronta i prezzi e avvisami del più economico senza acquistare."}
+{"id":"communication","category":"tool-capability","text":"Invia una mail a Marta dicendo che arrivo alle 19."}
+{"id":"confirmation-gate","category":"confirmation","text":"Trova un hotel a Napoli sotto i 100 euro, ma non prenotare finché non confermo."}
+{"id":"search-only","category":"no-confirmation","text":"Dimmi quali farmacie sono aperte vicino alla stazione di Milano Centrale."}

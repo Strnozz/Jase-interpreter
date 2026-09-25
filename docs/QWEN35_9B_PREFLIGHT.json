@@ -1,0 +1,13 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "license": "apache-2.0",
+  "safetensors_files": 4,
+  "weight_bytes": 19306310880,
+  "architecture": [
+    "Qwen3_5ForConditionalGeneration"
+  ],
+  "model_type": "qwen3_5",
+  "chat_template_ok": true,
+  "has_processor": true
+}

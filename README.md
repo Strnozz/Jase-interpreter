@@ -1,5 +1,9 @@
 # Jase Interpreter 2B — Starter Kit
 
+> Pipeline multi-model NVIDIA: [fase iniziale](docs/MULTIMODEL_PHASE1.md) e [training Jase 9B](docs/JASE_9B_TRAINING.md).
+> La baseline MLX 2B resta invariata; il nuovo runner QLoRA usa un ambiente
+> `.venv-nvidia` separato e configurazioni in `configs/models/`.
+
 Obiettivo: specializzare `Qwen3.5-2B` affinché trasformi una richiesta umana in un **Jase GoalContract v1** JSON, senza tentare di conoscere a priori tutti gli oggetti del mondo.
 
 Il principio è:
