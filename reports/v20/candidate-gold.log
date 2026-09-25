@@ -1,0 +1,101 @@
+  ...25/102
+  ...50/102
+  ...75/102
+  ...100/102
+{
+  "label": "candidate-gold",
+  "examples": 102,
+  "seconds": 197.9,
+  "guard": {
+    "status": {
+      "ACCEPT": 95,
+      "REPAIRED": 3,
+      "CLARIFY": 4
+    },
+    "extraction_errors": {},
+    "blocked_rate": 0.0392,
+    "repaired_rate": 0.0294,
+    "accepted_rate": 0.9314
+  },
+  "release_gates": {
+    "mandatory_total": 85,
+    "mandatory_passed": 80,
+    "mandatory_rate": 0.9412,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 9
+  },
+  "guarded": {
+    "examples": 102,
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 1.0,
+      "target_name_accuracy": 0.9619,
+      "target_type_accuracy": 0.981
+    },
+    "facts": {
+      "precision": 0.9706,
+      "recall": 0.9066,
+      "tp": 165,
+      "fp": 4,
+      "fn": 16,
+      "value_errors": 1
+    },
+    "roles": {
+      "bucket_accuracy": 0.9939,
+      "operator_accuracy": 0.9879,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.9487,
+        "recall": 0.8043,
+        "tp": 37,
+        "fp": 2,
+        "fn": 9
+      },
+      "constraints": {
+        "precision": 0.9669,
+        "recall": 0.936,
+        "tp": 117,
+        "fp": 4,
+        "fn": 8
+      },
+      "preferences": {
+        "precision": 1.0,
+        "recall": 0.9091,
+        "tp": 10,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.1569,
+      "hallucinated_fact_rate": 0.0392,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.8725,
+      "cosmetic_exact_rate": 0.4608,
+      "clarification_accuracy": 0.951,
+      "gate_accuracy": 1.0
+    }
+  },
+  "failure_taxonomy": {
+    "missing_fact": 7,
+    "clarification": 5,
+    "target_name": 4,
+    "guard:CLARIFY": 4,
+    "hallucinated_fact": 3,
+    "target_type": 2,
+    "operator:eq->contains": 1,
+    "bucket:preferences->constraints": 1,
+    "operator:contains->eq": 1,
+    "value_error": 1
+  }
+}
+
+report completo: /Users/simoneromano/Desktop/jase-interpreter-starter/reports/v20/candidate-gold.json

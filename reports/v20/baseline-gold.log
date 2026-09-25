@@ -1,0 +1,101 @@
+  ...25/102
+  ...50/102
+  ...75/102
+  ...100/102
+{
+  "label": "baseline-gold",
+  "examples": 102,
+  "seconds": 191.6,
+  "guard": {
+    "status": {
+      "ACCEPT": 95,
+      "CLARIFY": 6,
+      "REPAIRED": 1
+    },
+    "extraction_errors": {},
+    "blocked_rate": 0.0588,
+    "repaired_rate": 0.0098,
+    "accepted_rate": 0.9314
+  },
+  "release_gates": {
+    "mandatory_total": 85,
+    "mandatory_passed": 77,
+    "mandatory_rate": 0.9059,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 10
+  },
+  "guarded": {
+    "examples": 102,
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 1.0,
+      "target_name_accuracy": 0.9619,
+      "target_type_accuracy": 0.981
+    },
+    "facts": {
+      "precision": 0.9455,
+      "recall": 0.8571,
+      "tp": 156,
+      "fp": 7,
+      "fn": 24,
+      "value_errors": 2
+    },
+    "roles": {
+      "bucket_accuracy": 1.0,
+      "operator_accuracy": 0.9808,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.875,
+        "recall": 0.7609,
+        "tp": 35,
+        "fp": 5,
+        "fn": 11
+      },
+      "constraints": {
+        "precision": 0.9655,
+        "recall": 0.896,
+        "tp": 112,
+        "fp": 4,
+        "fn": 13
+      },
+      "preferences": {
+        "precision": 1.0,
+        "recall": 0.8182,
+        "tp": 9,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.2353,
+      "hallucinated_fact_rate": 0.0686,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.8431,
+      "cosmetic_exact_rate": 0.451,
+      "clarification_accuracy": 0.9314,
+      "gate_accuracy": 1.0
+    }
+  },
+  "failure_taxonomy": {
+    "missing_fact": 10,
+    "clarification": 7,
+    "guard:CLARIFY": 6,
+    "target_name": 4,
+    "hallucinated_fact": 4,
+    "target_type": 2,
+    "value_error": 2,
+    "operator:eq->contains": 1,
+    "operator:contains->eq": 1,
+    "operator:neq->excludes": 1
+  }
+}
+
+report completo: /Users/simoneromano/Desktop/jase-interpreter-starter/reports/v20/baseline-gold.json

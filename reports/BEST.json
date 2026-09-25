@@ -1,0 +1,72 @@
+{
+  "report": "076-pipe-strict.json",
+  "label": "jase-soup-tris-PIPE-strict",
+  "adapter": "adapters/jase-soup-tris",
+  "release_gates": {
+    "mandatory_total": 85,
+    "mandatory_passed": 79,
+    "mandatory_rate": 0.9294,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 12
+  },
+  "guarded": {
+    "examples": 102,
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 1.0,
+      "target_name_accuracy": 0.9238,
+      "target_type_accuracy": 0.9524
+    },
+    "facts": {
+      "precision": 0.9744,
+      "recall": 0.8352,
+      "tp": 152,
+      "fp": 2,
+      "fn": 28,
+      "value_errors": 2
+    },
+    "roles": {
+      "bucket_accuracy": 0.9934,
+      "operator_accuracy": 1.0,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.9697,
+        "recall": 0.6957,
+        "tp": 32,
+        "fp": 1,
+        "fn": 14
+      },
+      "constraints": {
+        "precision": 0.9737,
+        "recall": 0.888,
+        "tp": 111,
+        "fp": 3,
+        "fn": 14
+      },
+      "preferences": {
+        "precision": 0.8889,
+        "recall": 0.7273,
+        "tp": 8,
+        "fp": 1,
+        "fn": 3
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.2745,
+      "hallucinated_fact_rate": 0.0196,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.8333,
+      "cosmetic_exact_rate": 0.4706,
+      "clarification_accuracy": 0.951,
+      "gate_accuracy": 1.0
+    }
+  }
+}

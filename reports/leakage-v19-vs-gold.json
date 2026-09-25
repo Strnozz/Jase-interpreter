@@ -1,0 +1,120 @@
+{
+  "train": "/Users/simoneromano/Desktop/jase-interpreter-starter/data/v19_clean/train.jsonl",
+  "against": "/Users/simoneromano/Desktop/jase-interpreter-starter/benchmarks/gold_v1.jsonl",
+  "train_examples": 27504,
+  "against_examples": 102,
+  "exact_count": 0,
+  "near_count": 18,
+  "near_threshold": 0.8,
+  "exact": [],
+  "near": [
+    {
+      "score": 0.875,
+      "against_id": "con-004",
+      "against_text": "Vorrei un panino che deve avere la mortadella",
+      "train_text": "Vorrei un panino che deve avere mortadella"
+    },
+    {
+      "score": 0.8571,
+      "against_id": "con-003",
+      "against_text": "Vorrei un panino possibilmente con la mortadella",
+      "train_text": "Vorrei un panino possibilmente con mortadella"
+    },
+    {
+      "score": 0.8333,
+      "against_id": "con-001",
+      "against_text": "Vorrei un panino con la mortadella",
+      "train_text": "Vorrei un panino con mortadella"
+    },
+    {
+      "score": 0.8333,
+      "against_id": "con-002",
+      "against_text": "Vorrei un panino senza mortadella",
+      "train_text": "Vorrei un panino preferirei senza mortadella"
+    },
+    {
+      "score": 0.8333,
+      "against_id": "con-002",
+      "against_text": "Vorrei un panino senza mortadella",
+      "train_text": "Vorrei un panino preferibilmente senza mortadella"
+    },
+    {
+      "score": 0.8333,
+      "against_id": "con-020",
+      "against_text": "Prenotami un tavolo alle 20",
+      "train_text": "Prenotami un tavolo alle 20 grazie"
+    },
+    {
+      "score": 0.8333,
+      "against_id": "con-031",
+      "against_text": "Trovami un'auto non rossa",
+      "train_text": "Trovami un'auto usata, non rossa"
+    },
+    {
+      "score": 0.8,
+      "against_id": "con-030",
+      "against_text": "Trovami un'auto rossa",
+      "train_text": "Trovami un'auto usata, rossa"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 300€ comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 200€ comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 10€ comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 500 comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 100€ comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 800 comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 20€ comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 1500€ comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 50 comprala, altrimenti dimmi dove l'hai vista"
+    },
+    {
+      "score": 0.8,
+      "against_id": "cond-001",
+      "against_text": "Se la trovi sotto i 600 comprala, altrimenti dimmi solo dove l'hai vista.",
+      "train_text": "Se la trovi sotto i 1000 comprala, altrimenti dimmi dove l'hai vista"
+    }
+  ]
+}

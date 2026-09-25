@@ -1,0 +1,1 @@
+{"id": "108-soup-v15", "cmd": [".venv/bin/python", "scripts/soup_adapters.py", "adapters/jase-v15-soup", "adapters/jase-v15/0012000_adapters.safetensors", "adapters/jase-v15/0014000_adapters.safetensors", "adapters/jase-v15/0016000_adapters.safetensors", "adapters/jase-v15/adapters.safetensors"], "timeout": 600, "tail_lines": 30}

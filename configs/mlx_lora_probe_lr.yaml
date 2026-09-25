@@ -1,0 +1,50 @@
+# Jase Interpreter — v14
+#
+# Il v13 ha trovato il massimo della curva: 16 000 iterazioni. A 18 000
+# peggiora su quindici tag su venti, quindi da qui in poi 17 000 con un
+# checkpoint ogni 2000 e si sceglie sul gold, non sull'ultimo.
+#
+# Cosa cambia nei dati (data/v14), dai 13 casi mandatory falliti dal v13:
+#   • "due biglietti" era una FRASE DEL TARGET senza `quantity` nel
+#     contratto: il dataset insegnava esattamente l'omissione che poi
+#     misuravo su nat-020. Ora la quantità la produce il fatto, che scrive
+#     anche la frase, e i numeri piccoli si dicono in lettere ("due
+#     biglietti", "tre amplificatori") come si fa parlando
+#   • "un allevatore di Zwergschnauzer": la razza è `breed`, non la
+#     specializzazione del professionista (open-004)
+#   • target vaghi tenuti parola per parola — "qualcosa da mangiare" non
+#     diventa `food` (§8 vieta di astrarre, amb-004)
+#   • blocco nuovo: una parola di tempo accanto a una soglia di prezzo.
+#     In "un elettricista stasera entro 100 euro" l'`entro` governa i cento
+#     euro, non la sera, e il modello produceva `date before stasera`
+#   • `monitor`: il ramo "avvisami se…" passa dal 25% al 40% del blocco
+#     condizionale, l'unico posto dove quell'azione si impara
+#
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v14"
+seed: 2026
+num_layers: 8
+batch_size: 1
+iters: 60
+val_batches: 25
+learning_rate: 0.00003
+steps_per_report: 50
+steps_per_eval: 1000
+grad_accumulation_steps: 4
+adapter_path: "adapters/probe-lr"
+save_every: 1000
+test: false
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 16
+  scale: 32.0
+  dropout: 0.05
+lr_schedule:
+  name: cosine_decay
+  warmup: 10
+  arguments: [3.0e-5, 60, 3.0e-6]

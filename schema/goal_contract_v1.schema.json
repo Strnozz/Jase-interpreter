@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jase.local/schemas/goal-contract-v1.json",
+  "title": "Jase GoalContract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "goals", "clarification"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "goals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/goal"}
+    },
+    "clarification": {"$ref": "#/$defs/clarification"}
+  },
+  "$defs": {
+    "scalar": {
+      "type": ["string", "number", "integer", "boolean", "null"]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "raw"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "type": {"type": ["string", "null"]},
+        "raw": {"type": "string", "minLength": 1}
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["property", "operator", "value"],
+      "properties": {
+        "property": {"type": "string", "minLength": 1},
+        "operator": {
+          "type": "string",
+          "enum": [
+            "eq", "neq", "lt", "lte", "gt", "gte",
+            "contains", "excludes", "before", "after",
+            "near", "within", "between", "in", "not_in"
+          ]
+        },
+        "value": {"$ref": "#/$defs/scalar"},
+        "value_to": {"$ref": "#/$defs/scalar"},
+        "unit": {"type": ["string", "null"]},
+        "currency": {"type": ["string", "null"]},
+        "reference": {"type": ["string", "null"]}
+      }
+    },
+    "goal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "raw_action", "target", "attributes", "constraints", "preferences"],
+      "properties": {
+        "action": {"type": "string", "minLength": 1},
+        "raw_action": {"type": "string", "minLength": 1},
+        "target": {"$ref": "#/$defs/target"},
+        "attributes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/predicate"}
+        },
+        "constraints": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/predicate"}
+        },
+        "preferences": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/predicate"}
+        }
+      }
+    },
+    "clarification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "reason", "missing_fields"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "reason": {"type": ["string", "null"]},
+        "missing_fields": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

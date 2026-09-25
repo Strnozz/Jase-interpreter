@@ -1,0 +1,1 @@
+{"id": "112-eval-v16-16000", "cmd": [".venv/bin/python", "scripts/eval_v2.py", "--adapter", "adapters/jase-v16-iter16000", "--max-tokens", "640", "--label", "jase-v16-iter16000", "--report", "reports/064-v16-iter16000.json"], "timeout": 3600, "tail_lines": 30}

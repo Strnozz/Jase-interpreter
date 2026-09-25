@@ -1,0 +1,34 @@
+{
+  "metal_available": true,
+  "model_snapshot": "/Users/simoneromano/.cache/huggingface/hub/models--mlx-community--Qwen3.5-2B-4bit/snapshots/674aaa7240b91e8012fcad5d791b7dfe5ba90207",
+  "model_revision": "674aaa7240b91e8012fcad5d791b7dfe5ba90207",
+  "token_lengths": {
+    "train": {
+      "rows": 24560,
+      "min": 111,
+      "median": 161,
+      "p99": 253,
+      "max": 328,
+      "truncated": 0
+    },
+    "valid": {
+      "rows": 2191,
+      "min": 111,
+      "median": 160,
+      "p99": 265,
+      "max": 307,
+      "truncated": 0
+    }
+  },
+  "mask_and_inference_prefix_match": true,
+  "microbatches": 13000,
+  "optimizer_updates": 3250,
+  "epochs": 0.5293159609120521,
+  "versions": {
+    "mlx": "0.32.2",
+    "mlx-lm": "0.31.3",
+    "transformers": "5.17.0",
+    "jsonschema": "4.26.0",
+    "numpy": "2.4.6"
+  }
+}

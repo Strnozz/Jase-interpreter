@@ -1,0 +1,26 @@
+# Ripiego se il config v2 esaurisce la memoria METAL.
+# Stessa configurazione che nel v1 aveva retto con ~3 GB di picco.
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v2"
+seed: 2026
+num_layers: 4
+batch_size: 1
+iters: 1500
+val_batches: 15
+learning_rate: 0.00003
+steps_per_report: 25
+steps_per_eval: 100
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v2-lowmem"
+save_every: 100
+test: false
+max_seq_length: 448
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 8
+  scale: 16.0
+  dropout: 0.05

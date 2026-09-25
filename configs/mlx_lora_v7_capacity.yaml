@@ -1,0 +1,35 @@
+# Jase Interpreter — esperimento di CAPACITÀ (v7)
+#
+# Ipotesi da falsificare: il plateau al 53% dipende dalla capacità
+# dell'adattatore, non dai dati. Per isolare la variabile i dati restano
+# ESATTAMENTE quelli del v6; cambiano solo gli strati adattati (8 → 16) e il
+# rank (16 → 32), da 5.6M a circa 22M parametri allenabili.
+#
+# Rischio memoria: il v1 andò in METAL OOM con 8 strati e sequenze da 1280.
+# Qui le sequenze restano a 512 e il grad checkpoint è attivo, ma se il job
+# fallisce per memoria la risposta è "questa capacità non entra sul Mac",
+# non un errore da aggirare.
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v6"
+seed: 2026
+num_layers: 16
+batch_size: 1
+iters: 3000
+val_batches: 25
+learning_rate: 0.00003
+steps_per_report: 50
+steps_per_eval: 250
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v7cap"
+save_every: 500
+test: false
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 32
+  scale: 64.0
+  dropout: 0.05

@@ -1,0 +1,5 @@
+ms-swift
+transformers>=5.7.0
+bitsandbytes
+jsonschema>=4.23
+requests>=2.32

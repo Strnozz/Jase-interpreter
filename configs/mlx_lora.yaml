@@ -1,0 +1,24 @@
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data"
+seed: 42
+num_layers: 8
+batch_size: 1
+iters: 600
+val_batches: 25
+learning_rate: 0.00002
+steps_per_report: 10
+steps_per_eval: 100
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v1"
+save_every: 100
+test: false
+max_seq_length: 1280
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 8
+  scale: 16.0
+  dropout: 0.0

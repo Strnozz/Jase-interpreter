@@ -1,0 +1,105 @@
+  ...25/256
+  ...50/256
+  ...75/256
+  ...100/256
+  ...125/256
+  ...150/256
+  ...175/256
+  ...200/256
+  ...225/256
+  ...250/256
+{
+  "label": "baseline-dev",
+  "examples": 256,
+  "seconds": 520.1,
+  "guard": {
+    "status": {
+      "ACCEPT": 253,
+      "CLARIFY": 3
+    },
+    "extraction_errors": {},
+    "blocked_rate": 0.0117,
+    "repaired_rate": 0.0,
+    "accepted_rate": 0.9883
+  },
+  "release_gates": {
+    "mandatory_total": 256,
+    "mandatory_passed": 238,
+    "mandatory_rate": 0.9297,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 15
+  },
+  "guarded": {
+    "examples": 256,
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 0.9962,
+      "target_name_accuracy": 1.0,
+      "target_type_accuracy": 0.9699
+    },
+    "facts": {
+      "precision": 0.9963,
+      "recall": 0.9835,
+      "tp": 538,
+      "fp": 2,
+      "fn": 9,
+      "value_errors": 0
+    },
+    "roles": {
+      "bucket_accuracy": 0.987,
+      "operator_accuracy": 1.0,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.9683,
+        "recall": 0.976,
+        "tp": 122,
+        "fp": 4,
+        "fn": 3
+      },
+      "constraints": {
+        "precision": 0.9973,
+        "recall": 0.9842,
+        "tp": 374,
+        "fp": 1,
+        "fn": 6
+      },
+      "preferences": {
+        "precision": 0.8974,
+        "recall": 0.8333,
+        "tp": 35,
+        "fp": 4,
+        "fn": 7
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.0352,
+      "hallucinated_fact_rate": 0.0078,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.9297,
+      "cosmetic_exact_rate": 0.7773,
+      "clarification_accuracy": 0.9883,
+      "gate_accuracy": 1.0
+    }
+  },
+  "failure_taxonomy": {
+    "target_type": 8,
+    "missing_fact": 5,
+    "clarification": 3,
+    "guard:CLARIFY": 3,
+    "bucket:preferences->attributes": 3,
+    "hallucinated_fact": 2,
+    "bucket:attributes->preferences": 2,
+    "bucket:constraints->preferences": 1,
+    "action": 1
+  }
+}
+
+report completo: /Users/simoneromano/Desktop/jase-interpreter-starter/reports/v20/baseline-dev.json

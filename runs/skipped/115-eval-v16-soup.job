@@ -1,0 +1,1 @@
+{"id": "115-eval-v16-soup", "cmd": [".venv/bin/python", "scripts/eval_v2.py", "--adapter", "adapters/jase-v16-soup", "--max-tokens", "640", "--label", "jase-v16-soup-4ckpt", "--report", "reports/066-v16-soup.json"], "timeout": 3600, "tail_lines": 30}

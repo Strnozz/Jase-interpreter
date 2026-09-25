@@ -1,0 +1,85 @@
+{
+  "name": "v20_quality",
+  "seed": 20260924,
+  "requested_rows": 30000,
+  "purpose": "Synthetic development experiment, not an independent release test",
+  "cleaning": {
+    "input_rows": 29825,
+    "duplicate_rows_removed": 3074,
+    "conflicting_prompts": 0,
+    "conflicting_rows_quarantined": 0,
+    "unique_rows": 26751
+  },
+  "decontamination": {
+    "gold_v1.jsonl": 175,
+    "release_holdout_v1.jsonl": 0
+  },
+  "audit": {
+    "train": {
+      "rows": 24560,
+      "unique_prompts": 24560,
+      "duplicate_rows": 0,
+      "conflicting_prompts": 0,
+      "families": 7423,
+      "tags": {
+        "clarification": 118,
+        "gate": 1584,
+        "implicit-action": 2440,
+        "multi-goal": 856,
+        "negation": 1510,
+        "preference": 3565,
+        "three-plus-facts": 9127
+      }
+    },
+    "valid": {
+      "rows": 2191,
+      "unique_prompts": 2191,
+      "duplicate_rows": 0,
+      "conflicting_prompts": 0,
+      "families": 621,
+      "tags": {
+        "clarification": 30,
+        "gate": 157,
+        "implicit-action": 217,
+        "multi-goal": 76,
+        "negation": 176,
+        "preference": 319,
+        "three-plus-facts": 779
+      }
+    },
+    "shared_prompts": 0,
+    "shared_families": 0,
+    "missing_validation_tags": [],
+    "passed": true
+  },
+  "guard_checked": 26751,
+  "guard_issues": {},
+  "dev_size": 256,
+  "dev_eligible_unseen_v19": 1978,
+  "dev_exact_overlap_v19_train": 10,
+  "dev_comparison": "Use v19-exact-unseen for comparison; seen cases are diagnostics only. All dev cases are held out from v20 training. Same generator, not OOD.",
+  "dev_tags": {
+    "gate": 28,
+    "clarification": 10,
+    "multi-goal": 10,
+    "three-plus-facts": 103,
+    "preference": 39,
+    "implicit-action": 27,
+    "negation": 15
+  },
+  "source_hashes": {
+    "scripts/generate_dataset_v2.py": "a13027145c7bbc1492deffbf1d2a1bf63425614e12ff58ec366eefc8e73af328",
+    "jase/dataset_quality.py": "75fc152f0a8404599653ec2934afd4333a51cbce40bd8518a859c31969ba6b0c",
+    "scripts/prepare_v20.py": "2393fee6921c53d15565ee32179313e56208124f457d97bd030d2adb7c1ee36a",
+    "jase/guard.py": "826412600141bd6b1fd5e8d7adf062f438a469b580705ee27de6b41a5f52d751",
+    "data/v19_clean/train.jsonl": "7c5ad4add63497a48f6e71b13939e069a9ce99d27312023074d81952aa1891b1",
+    "benchmarks/gold_v1.jsonl": "8f06498986c2888dd840e38b2a4d4613b91349877f1f68246d153007796baf19",
+    "benchmarks/release_holdout_v1.jsonl": "4477fa1c753af509ad50e316859f2b07ff1d030cd25250b99ac30be117722137"
+  },
+  "files": {
+    "dev.jsonl": "fd5ca08016fd72a92376aa5aa5dfcfdfb9dd33de77a0b9acd1fb44ed1ad13c64",
+    "quarantine.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "train.jsonl": "e5f29521ef453781c5770d9c1a274eaeaed4c0b9961c7789735d1211828bde81",
+    "valid.jsonl": "e07c0ae7e8c0747c617bddf3ab3418c219bc2689fe52c864b32f040371635239"
+  }
+}

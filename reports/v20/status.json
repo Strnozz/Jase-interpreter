@@ -1,0 +1,15 @@
+{
+  "completed_phases": [
+    "preflight",
+    "train",
+    "baseline-dev",
+    "candidate-dev",
+    "baseline-gold",
+    "candidate-gold",
+    "comparison"
+  ],
+  "spec_sha256": "3b214811d43aaf6611e47cb3e626fc34ae41fb3ca7467beca87d18160d342234",
+  "status": "complete",
+  "phase": "complete",
+  "updated": "2026-09-25T04:48:54.835148+00:00"
+}

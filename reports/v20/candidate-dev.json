@@ -1,0 +1,2661 @@
+{
+  "label": "candidate-dev",
+  "model": "mlx-community/Qwen3.5-2B-4bit",
+  "adapter": "adapters/jase-v20-quality",
+  "data": "data/v20_quality/dev.jsonl",
+  "benchmark_role": "dev_regression",
+  "semantics_version": "semantics-1.1",
+  "pipeline": true,
+  "seed": 2026,
+  "max_tokens": 420,
+  "data_sha256": "fd5ca08016fd72a92376aa5aa5dfcfdfb9dd33de77a0b9acd1fb44ed1ad13c64",
+  "system_prompt_sha256": "f81e419b30f660ae1e208ee09d2242e29d4ef61e38d5623af89f514de689e735",
+  "guard_sha256": "826412600141bd6b1fd5e8d7adf062f438a469b580705ee27de6b41a5f52d751",
+  "decisions": {
+    "clarification_true_positive": 10,
+    "clarification_false_positive": 1,
+    "clarification_false_negative": 0,
+    "clarification_true_negative": 245,
+    "actionable": 245,
+    "actionable_but_wrong": 23
+  },
+  "system_prompt_chars": 132,
+  "examples": 256,
+  "seconds": 518.2,
+  "guard": {
+    "status": {
+      "ACCEPT": 253,
+      "REPAIRED": 2,
+      "CLARIFY": 1
+    },
+    "extraction_errors": {},
+    "blocked_rate": 0.0039,
+    "repaired_rate": 0.0078,
+    "accepted_rate": 0.9883
+  },
+  "raw": {
+    "examples": 256,
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 1.0,
+      "target_name_accuracy": 1.0,
+      "target_type_accuracy": 0.9511
+    },
+    "facts": {
+      "precision": 0.9927,
+      "recall": 0.989,
+      "tp": 541,
+      "fp": 3,
+      "fn": 5,
+      "value_errors": 1
+    },
+    "roles": {
+      "bucket_accuracy": 0.9871,
+      "operator_accuracy": 0.9945,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.96,
+        "recall": 0.96,
+        "tp": 120,
+        "fp": 5,
+        "fn": 5
+      },
+      "constraints": {
+        "precision": 0.9921,
+        "recall": 0.9895,
+        "tp": 376,
+        "fp": 3,
+        "fn": 4
+      },
+      "preferences": {
+        "precision": 0.9268,
+        "recall": 0.9048,
+        "tp": 38,
+        "fp": 3,
+        "fn": 4
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.0195,
+      "hallucinated_fact_rate": 0.0117,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.9062,
+      "cosmetic_exact_rate": 0.7227,
+      "clarification_accuracy": 0.9961,
+      "gate_accuracy": 1.0
+    }
+  },
+  "guarded": {
+    "examples": 256,
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 1.0,
+      "target_name_accuracy": 1.0,
+      "target_type_accuracy": 0.9511
+    },
+    "facts": {
+      "precision": 0.9927,
+      "recall": 0.989,
+      "tp": 541,
+      "fp": 3,
+      "fn": 5,
+      "value_errors": 1
+    },
+    "roles": {
+      "bucket_accuracy": 0.9871,
+      "operator_accuracy": 0.9945,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.96,
+        "recall": 0.96,
+        "tp": 120,
+        "fp": 5,
+        "fn": 5
+      },
+      "constraints": {
+        "precision": 0.9921,
+        "recall": 0.9895,
+        "tp": 376,
+        "fp": 3,
+        "fn": 4
+      },
+      "preferences": {
+        "precision": 0.9268,
+        "recall": 0.9048,
+        "tp": 38,
+        "fp": 3,
+        "fn": 4
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.0195,
+      "hallucinated_fact_rate": 0.0117,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.9062,
+      "cosmetic_exact_rate": 0.7227,
+      "clarification_accuracy": 0.9961,
+      "gate_accuracy": 1.0
+    }
+  },
+  "release_gates": {
+    "mandatory_total": 256,
+    "mandatory_passed": 232,
+    "mandatory_rate": 0.9062,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 23
+  },
+  "by_tag": {
+    "clarification": {
+      "n": 10,
+      "semantic_exact_rate": 1.0,
+      "facts": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "value_errors": 0
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 1.0
+      },
+      "accepted_but_wrong": 0
+    },
+    "gate": {
+      "n": 28,
+      "semantic_exact_rate": 1.0,
+      "facts": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "value_errors": 0
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 1.0
+      },
+      "accepted_but_wrong": 0
+    },
+    "implicit-action": {
+      "n": 27,
+      "semantic_exact_rate": 0.7407,
+      "facts": {
+        "precision": 0.9595,
+        "recall": 0.9726,
+        "tp": 71,
+        "fp": 3,
+        "fn": 2,
+        "value_errors": 0
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 0.8929
+      },
+      "accepted_but_wrong": 7
+    },
+    "multi-goal": {
+      "n": 10,
+      "semantic_exact_rate": 0.9,
+      "facts": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "tp": 34,
+        "fp": 0,
+        "fn": 0,
+        "value_errors": 0
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 0.95
+      },
+      "accepted_but_wrong": 1
+    },
+    "negation": {
+      "n": 15,
+      "semantic_exact_rate": 0.8,
+      "facts": {
+        "precision": 0.9756,
+        "recall": 0.9524,
+        "tp": 40,
+        "fp": 0,
+        "fn": 1,
+        "value_errors": 1
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 0.9333
+      },
+      "accepted_but_wrong": 3
+    },
+    "preference": {
+      "n": 39,
+      "semantic_exact_rate": 0.7949,
+      "facts": {
+        "precision": 1.0,
+        "recall": 0.9826,
+        "tp": 113,
+        "fp": 0,
+        "fn": 2,
+        "value_errors": 0
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 0.925
+      },
+      "accepted_but_wrong": 7
+    },
+    "three-plus-facts": {
+      "n": 103,
+      "semantic_exact_rate": 0.835,
+      "facts": {
+        "precision": 0.9889,
+        "recall": 0.9889,
+        "tp": 355,
+        "fp": 3,
+        "fn": 3,
+        "value_errors": 1
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 0.9364
+      },
+      "accepted_but_wrong": 17
+    },
+    "v19-exact-seen": {
+      "n": 10,
+      "semantic_exact_rate": 1.0,
+      "facts": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "value_errors": 0
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 1.0
+      },
+      "accepted_but_wrong": 0
+    },
+    "v19-exact-unseen": {
+      "n": 246,
+      "semantic_exact_rate": 0.9024,
+      "facts": {
+        "precision": 0.9927,
+        "recall": 0.989,
+        "tp": 541,
+        "fp": 3,
+        "fn": 5,
+        "value_errors": 1
+      },
+      "goals": {
+        "goal_count_rate": 1.0,
+        "action_accuracy": 1.0,
+        "target_name_accuracy": 1.0,
+        "target_type_accuracy": 0.9492
+      },
+      "accepted_but_wrong": 23
+    }
+  },
+  "failure_taxonomy": {
+    "target_type": 13,
+    "missing_fact": 4,
+    "bucket:attributes->preferences": 3,
+    "hallucinated_fact": 2,
+    "bucket:preferences->attributes": 2,
+    "value_error": 1,
+    "operator:excludes->neq": 1,
+    "operator:before->eq": 1,
+    "operator:lt->lte": 1,
+    "clarification": 1,
+    "guard:CLARIFY": 1,
+    "bucket:attributes->constraints": 1
+  },
+  "failures": [
+    {
+      "id": "v20-dev-016",
+      "text": "A udine cercami un biglietto, con due ingressi, sopra 30€ per favore e anche acquistami il Movo Go grazie.",
+      "tags": [
+        "multi-goal",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "biglietto",
+              "type": "ticket",
+              "raw": "un biglietto"
+            },
+            "attributes": [
+              {
+                "property": "quantity",
+                "operator": "eq",
+                "value": 2
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "gt",
+                "value": 30,
+                "currency": "EUR"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Udine"
+              }
+            ],
+            "preferences": []
+          },
+          {
+            "action": "buy",
+            "raw_action": "acquistami",
+            "target": {
+              "name": "Movo Go",
+              "type": "electronics",
+              "raw": "il Movo Go"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "biglietto",
+              "type": "ticket",
+              "raw": "un biglietto"
+            },
+            "attributes": [
+              {
+                "property": "quantity",
+                "operator": "eq",
+                "value": 2
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Udine"
+              },
+              {
+                "property": "price",
+                "operator": "gt",
+                "value": 30,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          },
+          {
+            "action": "buy",
+            "raw_action": "acquistami",
+            "target": {
+              "name": "Movo Go",
+              "type": "product",
+              "raw": "il Movo Go"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-031",
+      "text": "Mi serve un volo niente ITA e niente Ryanair con partenza alle 22",
+      "tags": [
+        "negation",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact",
+        "value_error"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi serve",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "carrier",
+                "operator": "neq",
+                "value": "ITA"
+              },
+              {
+                "property": "carrier",
+                "operator": "neq",
+                "value": "Ryanair"
+              },
+              {
+                "property": "departure_time",
+                "operator": "eq",
+                "value": "22:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi serve",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "carrier",
+                "operator": "neq",
+                "value": "ITA|Ryanair"
+              },
+              {
+                "property": "departure_time",
+                "operator": "eq",
+                "value": "22:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-033",
+      "text": "Vorrei affittare un Nebula Drive, meglio se fino a 2000 eur, non usato",
+      "tags": [
+        "negation",
+        "preference",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "REPAIRED",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "rent",
+            "raw_action": "vorrei affittare",
+            "target": {
+              "name": "Nebula Drive",
+              "type": null,
+              "raw": "un Nebula Drive"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "condition",
+                "operator": "neq",
+                "value": "usato"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 2000,
+                "currency": "EUR"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "rent",
+            "raw_action": "vorrei affittare",
+            "target": {
+              "name": "Nebula Drive",
+              "type": "product",
+              "raw": "un Nebula Drive"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "condition",
+                "operator": "neq",
+                "value": "usato"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 2000,
+                "currency": "EUR"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-040",
+      "text": "Trovami un panino che non sia mortadella, con cipolla vicino a Verona questa settimana",
+      "tags": [
+        "negation",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "operator:excludes->neq"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "panino",
+              "type": "food",
+              "raw": "un panino"
+            },
+            "attributes": [
+              {
+                "property": "ingredient",
+                "operator": "contains",
+                "value": "cipolla"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "ingredient",
+                "operator": "excludes",
+                "value": "mortadella"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Verona"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "questa settimana"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "panino",
+              "type": "food",
+              "raw": "un panino"
+            },
+            "attributes": [
+              {
+                "property": "ingredient",
+                "operator": "contains",
+                "value": "cipolla"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "ingredient",
+                "operator": "neq",
+                "value": "mortadella"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Verona"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "questa settimana"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-051",
+      "text": "ufficio pescara <300000€ etro le 10",
+      "tags": [
+        "implicit-action",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "operator:before->eq",
+        "operator:lt->lte"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "ufficio",
+              "type": "real_estate",
+              "raw": "un ufficio"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Pescara"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 300000,
+                "currency": "EUR"
+              },
+              {
+                "property": "time",
+                "operator": "before",
+                "value": "10:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "ufficio",
+              "type": "real_estate",
+              "raw": "un ufficio"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Pescara"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 300000,
+                "currency": "EUR"
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "10:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-055",
+      "text": "Buongiorno, Orvex Pro, in zona Perugia.",
+      "tags": [
+        "implicit-action",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "Orvex Pro",
+              "type": "product",
+              "raw": "Orvex Pro"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Perugia"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "Orvex Pro",
+              "type": null,
+              "raw": "Orvex Pro"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Perugia"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-068",
+      "text": "Ciao, fammi confrontare Kiro Plus, su Como, grigio, non più di 20 km, alle 12 se riesci",
+      "tags": [
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "fammi confrontare",
+            "target": {
+              "name": "Kiro Plus",
+              "type": "electronics",
+              "raw": "Kiro Plus"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "grigio"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 20,
+                "unit": "km"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Como"
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "12:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "fammi confrontare",
+            "target": {
+              "name": "Kiro Plus",
+              "type": "product",
+              "raw": "Kiro Plus"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "grigio"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Como"
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "12:00"
+              },
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 20,
+                "unit": "km"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-092",
+      "text": "Allora, cercami il Farnex Pro, per l 16, tra il 22 e il 24, vicino a Lecce, almeno 50 euro, grazie mille",
+      "tags": [
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "Farnex Pro",
+              "type": "product",
+              "raw": "il Farnex Pro"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "gte",
+                "value": 50,
+                "currency": "EUR"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Lecce"
+              },
+              {
+                "property": "date",
+                "operator": "between",
+                "value": 22,
+                "value_to": 24
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "16:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "Farnex Pro",
+              "type": null,
+              "raw": "il Farnex Pro"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Lecce"
+              },
+              {
+                "property": "date",
+                "operator": "between",
+                "value": 22,
+                "value_to": 24
+              },
+              {
+                "property": "price",
+                "operator": "gte",
+                "value": 50,
+                "currency": "EUR"
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "16:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-110",
+      "text": "Scusa, un volo, che parta da Padova, da 90 in su. Inoltre con artenza alle 18, per Madrid, prima delle 9.",
+      "tags": [
+        "implicit-action",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "time",
+                "operator": "before",
+                "value": "9:00"
+              },
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Madrid"
+              },
+              {
+                "property": "price",
+                "operator": "gte",
+                "value": 90
+              },
+              {
+                "property": "origin",
+                "operator": "eq",
+                "value": "Padova"
+              },
+              {
+                "property": "departure_time",
+                "operator": "eq",
+                "value": "18:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [
+              {
+                "property": "carrier",
+                "operator": "eq",
+                "value": "artenza"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Madrid"
+              },
+              {
+                "property": "time",
+                "operator": "before",
+                "value": "9:00"
+              },
+              {
+                "property": "origin",
+                "operator": "eq",
+                "value": "Padova"
+              },
+              {
+                "property": "price",
+                "operator": "gte",
+                "value": 90
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "18:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-111",
+      "text": "Ebook tassativamente, comprami un audiolibro, meglio se Levi",
+      "tags": [
+        "preference",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "CLARIFY",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "clarification",
+        "guard:CLARIFY",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "comprami",
+            "target": {
+              "name": "audiolibro",
+              "type": "media",
+              "raw": "un audiolibro"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "format",
+                "operator": "eq",
+                "value": "ebook"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "author",
+                "operator": "eq",
+                "value": "Levi"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "comprami",
+            "target": {
+              "name": "audiolibro",
+              "type": "media",
+              "raw": "un audiolibro"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": true,
+          "reason": "conflicting_constraints",
+          "missing_fields": [
+            "constraints"
+          ]
+        }
+      }
+    },
+    {
+      "id": "v20-dev-112",
+      "text": "Allora, vorrei il TalinScan 9, con 64 GB di RAM, non più di 150€ se riesci",
+      "tags": [
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "vorrei",
+            "target": {
+              "name": "TalinScan 9",
+              "type": "electronics",
+              "raw": "il TalinScan 9"
+            },
+            "attributes": [
+              {
+                "property": "ram",
+                "operator": "eq",
+                "value": 64,
+                "unit": "GB"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 150,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "vorrei",
+            "target": {
+              "name": "TalinScan 9",
+              "type": "product",
+              "raw": "il TalinScan 9"
+            },
+            "attributes": [
+              {
+                "property": "ram",
+                "operator": "eq",
+                "value": 64,
+                "unit": "GB"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 150,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-123",
+      "text": "Ciao, Farnex Plus, dalle parti di Bari, meglio se max 20€. Ah, e magari lunedì.",
+      "tags": [
+        "implicit-action",
+        "preference",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "Farnex Plus",
+              "type": "product",
+              "raw": "Farnex Plus"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bari"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 20,
+                "currency": "EUR"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "lunedì"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "Farnex Plus",
+              "type": null,
+              "raw": "Farnex Plus"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bari"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "lunedì"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 20,
+                "currency": "EUR"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-128",
+      "text": "Mi serve un passeggino in pelle del 2021 con telecomando se possibile blu.",
+      "tags": [
+        "preference",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:attributes->preferences"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi serve",
+            "target": {
+              "name": "passeggino",
+              "type": "product",
+              "raw": "un passeggino"
+            },
+            "attributes": [
+              {
+                "property": "material",
+                "operator": "eq",
+                "value": "in pelle"
+              },
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "blu"
+              },
+              {
+                "property": "year",
+                "operator": "eq",
+                "value": 2021
+              }
+            ],
+            "constraints": [],
+            "preferences": [
+              {
+                "property": "feature",
+                "operator": "contains",
+                "value": "telecomando"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi serve",
+            "target": {
+              "name": "passeggino",
+              "type": "product",
+              "raw": "un passeggino"
+            },
+            "attributes": [
+              {
+                "property": "material",
+                "operator": "eq",
+                "value": "in pelle"
+              },
+              {
+                "property": "year",
+                "operator": "eq",
+                "value": 2021
+              }
+            ],
+            "constraints": [],
+            "preferences": [
+              {
+                "property": "feature",
+                "operator": "contains",
+                "value": "telecomando"
+              },
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "blu"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-132",
+      "text": "Un'assicurazione auto, con fragile assolutamente. 4 stelle, che sia aperto nei festivi, fino a 200€.",
+      "tags": [
+        "implicit-action",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:attributes->constraints"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "assicurazione auto",
+              "type": "service",
+              "raw": "un'assicurazione auto"
+            },
+            "attributes": [
+              {
+                "property": "rating",
+                "operator": "eq",
+                "value": 4
+              }
+            ],
+            "constraints": [
+              {
+                "property": "availability",
+                "operator": "contains",
+                "value": "festivi"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 200,
+                "currency": "EUR"
+              },
+              {
+                "property": "specialization",
+                "operator": "contains",
+                "value": "fragile"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "assicurazione auto",
+              "type": "service",
+              "raw": "un'assicurazione auto"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "availability",
+                "operator": "contains",
+                "value": "festivi"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 200,
+                "currency": "EUR"
+              },
+              {
+                "property": "specialization",
+                "operator": "contains",
+                "value": "fragile"
+              },
+              {
+                "property": "rating",
+                "operator": "eq",
+                "value": 4
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-154",
+      "text": "Talin Lite, meglio se in pelle grazie",
+      "tags": [
+        "implicit-action",
+        "preference",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "Talin Lite",
+              "type": "product",
+              "raw": "Talin Lite"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": [
+              {
+                "property": "material",
+                "operator": "eq",
+                "value": "in pelle"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "Talin Lite",
+              "type": null,
+              "raw": "Talin Lite"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": [
+              {
+                "property": "material",
+                "operator": "eq",
+                "value": "in pelle"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-160",
+      "text": "Fammi confrontare Kiro One ricondizionato, grazie mille",
+      "tags": [
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "fammi confrontare",
+            "target": {
+              "name": "Kiro One",
+              "type": null,
+              "raw": "Kiro One"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "ricondizionato"
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "fammi confrontare",
+            "target": {
+              "name": "Kiro One",
+              "type": "product",
+              "raw": "Kiro One"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "ricondizionato"
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-179",
+      "text": "Allora, vorrei acquistare un libro, più di 15 euro, entro 50 km, qui a Catania, meglio se storico, italiano",
+      "tags": [
+        "preference",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:attributes->preferences"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "vorrei acquistare",
+            "target": {
+              "name": "libro",
+              "type": "media",
+              "raw": "un libro"
+            },
+            "attributes": [
+              {
+                "property": "language",
+                "operator": "eq",
+                "value": "italiano"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Catania"
+              },
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 50,
+                "unit": "km"
+              },
+              {
+                "property": "price",
+                "operator": "gt",
+                "value": 15,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "genre",
+                "operator": "eq",
+                "value": "storico"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "vorrei acquistare",
+            "target": {
+              "name": "libro",
+              "type": "media",
+              "raw": "un libro"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Catania"
+              },
+              {
+                "property": "price",
+                "operator": "gt",
+                "value": 15,
+                "currency": "EUR"
+              },
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 50,
+                "unit": "km"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "genre",
+                "operator": "eq",
+                "value": "storico"
+              },
+              {
+                "property": "language",
+                "operator": "eq",
+                "value": "italiano"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-191",
+      "text": "Prenotami un hotel a Verona, con colazione e spa se ci riesci lunedì",
+      "tags": [
+        "preference",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:preferences->attributes"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "un hotel"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Verona"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "lunedì"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "colazione"
+              },
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "spa"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "un hotel"
+            },
+            "attributes": [
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "colazione"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Verona"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "lunedì"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "spa"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-201",
+      "text": "Alle 12, fammi confrontare Kiro Plus, su Como, grigio, non più di 20 km grazie",
+      "tags": [
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "fammi confrontare",
+            "target": {
+              "name": "Kiro Plus",
+              "type": "electronics",
+              "raw": "Kiro Plus"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "grigio"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 20,
+                "unit": "km"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Como"
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "12:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "fammi confrontare",
+            "target": {
+              "name": "Kiro Plus",
+              "type": "product",
+              "raw": "Kiro Plus"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "grigio"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Como"
+              },
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 20,
+                "unit": "km"
+              },
+              {
+                "property": "time",
+                "operator": "eq",
+                "value": "12:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-210",
+      "text": "Vorrei un hotel a Bari, con spa e colazione possibilmente doppia",
+      "tags": [
+        "preference",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:attributes->preferences",
+        "bucket:preferences->attributes"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "vorrei",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "un hotel"
+            },
+            "attributes": [
+              {
+                "property": "room_type",
+                "operator": "eq",
+                "value": "doppia"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bari"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "spa"
+              },
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "colazione"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "vorrei",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "un hotel"
+            },
+            "attributes": [
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "spa"
+              },
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "colazione"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bari"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "room_type",
+                "operator": "eq",
+                "value": "doppia"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-218",
+      "text": "allevatore da 2 meis prima delle 9 domani",
+      "tags": [
+        "implicit-action",
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "allevatore",
+              "type": "service",
+              "raw": "un allevatore"
+            },
+            "attributes": [
+              {
+                "property": "age",
+                "operator": "eq",
+                "value": 2,
+                "unit": "months"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "time",
+                "operator": "before",
+                "value": "9:00"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "domani"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "allevatore",
+              "type": "service",
+              "raw": "un allevatore"
+            },
+            "attributes": [
+              {
+                "property": "breed",
+                "operator": "eq",
+                "value": "da 2 meis"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "domani"
+              },
+              {
+                "property": "time",
+                "operator": "before",
+                "value": "9:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-232",
+      "text": "Spedizione meno di 10€, acquistami VelunTech 30, bianco, minimo 500 euro, grazie mille",
+      "tags": [
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "acquistami",
+            "target": {
+              "name": "VelunTech 30",
+              "type": "product",
+              "raw": "VelunTech 30"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "bianco"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "gte",
+                "value": 500,
+                "currency": "EUR"
+              },
+              {
+                "property": "shipping_cost",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "acquistami",
+            "target": {
+              "name": "VelunTech 30",
+              "type": null,
+              "raw": "VelunTech 30"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "bianco"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "shipping_cost",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              },
+              {
+                "property": "price",
+                "operator": "gte",
+                "value": 500,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-234",
+      "text": "Scusa, acquistami Movo One, spedizione meno di 10€, dal 22 al 24.",
+      "tags": [
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "acquistami",
+            "target": {
+              "name": "Movo One",
+              "type": null,
+              "raw": "Movo One"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "shipping_cost",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              },
+              {
+                "property": "date",
+                "operator": "between",
+                "value": 22,
+                "value_to": 24
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "acquistami",
+            "target": {
+              "name": "Movo One",
+              "type": "product",
+              "raw": "Movo One"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "shipping_cost",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              },
+              {
+                "property": "date",
+                "operator": "between",
+                "value": 22,
+                "value_to": 24
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "v20-dev-238",
+      "text": "Ikea, compra un QuorixTech 30, qui a Trieste, max 60000 km",
+      "tags": [
+        "three-plus-facts",
+        "v19-exact-unseen"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "compra",
+            "target": {
+              "name": "QuorixTech 30",
+              "type": "product",
+              "raw": "un QuorixTech 30"
+            },
+            "attributes": [
+              {
+                "property": "brand",
+                "operator": "eq",
+                "value": "Ikea"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "mileage",
+                "operator": "lte",
+                "value": 60000,
+                "unit": "km"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Trieste"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "compra",
+            "target": {
+              "name": "QuorixTech 30",
+              "type": null,
+              "raw": "un QuorixTech 30"
+            },
+            "attributes": [
+              {
+                "property": "brand",
+                "operator": "eq",
+                "value": "Ikea"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Trieste"
+              },
+              {
+                "property": "mileage",
+                "operator": "lte",
+                "value": 60000,
+                "unit": "km"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+# Jase Interpreter v19-capacity16
+#
+# Capacity probe sul dataset maturo e decontaminato. Rispetto a v19-clean
+# cambia UNA sola variabile: num_layers 8 -> 16. Rank resta 16 per isolare
+# l'effetto della profondità dell'adattamento senza quadruplicare i parametri.
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v19_clean"
+seed: 1337
+num_layers: 16
+batch_size: 1
+iters: 13000
+val_batches: 25
+learning_rate: 0.00003
+steps_per_report: 50
+steps_per_eval: 500
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v19-cap16-s1337"
+save_every: 1500
+test: false
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 16
+  scale: 32.0
+  dropout: 0.05
+lr_schedule:
+  name: cosine_decay
+  warmup: 100
+  arguments: [0.00003, 3250, 0.000003]

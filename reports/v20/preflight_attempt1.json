@@ -1,0 +1,8 @@
+{
+  "completed_phases": [],
+  "spec_sha256": "1fff1076ffd76a8fc08367fae4762afeff7e0ba4cc3f4d471d9fee0f5d70e10e",
+  "status": "failed",
+  "phase": "preflight",
+  "updated": "2026-09-24T21:33:24.826606+00:00",
+  "error": "The cached snapshot for 'mlx-community/Qwen3.5-2B-4bit' (revision 'main', commit 674aaa7240b91e8012fcad5d791b7dfe5ba90207) is incomplete: 2 file(s) are missing (.gitattributes, README.md). Outgoing traffic is disabled ('local_files_only=True'). Re-run the download with network access to complete the snapshot."
+}

@@ -1,0 +1,61 @@
+{
+  "baseline": "adapters/jase-v19-cap16",
+  "candidate": "adapters/jase-v20-quality",
+  "benchmark_role": "dev_regression",
+  "primary_panel": "v19-exact-unseen",
+  "baseline_unseen": {
+    "n": 246,
+    "semantic_exact_rate": 0.9268,
+    "facts": {
+      "precision": 0.9963,
+      "recall": 0.9835,
+      "tp": 538,
+      "fp": 2,
+      "fn": 9,
+      "value_errors": 0
+    },
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 0.9961,
+      "target_name_accuracy": 1.0,
+      "target_type_accuracy": 0.9688
+    },
+    "accepted_but_wrong": 15
+  },
+  "candidate_unseen": {
+    "n": 246,
+    "semantic_exact_rate": 0.9024,
+    "facts": {
+      "precision": 0.9927,
+      "recall": 0.989,
+      "tp": 541,
+      "fp": 3,
+      "fn": 5,
+      "value_errors": 1
+    },
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 1.0,
+      "target_name_accuracy": 1.0,
+      "target_type_accuracy": 0.9492
+    },
+    "accepted_but_wrong": 23
+  },
+  "criteria": {
+    "accepted_errors_reduced": false,
+    "exact_not_worse": false,
+    "recall_not_worse": true,
+    "precision_loss_at_most_one_point": true,
+    "unnecessary_clarifications_not_increased": true,
+    "gold_regression_at_most_two_cases": true
+  },
+  "directionally_promising": false,
+  "production_ready": false,
+  "limitations": [
+    "One training seed",
+    "Synthetic shared-generator development data",
+    "Exact-text exclusion does not imply structural independence",
+    "Seen clarification cases are diagnostics, not comparative evidence",
+    "Release holdout not evaluated; no automatic promotion"
+  ]
+}

@@ -1,0 +1,56 @@
+# Jase Interpreter — training v6
+#
+# Cambia rispetto al v5 (solo i DATI):
+#   • blocchi correttivi dal 20% al 28% del dataset
+#   • blocco numero-ruolo molto più denso: dopo due iterazioni
+#     "Prenotami un tavolo alle 20" diventava ancora `guests eq 20`
+#   • nuovo blocco a DUE numeri nella stessa frase con ruoli diversi
+#     ("un tavolo per 4 alle 21"): il caso singolo non bastava
+#
+# Storia del v5:
+#   • marcatori di preferenza POSTICIPATI ("oggi pomeriggio se possibile") e
+#     con scope su più fatti: sul gold il v4 faceva 0 su 7 sulle preferenze
+#   • operatori di lista `in`/`not_in` ("o X o Y", "né X né Y"): il v4 non ne
+#     conteneva nemmeno uno e sbagliava tutti e 3 i casi gold
+#   • inglese al 6.5%: il dataset era interamente in italiano
+#
+# Storia del v4:
+#   • 9% di richieste SENZA VERBO con raw_action "(implicito)" — il v3 non ne
+#     conteneva nessuna e il modello inventava il verbo dell'utente
+#   • blocco forza riequilibrato: prima 1 attributo contro 3 vincoli, e aveva
+#     insegnato a spingere tutto in constraints
+#   • niente sinonimi nel target ("una bicicletta" non produce più "bici")
+#   • valuta, riferimento spaziale e senso dei comparativi protetti dai refusi
+#
+# Storia del v3, conservata:
+#   • dati: data/v6, con i blocchi correttivi generati dall'evidenza di
+#     reports/002 (numero-ruolo, comparativi, forza del fatto, specificità
+#     del target) e senza il bug che insegnava ad allucinare la valuta
+#   • iters 1500 → 3000: con 14k esempi, batch 1 e accumulo 4, 1500 step
+#     vedevano solo ~6000 esempi, meno di mezza epoca
+#   • checkpoint ogni 250 step invece di 100: servono meno punti ma più
+#     distanti, e il BEST si sceglie sul gold, non sulla validation loss
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v6"
+seed: 2026
+num_layers: 8
+batch_size: 1
+iters: 3500
+val_batches: 25
+learning_rate: 0.00003
+steps_per_report: 50
+steps_per_eval: 250
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v6"
+save_every: 250
+test: false
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 16
+  scale: 32.0
+  dropout: 0.05

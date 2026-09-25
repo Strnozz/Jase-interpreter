@@ -1,0 +1,67 @@
+# Jase Interpreter — training v12
+#
+# L'iterazione che smette di inseguire i singoli casi e aggredisce la causa
+# numero uno: 35 dei 47 fallimenti del v11 erano OMISSIONI. Il modello non
+# sbagliava i fatti, ne scriveva uno e si fermava.
+#
+# Misurato, non ipotizzato: nel dataset v11 il 57% dei goal aveva UN SOLO
+# fatto, contro il 39% del gold; due o tre fatti erano il 21% del training
+# contro il 46% del gold. I blocchi correttivi — quasi tutti a fatto
+# singolo — erano diventati metà del dataset e insegnavano benissimo anche
+# la lezione che non volevo dare.
+#
+# Cosa cambia nei dati (data/v12):
+#   • il numero di fatti per frase si decide una volta sola, con una
+#     distribuzione dichiarata (FACT_COUNT_WEIGHTS) confrontabile col gold
+#   • i blocchi correttivi ricevono un contorno coerente col tipo di target
+#     (una destinazione per un volo, una città per un ristorante, e nel 45%
+#     dei casi una proprietà DESCRITTIVA: è quella che il modello perdeva)
+#   • `destination` e `origin` per i mezzi di trasporto: il generatore
+#     attaccava `location near Roma` a un volo nel 23% dei casi, e sul gold
+#     il modello scriveva `location` al posto di `destination` in 6 casi
+#   • "senza A e senza B" sono DUE fatti, "né A né B" è una lista: il
+#     generatore li appiattiva entrambi su not_in, cioè insegnava l'errore
+#     che poi misuravo
+#   • "avvisami se scende sotto X" è `monitor` + vincolo, non un gate con
+#     `then: notify` — che è una tautologia (§11.3)
+#   • nomi inventati che finiscono con un numero ("NebulaDrive 12")
+#   • il ruolo di ogni fatto segue la cascata §2 anche nel generatore: prima
+#     `date` e `location` finivano fra gli attributi e il Guard le spostava
+#
+# Cosa cambia nel Guard (e vale per la produzione, non solo per i numeri):
+#   • la cascata §2 come riparazione deterministica, applicata solo quando
+#     nel testo non c'è né un marcatore debole né un obbligo
+#   • polarità: "no rosso" non può diventare `color eq rosso`
+#   • ruolo del numero anche dopo la normalizzazione oraria: da "un
+#     idraulico entro 20 euro" non passa più `time before 20:00`
+#
+# Tre controlli nuovi, tutti con esito misurato prima di partire:
+#   • scripts/guard_falsepos.py: 0 falsi positivi sui 102 casi gold
+#   • 6000 esempi generati: 0 errori e 0 riparazioni del Guard
+#   • tre casi gold corretti perché violavano §6.3 (valuta non ancorata)
+#
+# La storia delle versioni precedenti è in docs/ITERATIONS.md.
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v12"
+seed: 2026
+num_layers: 8
+batch_size: 2
+iters: 60
+val_batches: 25
+learning_rate: 0.00003
+steps_per_report: 50
+steps_per_eval: 1000
+grad_accumulation_steps: 2
+adapter_path: "adapters/probe-batch2"
+save_every: 1000
+test: false
+max_seq_length: 384
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 16
+  scale: 32.0
+  dropout: 0.05

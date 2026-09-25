@@ -1,0 +1,279 @@
+{
+  "label": "jase-v19-cap16-s2026-iter13000",
+  "model": "mlx-community/Qwen3.5-2B-4bit",
+  "adapter": "adapters/jase-v19-cap16",
+  "data": "benchmarks/release_holdout_v1.jsonl",
+  "benchmark_role": "release_holdout",
+  "semantics_version": "semantics-1.1",
+  "system_prompt_chars": 132,
+  "examples": 27,
+  "seconds": 40.7,
+  "guard": {
+    "status": {
+      "ACCEPT": 21,
+      "CLARIFY": 6
+    },
+    "extraction_errors": {},
+    "blocked_rate": 0.2222,
+    "repaired_rate": 0.0,
+    "accepted_rate": 0.7778
+  },
+  "raw": {
+    "examples": 27,
+    "goals": {
+      "goal_count_rate": 0.963,
+      "action_accuracy": 0.931,
+      "target_name_accuracy": 0.6897,
+      "target_type_accuracy": 0.7241
+    },
+    "facts": {
+      "precision": 0.6667,
+      "recall": 0.5532,
+      "tp": 26,
+      "fp": 11,
+      "fn": 19,
+      "value_errors": 2
+    },
+    "roles": {
+      "bucket_accuracy": 1.0,
+      "operator_accuracy": 0.8462,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.5455,
+        "recall": 0.5,
+        "tp": 6,
+        "fp": 5,
+        "fn": 6
+      },
+      "constraints": {
+        "precision": 0.68,
+        "recall": 0.5484,
+        "tp": 17,
+        "fp": 8,
+        "fn": 14
+      },
+      "preferences": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.7037,
+      "hallucinated_fact_rate": 0.4074,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.2222,
+      "cosmetic_exact_rate": 0.1481,
+      "clarification_accuracy": 0.7407,
+      "gate_accuracy": 1.0
+    }
+  },
+  "guarded": {
+    "examples": 27,
+    "goals": {
+      "goal_count_rate": 0.963,
+      "action_accuracy": 0.931,
+      "target_name_accuracy": 0.6897,
+      "target_type_accuracy": 0.7241
+    },
+    "facts": {
+      "precision": 0.6667,
+      "recall": 0.5532,
+      "tp": 26,
+      "fp": 11,
+      "fn": 19,
+      "value_errors": 2
+    },
+    "roles": {
+      "bucket_accuracy": 1.0,
+      "operator_accuracy": 0.8462,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.5455,
+        "recall": 0.5,
+        "tp": 6,
+        "fp": 5,
+        "fn": 6
+      },
+      "constraints": {
+        "precision": 0.68,
+        "recall": 0.5484,
+        "tp": 17,
+        "fp": 8,
+        "fn": 14
+      },
+      "preferences": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.7037,
+      "hallucinated_fact_rate": 0.4074,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.2222,
+      "cosmetic_exact_rate": 0.1481,
+      "clarification_accuracy": 0.7407,
+      "gate_accuracy": 1.0
+    }
+  },
+  "release_gates": {
+    "mandatory_total": 25,
+    "mandatory_passed": 6,
+    "mandatory_rate": 0.24,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 15
+  },
+  "by_tag": {
+    "ambigua": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "anafora": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "availability": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "azione-implicita": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "chiarimento": {
+      "n": 3,
+      "semantic_exact_rate": 0.0
+    },
+    "condizionale": {
+      "n": 2,
+      "semantic_exact_rate": 1.0
+    },
+    "contrasto": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "ellissi": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "gate": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "lista": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "monitor": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "multi-frase": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "multi-goal": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "negazione": {
+      "n": 4,
+      "semantic_exact_rate": 0.25
+    },
+    "non-rappresentabile": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "numeri-ruoli": {
+      "n": 3,
+      "semantic_exact_rate": 0.0
+    },
+    "obbligo": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "preferenza": {
+      "n": 4,
+      "semantic_exact_rate": 0.5
+    },
+    "pronome": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "quantita": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "refuso": {
+      "n": 3,
+      "semantic_exact_rate": 0.0
+    },
+    "ripensamento": {
+      "n": 3,
+      "semantic_exact_rate": 0.0
+    },
+    "slang": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "soglia": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "spontaneo": {
+      "n": 3,
+      "semantic_exact_rate": 0.3333
+    },
+    "target-vago": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "unita": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "vincolo-condiviso": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "vocabolario-aperto": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    }
+  },
+  "failure_taxonomy": {
+    "missing_fact": 13,
+    "target_name": 8,
+    "hallucinated_fact": 8,
+    "clarification": 7,
+    "target_type": 7,
+    "guard:CLARIFY": 6,
+    "operator:lte->before": 2,
+    "operator:contains->eq": 1,
+    "value_error": 1,
+    "action": 1,
+    "missing_goal": 1
+  },
+  "failures": []
+}

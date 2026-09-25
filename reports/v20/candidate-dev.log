@@ -1,0 +1,109 @@
+  ...25/256
+  ...50/256
+  ...75/256
+  ...100/256
+  ...125/256
+  ...150/256
+  ...175/256
+  ...200/256
+  ...225/256
+  ...250/256
+{
+  "label": "candidate-dev",
+  "examples": 256,
+  "seconds": 518.2,
+  "guard": {
+    "status": {
+      "ACCEPT": 253,
+      "REPAIRED": 2,
+      "CLARIFY": 1
+    },
+    "extraction_errors": {},
+    "blocked_rate": 0.0039,
+    "repaired_rate": 0.0078,
+    "accepted_rate": 0.9883
+  },
+  "release_gates": {
+    "mandatory_total": 256,
+    "mandatory_passed": 232,
+    "mandatory_rate": 0.9062,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 23
+  },
+  "guarded": {
+    "examples": 256,
+    "goals": {
+      "goal_count_rate": 1.0,
+      "action_accuracy": 1.0,
+      "target_name_accuracy": 1.0,
+      "target_type_accuracy": 0.9511
+    },
+    "facts": {
+      "precision": 0.9927,
+      "recall": 0.989,
+      "tp": 541,
+      "fp": 3,
+      "fn": 5,
+      "value_errors": 1
+    },
+    "roles": {
+      "bucket_accuracy": 0.9871,
+      "operator_accuracy": 0.9945,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.96,
+        "recall": 0.96,
+        "tp": 120,
+        "fp": 5,
+        "fn": 5
+      },
+      "constraints": {
+        "precision": 0.9921,
+        "recall": 0.9895,
+        "tp": 376,
+        "fp": 3,
+        "fn": 4
+      },
+      "preferences": {
+        "precision": 0.9268,
+        "recall": 0.9048,
+        "tp": 38,
+        "fp": 3,
+        "fn": 4
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.0195,
+      "hallucinated_fact_rate": 0.0117,
+      "ungrounded_value_rate": 0.0,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.9062,
+      "cosmetic_exact_rate": 0.7227,
+      "clarification_accuracy": 0.9961,
+      "gate_accuracy": 1.0
+    }
+  },
+  "failure_taxonomy": {
+    "target_type": 13,
+    "missing_fact": 4,
+    "bucket:attributes->preferences": 3,
+    "hallucinated_fact": 2,
+    "bucket:preferences->attributes": 2,
+    "value_error": 1,
+    "operator:excludes->neq": 1,
+    "operator:before->eq": 1,
+    "operator:lt->lte": 1,
+    "clarification": 1,
+    "guard:CLARIFY": 1,
+    "bucket:attributes->constraints": 1
+  }
+}
+
+report completo: /Users/simoneromano/Desktop/jase-interpreter-starter/reports/v20/candidate-dev.json

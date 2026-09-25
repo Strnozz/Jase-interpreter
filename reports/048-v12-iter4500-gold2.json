@@ -1,0 +1,3510 @@
+{
+  "label": "jase-v12-iter4500-gold2",
+  "model": "mlx-community/Qwen3.5-2B-4bit",
+  "adapter": "adapters/jase-v12",
+  "data": "benchmarks/gold_v1.jsonl",
+  "semantics_version": "semantics-1.1",
+  "system_prompt_chars": 132,
+  "examples": 102,
+  "seconds": 143.1,
+  "guard": {
+    "status": {
+      "ACCEPT": 91,
+      "REPAIRED": 4,
+      "CLARIFY": 7
+    },
+    "extraction_errors": {},
+    "blocked_rate": 0.0686,
+    "repaired_rate": 0.0392,
+    "accepted_rate": 0.8922
+  },
+  "raw": {
+    "examples": 102,
+    "goals": {
+      "goal_count_rate": 0.9902,
+      "action_accuracy": 0.9714,
+      "target_name_accuracy": 0.9143,
+      "target_type_accuracy": 0.9714
+    },
+    "facts": {
+      "precision": 0.8947,
+      "recall": 0.8453,
+      "tp": 153,
+      "fp": 12,
+      "fn": 22,
+      "value_errors": 6
+    },
+    "roles": {
+      "bucket_accuracy": 0.9412,
+      "operator_accuracy": 0.9542,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.6842,
+        "recall": 0.5778,
+        "tp": 26,
+        "fp": 12,
+        "fn": 19
+      },
+      "constraints": {
+        "precision": 0.9,
+        "recall": 0.871,
+        "tp": 108,
+        "fp": 12,
+        "fn": 16
+      },
+      "preferences": {
+        "precision": 0.7692,
+        "recall": 0.9091,
+        "tp": 10,
+        "fp": 3,
+        "fn": 1
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.2157,
+      "hallucinated_fact_rate": 0.1176,
+      "ungrounded_value_rate": 0.0196,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.6373,
+      "cosmetic_exact_rate": 0.3922,
+      "clarification_accuracy": 1.0,
+      "gate_accuracy": 0.8
+    }
+  },
+  "guarded": {
+    "examples": 102,
+    "goals": {
+      "goal_count_rate": 0.9902,
+      "action_accuracy": 0.9714,
+      "target_name_accuracy": 0.9143,
+      "target_type_accuracy": 0.9714
+    },
+    "facts": {
+      "precision": 0.8947,
+      "recall": 0.8453,
+      "tp": 153,
+      "fp": 12,
+      "fn": 22,
+      "value_errors": 6
+    },
+    "roles": {
+      "bucket_accuracy": 0.9673,
+      "operator_accuracy": 0.9542,
+      "unit_accuracy": 1.0,
+      "currency_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "buckets": {
+      "attributes": {
+        "precision": 0.7297,
+        "recall": 0.6,
+        "tp": 27,
+        "fp": 10,
+        "fn": 18
+      },
+      "constraints": {
+        "precision": 0.9098,
+        "recall": 0.8952,
+        "tp": 111,
+        "fp": 11,
+        "fn": 13
+      },
+      "preferences": {
+        "precision": 0.8333,
+        "recall": 0.9091,
+        "tp": 10,
+        "fp": 2,
+        "fn": 1
+      }
+    },
+    "fidelity": {
+      "missing_fact_rate": 0.2157,
+      "hallucinated_fact_rate": 0.1176,
+      "ungrounded_value_rate": 0.0196,
+      "duplicate_fact_rate": 0.0
+    },
+    "contract": {
+      "semantic_exact_rate": 0.6667,
+      "cosmetic_exact_rate": 0.3922,
+      "clarification_accuracy": 1.0,
+      "gate_accuracy": 0.8
+    }
+  },
+  "release_gates": {
+    "mandatory_total": 85,
+    "mandatory_passed": 65,
+    "mandatory_rate": 0.7647,
+    "json_validity": 1.0,
+    "no_wrong_contract_reaches_planner": false,
+    "accepted_but_wrong": 27
+  },
+  "by_tag": {
+    "accommodation": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "action:buy": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "action:cancel": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "action:compare": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "action:contact": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "action:monitor": {
+      "n": 2,
+      "semantic_exact_rate": 1.0
+    },
+    "action:rent": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "ambiguity": {
+      "n": 3,
+      "semantic_exact_rate": 0.6667
+    },
+    "ambiguity:no": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "ambiguous-property": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "animal": {
+      "n": 4,
+      "semantic_exact_rate": 0.5
+    },
+    "anti-hallucination": {
+      "n": 10,
+      "semantic_exact_rate": 1.0
+    },
+    "bucket:attribute": {
+      "n": 3,
+      "semantic_exact_rate": 0.6667
+    },
+    "bucket:constraint": {
+      "n": 3,
+      "semantic_exact_rate": 1.0
+    },
+    "bucket:preference": {
+      "n": 3,
+      "semantic_exact_rate": 1.0
+    },
+    "clarification": {
+      "n": 3,
+      "semantic_exact_rate": 0.6667
+    },
+    "composite-action": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "conditional": {
+      "n": 6,
+      "semantic_exact_rate": 0.8333
+    },
+    "contrast": {
+      "n": 20,
+      "semantic_exact_rate": 0.95
+    },
+    "currency": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "education": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "electronics": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "elliptical": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "elliptical-currency": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "english": {
+      "n": 3,
+      "semantic_exact_rate": 0.6667
+    },
+    "food": {
+      "n": 4,
+      "semantic_exact_rate": 0.5
+    },
+    "gate": {
+      "n": 5,
+      "semantic_exact_rate": 0.8
+    },
+    "implicit-action": {
+      "n": 14,
+      "semantic_exact_rate": 0.7857
+    },
+    "implicit-target": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "list-operator": {
+      "n": 3,
+      "semantic_exact_rate": 0.6667
+    },
+    "multi-goal": {
+      "n": 3,
+      "semantic_exact_rate": 0.0
+    },
+    "multi-goal:no": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "multi-sentence": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "natural": {
+      "n": 20,
+      "semantic_exact_rate": 0.35
+    },
+    "negation": {
+      "n": 11,
+      "semantic_exact_rate": 0.3636
+    },
+    "negation:no": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "noisy": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "number-role": {
+      "n": 8,
+      "semantic_exact_rate": 0.875
+    },
+    "obligation": {
+      "n": 2,
+      "semantic_exact_rate": 1.0
+    },
+    "open-vocab": {
+      "n": 8,
+      "semantic_exact_rate": 0.5
+    },
+    "paraphrase": {
+      "n": 3,
+      "semantic_exact_rate": 0.6667
+    },
+    "polite-noise": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "preference": {
+      "n": 7,
+      "semantic_exact_rate": 0.5714
+    },
+    "range": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "regression": {
+      "n": 6,
+      "semantic_exact_rate": 1.0
+    },
+    "service": {
+      "n": 3,
+      "semantic_exact_rate": 0.0
+    },
+    "shared-constraint": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "sparse": {
+      "n": 10,
+      "semantic_exact_rate": 0.9
+    },
+    "spatial": {
+      "n": 3,
+      "semantic_exact_rate": 0.6667
+    },
+    "strictness:between": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "strictness:gt": {
+      "n": 1,
+      "semantic_exact_rate": 1.0
+    },
+    "strictness:gte": {
+      "n": 7,
+      "semantic_exact_rate": 0.7143
+    },
+    "strictness:lt": {
+      "n": 3,
+      "semantic_exact_rate": 1.0
+    },
+    "strictness:lte": {
+      "n": 4,
+      "semantic_exact_rate": 0.75
+    },
+    "target-specificity": {
+      "n": 2,
+      "semantic_exact_rate": 0.0
+    },
+    "telegraphic": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "temporal": {
+      "n": 9,
+      "semantic_exact_rate": 0.6667
+    },
+    "ticket": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    },
+    "transport": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "trap": {
+      "n": 2,
+      "semantic_exact_rate": 0.5
+    },
+    "two-branch": {
+      "n": 2,
+      "semantic_exact_rate": 1.0
+    },
+    "unit": {
+      "n": 4,
+      "semantic_exact_rate": 0.5
+    },
+    "vague-target": {
+      "n": 1,
+      "semantic_exact_rate": 0.0
+    }
+  },
+  "failure_taxonomy": {
+    "missing_fact": 20,
+    "hallucinated_fact": 10,
+    "target_name": 8,
+    "guard:CLARIFY": 7,
+    "value_error": 6,
+    "bucket:constraints->attributes": 3,
+    "ungrounded_value": 2,
+    "action": 2,
+    "target_type": 2,
+    "operator:gte->eq": 2,
+    "operator:neq->eq": 1,
+    "bucket:attributes->constraints": 1,
+    "operator:eq->contains": 1,
+    "operator:contains->eq": 1,
+    "missing_goal": 1,
+    "gate_condition": 1,
+    "bucket:constraints->preferences": 1,
+    "operator:not_in->eq": 1,
+    "operator:lte->lt": 1
+  },
+  "failures": [
+    {
+      "id": "con-030",
+      "text": "Trovami un'auto rossa",
+      "tags": [
+        "contrast",
+        "bucket:attribute"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "auto",
+              "type": "product",
+              "raw": "un'auto rossa"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "rossa"
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "auto",
+              "type": "product",
+              "raw": "un'auto"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "sparse-007",
+      "text": "Cercami un corso di inglese online",
+      "tags": [
+        "sparse",
+        "education"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "corso",
+              "type": "education",
+              "raw": "un corso di inglese"
+            },
+            "attributes": [
+              {
+                "property": "subject",
+                "operator": "eq",
+                "value": "inglese"
+              },
+              {
+                "property": "format",
+                "operator": "eq",
+                "value": "online"
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "corso",
+              "type": "education",
+              "raw": "un corso di inglese"
+            },
+            "attributes": [
+              {
+                "property": "format",
+                "operator": "eq",
+                "value": "online"
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-001",
+      "text": "Ho fame e sono a Milano, mi andrebbe qualcosa con la mortadella ma dieci euro per un panino proprio non li spendo.",
+      "tags": [
+        "natural",
+        "noisy",
+        "food"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi andrebbe",
+            "target": {
+              "name": "panino",
+              "type": "food",
+              "raw": "un panino"
+            },
+            "attributes": [
+              {
+                "property": "ingredient",
+                "operator": "contains",
+                "value": "mortadella"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Milano"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi andrebbe",
+            "target": {
+              "name": "panino",
+              "type": "food",
+              "raw": "qualcosa con la mortadella"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Milano"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-002",
+      "text": "Mi trovi uno Sphynx femmina? Preferirei giovane, però non voglio farmi più di 80 km.",
+      "tags": [
+        "natural",
+        "animal",
+        "preference",
+        "spatial",
+        "target-specificity"
+      ],
+      "mandatory": true,
+      "guard": "CLARIFY",
+      "guard_issues": [
+        "hallucinated_value"
+      ],
+      "guard_repairs": [],
+      "errors": [
+        "guard:CLARIFY",
+        "ungrounded_value",
+        "value_error"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi trovi",
+            "target": {
+              "name": "Sphynx",
+              "type": "animal",
+              "raw": "uno Sphynx femmina"
+            },
+            "attributes": [
+              {
+                "property": "sex",
+                "operator": "eq",
+                "value": "female"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 80,
+                "unit": "km"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "age",
+                "operator": "eq",
+                "value": "giovane"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi trovi",
+            "target": {
+              "name": "Sphynx",
+              "type": "animal",
+              "raw": "uno Sphynx"
+            },
+            "attributes": [
+              {
+                "property": "sex",
+                "operator": "eq",
+                "value": "female"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "distance",
+                "operator": "within",
+                "value": 80,
+                "unit": "km"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "age",
+                "operator": "eq",
+                "value": "young"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-003",
+      "text": "Serve qualcuno per sistemare una presa oggi, sono a Verbania, cento euro proprio massimo.",
+      "tags": [
+        "natural",
+        "noisy",
+        "service",
+        "implicit-target",
+        "target-specificity"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "action",
+        "missing_fact",
+        "target_name",
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "serve",
+            "target": {
+              "name": "qualcuno",
+              "type": "professional_service",
+              "raw": "qualcuno per sistemare una presa"
+            },
+            "attributes": [
+              {
+                "property": "specialization",
+                "operator": "contains",
+                "value": "presa"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "oggi"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Verbania"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 100,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "order",
+            "raw_action": "serve",
+            "target": {
+              "name": "presa",
+              "type": "service",
+              "raw": "qualsomeone"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Verbania"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 100,
+                "currency": "EUR"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "oggi"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-004",
+      "text": "cerco zorba x7 32gb palermo no rosso max 500",
+      "tags": [
+        "natural",
+        "telegraphic",
+        "open-vocab",
+        "negation",
+        "ambiguous-property"
+      ],
+      "mandatory": true,
+      "guard": "CLARIFY",
+      "guard_issues": [
+        "operator_polarity_mismatch"
+      ],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:constraints->attributes",
+        "guard:CLARIFY",
+        "operator:neq->eq",
+        "target_name"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cerco",
+            "target": {
+              "name": "Zorba X7",
+              "type": "product",
+              "raw": "zorba x7"
+            },
+            "attributes": [
+              {
+                "property": "storage",
+                "operator": "eq",
+                "value": 32,
+                "unit": "GB"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Palermo"
+              },
+              {
+                "property": "color",
+                "operator": "neq",
+                "value": "rosso"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 500
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cerco",
+            "target": {
+              "name": "Zorba",
+              "type": "product",
+              "raw": "Zorba x7 32gb"
+            },
+            "attributes": [
+              {
+                "property": "color",
+                "operator": "eq",
+                "value": "rosso"
+              },
+              {
+                "property": "storage",
+                "operator": "eq",
+                "value": 32,
+                "unit": "GB"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Palermo"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 500
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-007",
+      "text": "Sono a Milano e ho voglia di un panino alla mortadella. Dieci euro però non li spendo.",
+      "tags": [
+        "natural",
+        "paraphrase",
+        "multi-sentence"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "ho voglia",
+            "target": {
+              "name": "panino",
+              "type": "food",
+              "raw": "un panino alla mortadella"
+            },
+            "attributes": [
+              {
+                "property": "ingredient",
+                "operator": "contains",
+                "value": "mortadella"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Milano"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "panino",
+              "type": "food",
+              "raw": "un panino"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Milano"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 10,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-010",
+      "text": "vorrei un macbook con almeno 32 gb di ram, ricondizionato va benissimo, sotto i 1500",
+      "tags": [
+        "natural",
+        "electronics",
+        "strictness:gte"
+      ],
+      "mandatory": true,
+      "guard": "CLARIFY",
+      "guard_issues": [
+        "operator_strictness_mismatch",
+        "hallucinated_currency"
+      ],
+      "guard_repairs": [
+        "goals[0]: 'condition' spostato da constraints a attributes (cascata §2)"
+      ],
+      "errors": [
+        "bucket:attributes->constraints",
+        "bucket:constraints->attributes",
+        "guard:CLARIFY",
+        "operator:gte->eq",
+        "value_error"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "vorrei",
+            "target": {
+              "name": "MacBook",
+              "type": "product",
+              "raw": "un macbook"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "ricondizionato"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "ram",
+                "operator": "gte",
+                "value": 32,
+                "unit": "GB"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 1500
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "vorrei",
+            "target": {
+              "name": "macbook",
+              "type": "product",
+              "raw": "un macbook"
+            },
+            "attributes": [
+              {
+                "property": "ram",
+                "operator": "eq",
+                "value": 32,
+                "unit": "GB"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 1500,
+                "currency": "EUR"
+              },
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "ricondizionato"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-011",
+      "text": "Trovami un volo per Londra sotto i 90€, non Ryanair, devo arrivare prima delle 18.",
+      "tags": [
+        "natural",
+        "transport",
+        "negation",
+        "temporal"
+      ],
+      "mandatory": true,
+      "guard": "REPAIRED",
+      "guard_issues": [],
+      "guard_repairs": [
+        "goals[0]: 'destination' spostato da attributes a constraints (cascata §2)"
+      ],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Londra"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 90,
+                "currency": "EUR"
+              },
+              {
+                "property": "carrier",
+                "operator": "neq",
+                "value": "Ryanair"
+              },
+              {
+                "property": "arrival_time",
+                "operator": "before",
+                "value": "18:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Londra"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 90,
+                "currency": "EUR"
+              },
+              {
+                "property": "destination",
+                "operator": "neq",
+                "value": "Ryanair"
+              },
+              {
+                "property": "arrival_time",
+                "operator": "before",
+                "value": "18:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-015",
+      "text": "ciao! senti, mi servirebbe una pizza senza glutine dalle parti di Bologna, e possibilmente che consegnino",
+      "tags": [
+        "natural",
+        "negation",
+        "preference",
+        "food"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "operator:eq->contains"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi servirebbe",
+            "target": {
+              "name": "pizza",
+              "type": "food",
+              "raw": "una pizza senza glutine"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "diet",
+                "operator": "excludes",
+                "value": "glutine"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bologna"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "delivery",
+                "operator": "eq",
+                "value": "consegna"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi servirebbe",
+            "target": {
+              "name": "pizza",
+              "type": "food",
+              "raw": "una pizza"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "diet",
+                "operator": "excludes",
+                "value": "glutine"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bologna"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "delivery",
+                "operator": "contains",
+                "value": "consegna"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-016",
+      "text": "Ho bisogno di un traduttore dall'inglese all'italiano, madrelingua, entro venerdì.",
+      "tags": [
+        "natural",
+        "service",
+        "temporal"
+      ],
+      "mandatory": false,
+      "guard": "CLARIFY",
+      "guard_issues": [
+        "hallucinated_value"
+      ],
+      "guard_repairs": [],
+      "errors": [
+        "guard:CLARIFY",
+        "hallucinated_fact",
+        "missing_fact",
+        "operator:contains->eq",
+        "ungrounded_value"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "ho bisogno",
+            "target": {
+              "name": "traduttore",
+              "type": "professional_service",
+              "raw": "un traduttore"
+            },
+            "attributes": [
+              {
+                "property": "language",
+                "operator": "contains",
+                "value": "inglese"
+              },
+              {
+                "property": "language",
+                "operator": "contains",
+                "value": "italiano"
+              },
+              {
+                "property": "certification",
+                "operator": "eq",
+                "value": "madrelingua"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "before",
+                "value": "venerdì"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "ho bisogno di",
+            "target": {
+              "name": "traduttore",
+              "type": "professional_service",
+              "raw": "un traduttore"
+            },
+            "attributes": [
+              {
+                "property": "language",
+                "operator": "eq",
+                "value": "italiano"
+              },
+              {
+                "property": "specialization",
+                "operator": "contains",
+                "value": "matrimonlingua"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "before",
+                "value": "venerdì"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-017",
+      "text": "una stampante 3d usata, che non sia cinese, qui in zona Firenze",
+      "tags": [
+        "natural",
+        "negation",
+        "implicit-action",
+        "open-vocab"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact",
+        "target_name",
+        "value_error"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "stampante 3D",
+              "type": "product",
+              "raw": "una stampante 3d usata"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "usata"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "brand",
+                "operator": "neq",
+                "value": "cinese"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Firenze"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "stampante",
+              "type": "product",
+              "raw": "una stampante"
+            },
+            "attributes": [
+              {
+                "property": "brand",
+                "operator": "eq",
+                "value": "usata"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Firenze"
+              },
+              {
+                "property": "language",
+                "operator": "neq",
+                "value": "cinese"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-018",
+      "text": "Prenotami due notti in un bed and breakfast a Napoli dal 12 al 14",
+      "tags": [
+        "natural",
+        "accommodation",
+        "temporal",
+        "range"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact",
+        "target_name"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "bed and breakfast",
+              "type": "accommodation",
+              "raw": "un bed and breakfast"
+            },
+            "attributes": [
+              {
+                "property": "duration",
+                "operator": "eq",
+                "value": 2,
+                "unit": "nights"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Napoli"
+              },
+              {
+                "property": "date",
+                "operator": "between",
+                "value": 12,
+                "value_to": 14
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "notti",
+              "type": "accommodation",
+              "raw": "un bed and breakfast"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Napoli"
+              },
+              {
+                "property": "date",
+                "operator": "between",
+                "value": 12,
+                "value_to": 14
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-019",
+      "text": "Mi cerchi un veterinario aperto la domenica? Sono a Bari.",
+      "tags": [
+        "natural",
+        "service"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi cerchi",
+            "target": {
+              "name": "veterinario",
+              "type": "professional_service",
+              "raw": "un veterinario"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "availability",
+                "operator": "contains",
+                "value": "domenica"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bari"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi cerchi",
+            "target": {
+              "name": "veterinario",
+              "type": "professional_service",
+              "raw": "un veterinario"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Bari"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "domenica"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "nat-020",
+      "text": "compra due biglietti per il concerto di sabato, in platea, non più di 60 euro l'uno",
+      "tags": [
+        "natural",
+        "ticket",
+        "strictness:lte"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "compra",
+            "target": {
+              "name": "biglietto",
+              "type": "ticket",
+              "raw": "due biglietti per il concerto"
+            },
+            "attributes": [
+              {
+                "property": "quantity",
+                "operator": "eq",
+                "value": 2
+              },
+              {
+                "property": "section",
+                "operator": "eq",
+                "value": "platea"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "sabato"
+              },
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 60,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "compra",
+            "target": {
+              "name": "biglietto",
+              "type": "ticket",
+              "raw": "biglietto"
+            },
+            "attributes": [
+              {
+                "property": "section",
+                "operator": "eq",
+                "value": "platea"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lte",
+                "value": 60,
+                "currency": "EUR"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "sabato"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "multi-001",
+      "text": "Trovami un hotel a Roma e prenotami un treno per sabato",
+      "tags": [
+        "multi-goal"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "un hotel"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Roma"
+              }
+            ],
+            "preferences": []
+          },
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "treno",
+              "type": "transport",
+              "raw": "un treno"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "sabato"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "un hotel"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Roma"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "sabato"
+              }
+            ],
+            "preferences": []
+          },
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "treno",
+              "type": "transport",
+              "raw": "un treno"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Roma"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "sabato"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "multi-002",
+      "text": "Mi servono un idraulico e un elettricista a Torino",
+      "tags": [
+        "multi-goal",
+        "shared-constraint"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_goal"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi servono",
+            "target": {
+              "name": "idraulico",
+              "type": "professional_service",
+              "raw": "un idraulico"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Torino"
+              }
+            ],
+            "preferences": []
+          },
+          {
+            "action": "find",
+            "raw_action": "mi servono",
+            "target": {
+              "name": "elettricista",
+              "type": "professional_service",
+              "raw": "un elettricista"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Torino"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "mi servono",
+            "target": {
+              "name": "idraulico",
+              "type": "professional_service",
+              "raw": "un idraulico"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Torino"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "multi-003",
+      "text": "Cercami una chitarra usata sotto i 300 euro e confrontami tre amplificatori",
+      "tags": [
+        "multi-goal"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact",
+        "target_name"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "chitarra",
+              "type": "product",
+              "raw": "una chitarra usata"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "usata"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 300,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          },
+          {
+            "action": "compare",
+            "raw_action": "confrontami",
+            "target": {
+              "name": "amplificatore",
+              "type": "product",
+              "raw": "tre amplificatori"
+            },
+            "attributes": [
+              {
+                "property": "quantity",
+                "operator": "eq",
+                "value": 3
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "chitarra",
+              "type": "product",
+              "raw": "una chitarra"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "usata"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 300,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          },
+          {
+            "action": "compare",
+            "raw_action": "confrontami",
+            "target": {
+              "name": "amplificatori",
+              "type": "product",
+              "raw": "tre amplificatori"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "cond-003",
+      "text": "Trova un volo per Madrid, e se ne trovi uno diretto prenotalo subito",
+      "tags": [
+        "conditional",
+        "gate"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "gate_condition"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trova",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Madrid"
+              }
+            ],
+            "preferences": [],
+            "gate": {
+              "when": {
+                "property": "route",
+                "operator": "eq",
+                "value": "diretto"
+              },
+              "then": "book",
+              "otherwise": null
+            }
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trova",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Madrid"
+              }
+            ],
+            "preferences": [],
+            "gate": {
+              "when": {
+                "property": "route",
+                "operator": "eq",
+                "value": "Madrid"
+              },
+              "then": "book",
+              "otherwise": null
+            }
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "amb-002",
+      "text": "Aiutami.",
+      "tags": [
+        "ambiguity",
+        "clarification"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "aiutami",
+            "target": {
+              "name": "unknown",
+              "type": null,
+              "raw": "aiutami"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": true,
+          "reason": "goal_unintelligible",
+          "missing_fields": [
+            "target",
+            "action"
+          ]
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "aiutami",
+            "target": {
+              "name": "unknown",
+              "type": null,
+              "raw": "aiutami"
+            },
+            "attributes": [],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": true,
+          "reason": "goal_unintelligible",
+          "missing_fields": [
+            "target"
+          ]
+        }
+      }
+    },
+    {
+      "id": "amb-004",
+      "text": "Cercami qualcosa da mangiare a Roma sotto i 15 euro",
+      "tags": [
+        "ambiguity:no",
+        "vague-target"
+      ],
+      "mandatory": true,
+      "guard": "CLARIFY",
+      "guard_issues": [
+        "hallucinated_target"
+      ],
+      "guard_repairs": [],
+      "errors": [
+        "guard:CLARIFY",
+        "target_name",
+        "target_type"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "qualcosa da mangiare",
+              "type": "food",
+              "raw": "qualcosa da mangiare"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Roma"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 15,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "food",
+              "type": "place",
+              "raw": "qualcosa da mangiare"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Roma"
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 15,
+                "currency": "EUR"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "open-004",
+      "text": "Trovami un allevatore di Zwergschnauzer pepe e sale vicino a Udine",
+      "tags": [
+        "open-vocab",
+        "animal"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact",
+        "value_error"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "allevatore",
+              "type": "service",
+              "raw": "un allevatore di Zwergschnauzer"
+            },
+            "attributes": [
+              {
+                "property": "breed",
+                "operator": "eq",
+                "value": "Zwergschnauzer"
+              },
+              {
+                "property": "coat",
+                "operator": "eq",
+                "value": "pepe e sale"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Udine"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "allevatore",
+              "type": "service",
+              "raw": "un allevatore"
+            },
+            "attributes": [
+              {
+                "property": "specialization",
+                "operator": "contains",
+                "value": "Zwergschnauzer"
+              },
+              {
+                "property": "breed",
+                "operator": "eq",
+                "value": "pepe"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Udine"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "open-006",
+      "text": "Prenotami un tavolo da Frobnicato a Lecce per stasera",
+      "tags": [
+        "open-vocab"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "tavolo",
+              "type": "place",
+              "raw": "un tavolo da Frobnicato"
+            },
+            "attributes": [
+              {
+                "property": "brand",
+                "operator": "eq",
+                "value": "Frobnicato"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Lecce"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "stasera"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "prenotami",
+            "target": {
+              "name": "tavolo",
+              "type": "place",
+              "raw": "un tavolo"
+            },
+            "attributes": [
+              {
+                "property": "ingredient",
+                "operator": "contains",
+                "value": "Frobnicato"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Lecce"
+              },
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "stasera"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "en-002",
+      "text": "Book a hotel in Rome, at least 4 stars, preferably with a pool",
+      "tags": [
+        "english",
+        "preference",
+        "strictness:gte"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:constraints->preferences",
+        "operator:gte->eq"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "book",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "a hotel"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Rome"
+              },
+              {
+                "property": "stars",
+                "operator": "gte",
+                "value": 4
+              }
+            ],
+            "preferences": [
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "pool"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "book",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "a hotel"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Rome"
+              }
+            ],
+            "preferences": [
+              {
+                "property": "stars",
+                "operator": "eq",
+                "value": 4
+              },
+              {
+                "property": "amenity",
+                "operator": "contains",
+                "value": "a pool"
+              }
+            ]
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "act-001",
+      "text": "Comprami un tostapane su Amazon",
+      "tags": [
+        "action:buy"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "comprami",
+            "target": {
+              "name": "tostapane",
+              "type": "product",
+              "raw": "un tostapane"
+            },
+            "attributes": [
+              {
+                "property": "seller",
+                "operator": "eq",
+                "value": "Amazon"
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "buy",
+            "raw_action": "comprami",
+            "target": {
+              "name": "tostapane",
+              "type": "product",
+              "raw": "un tostapane"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Amazon"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "act-002",
+      "text": "Contatta il ristorante La Pergola e chiedi se hanno posto sabato",
+      "tags": [
+        "action:contact"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "contact",
+            "raw_action": "contatta",
+            "target": {
+              "name": "ristorante",
+              "type": "place",
+              "raw": "il ristorante La Pergola"
+            },
+            "attributes": [
+              {
+                "property": "brand",
+                "operator": "eq",
+                "value": "La Pergola"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "sabato"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "contact",
+            "raw_action": "contatta",
+            "target": {
+              "name": "ristorante",
+              "type": "place",
+              "raw": "il ristorante La Pergola"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "sabato"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "act-003",
+      "text": "Confrontami tre assicurazioni auto per una Panda del 2015",
+      "tags": [
+        "action:compare"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "confrontami",
+            "target": {
+              "name": "assicurazione auto",
+              "type": "service",
+              "raw": "tre assicurazioni auto"
+            },
+            "attributes": [
+              {
+                "property": "quantity",
+                "operator": "eq",
+                "value": 3
+              },
+              {
+                "property": "model",
+                "operator": "eq",
+                "value": "Panda"
+              },
+              {
+                "property": "year",
+                "operator": "eq",
+                "value": 2015
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "compare",
+            "raw_action": "confrontami",
+            "target": {
+              "name": "assicurazione auto",
+              "type": "service",
+              "raw": "tre assicurazioni auto"
+            },
+            "attributes": [
+              {
+                "property": "model",
+                "operator": "eq",
+                "value": "Panda"
+              },
+              {
+                "property": "year",
+                "operator": "eq",
+                "value": 2015
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "act-006",
+      "text": "Disdici la prenotazione dell'hotel di venerdì",
+      "tags": [
+        "action:cancel"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "action",
+        "target_name"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "cancel",
+            "raw_action": "disdici",
+            "target": {
+              "name": "prenotazione",
+              "type": "accommodation",
+              "raw": "la prenotazione dell'hotel"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "venerdì"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "book",
+            "raw_action": "disdici",
+            "target": {
+              "name": "hotel",
+              "type": "accommodation",
+              "raw": "del hotel"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "date",
+                "operator": "eq",
+                "value": "venerdì"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "unit-004",
+      "text": "Trovami una corsa in taxi sotto i 15 minuti",
+      "tags": [
+        "unit"
+      ],
+      "mandatory": false,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact",
+        "target_name"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "taxi",
+              "type": "transport",
+              "raw": "una corsa in taxi"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "duration",
+                "operator": "lt",
+                "value": 15,
+                "unit": "min"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "corsa",
+              "type": "transport",
+              "raw": "una corsa"
+            },
+            "attributes": [
+              {
+                "property": "mode",
+                "operator": "eq",
+                "value": "taxi"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "time",
+                "operator": "lt",
+                "value": "15:00"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "unit-005",
+      "text": "Cercami un monolocale a 700 al mese a Milano",
+      "tags": [
+        "currency",
+        "elliptical",
+        "unit"
+      ],
+      "mandatory": false,
+      "guard": "CLARIFY",
+      "guard_issues": [
+        "hallucinated_currency"
+      ],
+      "guard_repairs": [],
+      "errors": [
+        "guard:CLARIFY",
+        "value_error"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "monolocale",
+              "type": "real_estate",
+              "raw": "un monolocale"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "eq",
+                "value": 700,
+                "unit": "month"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Milano"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "cercami",
+            "target": {
+              "name": "monolocale",
+              "type": "real_estate",
+              "raw": "un monolocale"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "eq",
+                "value": 700,
+                "currency": "EUR"
+              },
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Milano"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "trap-005",
+      "text": "Voglio una Fiat 500 del 2020 sotto i 12000",
+      "tags": [
+        "number-role",
+        "trap"
+      ],
+      "mandatory": true,
+      "guard": "CLARIFY",
+      "guard_issues": [
+        "hallucinated_currency"
+      ],
+      "guard_repairs": [
+        "goals[0]: 'price' spostato da attributes a constraints (cascata §2)"
+      ],
+      "errors": [
+        "guard:CLARIFY",
+        "value_error"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "voglio",
+            "target": {
+              "name": "Fiat 500",
+              "type": "product",
+              "raw": "una Fiat 500 del 2020"
+            },
+            "attributes": [
+              {
+                "property": "year",
+                "operator": "eq",
+                "value": 2020
+              }
+            ],
+            "constraints": [
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 12000
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "voglio",
+            "target": {
+              "name": "Fiat 500",
+              "type": "product",
+              "raw": "una Fiat 500"
+            },
+            "attributes": [
+              {
+                "property": "year",
+                "operator": "eq",
+                "value": 2020
+              },
+              {
+                "property": "price",
+                "operator": "lt",
+                "value": 12000,
+                "currency": "EUR"
+              }
+            ],
+            "constraints": [],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "neg-001",
+      "text": "Un volo per Barcellona né con Ryanair né con Wizzair",
+      "tags": [
+        "negation",
+        "list-operator",
+        "implicit-action"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "bucket:constraints->attributes",
+        "operator:not_in->eq"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Barcellona"
+              },
+              {
+                "property": "carrier",
+                "operator": "not_in",
+                "value": "Ryanair|Wizzair"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "volo",
+              "type": "transport",
+              "raw": "un volo"
+            },
+            "attributes": [
+              {
+                "property": "carrier",
+                "operator": "eq",
+                "value": "Ryanair|Wizzair"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "destination",
+                "operator": "eq",
+                "value": "Barcellona"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "neg-003",
+      "text": "Un'auto usata ma non incidentata, non oltre i 90000 km",
+      "tags": [
+        "negation",
+        "implicit-action"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "missing_fact",
+        "operator:lte->lt"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "auto",
+              "type": "product",
+              "raw": "un'auto usata"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "usata"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "condition",
+                "operator": "neq",
+                "value": "incidentata"
+              },
+              {
+                "property": "mileage",
+                "operator": "lte",
+                "value": 90000,
+                "unit": "km"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "(implicito)",
+            "target": {
+              "name": "auto",
+              "type": "product",
+              "raw": "un'auto"
+            },
+            "attributes": [
+              {
+                "property": "condition",
+                "operator": "eq",
+                "value": "usata"
+              }
+            ],
+            "constraints": [
+              {
+                "property": "mileage",
+                "operator": "lt",
+                "value": 90000,
+                "unit": "km"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    },
+    {
+      "id": "neg-004",
+      "text": "Trovami un ristorante a Trieste che non sia di pesce",
+      "tags": [
+        "negation"
+      ],
+      "mandatory": true,
+      "guard": "ACCEPT",
+      "guard_issues": [],
+      "guard_repairs": [],
+      "errors": [
+        "hallucinated_fact",
+        "missing_fact"
+      ],
+      "expected": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "ristorante",
+              "type": "place",
+              "raw": "un ristorante"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Trieste"
+              },
+              {
+                "property": "cuisine",
+                "operator": "neq",
+                "value": "pesce"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      },
+      "got": {
+        "schema_version": "1.1",
+        "goals": [
+          {
+            "action": "find",
+            "raw_action": "trovami",
+            "target": {
+              "name": "ristorante",
+              "type": "place",
+              "raw": "un ristorante"
+            },
+            "attributes": [],
+            "constraints": [
+              {
+                "property": "location",
+                "operator": "near",
+                "value": "Trieste"
+              },
+              {
+                "property": "diet",
+                "operator": "excludes",
+                "value": "pesce"
+              }
+            ],
+            "preferences": []
+          }
+        ],
+        "clarification": {
+          "required": false,
+          "reason": null,
+          "missing_fields": []
+        }
+      }
+    }
+  ]
+}

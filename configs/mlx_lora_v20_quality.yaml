@@ -1,0 +1,31 @@
+# H14: data quality at a fixed microbatch budget; same LoRA as v19-cap16.
+# 13,000 microbatches / 24,560 rows = 0.529 epochs, 3,250 optimizer updates.
+# Full validation loss at start/mid/end; fixed semantic dev panel after training.
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v20_quality"
+seed: 2026
+num_layers: 16
+batch_size: 1
+iters: 13000
+val_batches: -1
+learning_rate: 0.00003
+steps_per_report: 50
+steps_per_eval: 6500
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v20-quality"
+save_every: 1500
+test: false
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 16
+  scale: 32.0
+  dropout: 0.05
+lr_schedule:
+  name: cosine_decay
+  warmup: 100
+  arguments: [0.00003, 3250, 0.000003]

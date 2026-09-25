@@ -1,0 +1,67 @@
+# Jase Interpreter — v16: il decadimento del learning rate, stavolta davvero
+#
+# Corsa accorciata da 17 000 a 13 000 iterazioni dopo che il Mac si è
+# spento a metà del v15 (batteria). Con la media dei pesi non serve
+# arrivare lontanissimo: serve una finestra di checkpoint maturi da
+# mediare, e 13 000 la dà lo stesso costando un terzo di tempo in meno.
+#
+# Il v13 ha trovato il massimo della curva: 16 000 iterazioni. A 18 000
+# peggiora su quindici tag su venti, quindi da qui in poi 17 000 con un
+# checkpoint ogni 2000 e si sceglie sul gold, non sull'ultimo.
+#
+# Cosa cambia nei dati (data/v14), dai 13 casi mandatory falliti dal v13:
+#   • "due biglietti" era una FRASE DEL TARGET senza `quantity` nel
+#     contratto: il dataset insegnava esattamente l'omissione che poi
+#     misuravo su nat-020. Ora la quantità la produce il fatto, che scrive
+#     anche la frase, e i numeri piccoli si dicono in lettere ("due
+#     biglietti", "tre amplificatori") come si fa parlando
+#   • "un allevatore di Zwergschnauzer": la razza è `breed`, non la
+#     specializzazione del professionista (open-004)
+#   • target vaghi tenuti parola per parola — "qualcosa da mangiare" non
+#     diventa `food` (§8 vieta di astrarre, amb-004)
+#   • blocco nuovo: una parola di tempo accanto a una soglia di prezzo.
+#     In "un elettricista stasera entro 100 euro" l'`entro` governa i cento
+#     euro, non la sera, e il modello produceva `date before stasera`
+#   • `monitor`: il ramo "avvisami se…" passa dal 25% al 40% del blocco
+#     condizionale, l'unico posto dove quell'azione si impara
+#
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v15"
+seed: 2026
+num_layers: 8
+batch_size: 1
+iters: 13000
+val_batches: 25
+learning_rate: 0.00003
+steps_per_report: 50
+steps_per_eval: 500
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v16"
+save_every: 1500
+test: false
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 16
+  scale: 32.0
+  dropout: 0.05
+# decadimento del learning rate: fra un checkpoint e l'altro della stessa
+# corsa i casi mandatory oscillavano di tre o quattro (v14: 0.788 a 16 000,
+# 0.859 a 17 000). Con il passo costante l'ottimizzatore rimbalza attorno al
+# minimo; il coseno lo fa atterrare. La media dei pesi (`soup_adapters.py`)
+# cura lo stesso male a valle: qui si prova a curarlo a monte, e le due cose
+# si sommano.
+# ATTENZIONE: `warmup` e `decay_steps` si contano in STEP DELL'OTTIMIZZATORE,
+# non in iterazioni. Con grad_accumulation_steps 4, 17 000 iterazioni sono
+# un quarto: 13 000 iterazioni sono 3250 step, ed è quello il numero da
+# scrivere qui perché il coseno arrivi in fondo esattamente a fine corsa.
+# Verificato leggendo il log del v15: a iterazione 150 il passo era
+# 2,16·10⁻⁶, cioè il valore della rampa lineare allo step 37, non a 150.
+lr_schedule:
+  name: cosine_decay
+  warmup: 100
+  arguments: [0.00003, 3250, 0.000003]

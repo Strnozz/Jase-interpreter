@@ -1,0 +1,31 @@
+# Jase Interpreter — training v2 su Mac (MLX + LoRA)
+#
+# Rispetto al v1 lowmem: più strati adattati (4 → 8) e rank più alto (8 → 16),
+# perché il dataset v2 chiede al modello distinzioni più fini (ruolo del fatto,
+# strettezza dell'operatore) che 1.4M parametri faticano a tenere.
+# La sequenza resta corta (512): il prompt di sistema è minuscolo e gli esempi
+# sono compatti, quindi non serve il 1280 che aveva fatto esplodere METAL.
+model: "mlx-community/Qwen3.5-2B-4bit"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data/v2"
+seed: 2026
+num_layers: 8
+batch_size: 1
+iters: 1500
+val_batches: 25
+learning_rate: 0.00003
+steps_per_report: 25
+steps_per_eval: 100
+grad_accumulation_steps: 4
+adapter_path: "adapters/jase-v2"
+save_every: 100
+test: false
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+lora_parameters:
+  rank: 16
+  scale: 32.0
+  dropout: 0.05

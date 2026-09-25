@@ -1,0 +1,33 @@
+{
+  "name": "H14-v20-quality",
+  "config": "configs/mlx_lora_v20_quality.yaml",
+  "candidate_adapter": "adapters/jase-v20-quality",
+  "baseline_adapter": "adapters/jase-v19-cap16",
+  "dev": "data/v20_quality/dev.jsonl",
+  "input_hashes": {
+    "configs/mlx_lora_v20_quality.yaml": "cbe5d715b63341db3665aa18a9f2126b95046e4d164a7a29c004dc2fc47874b2",
+    "docs/EXPERIMENT_V20.md": "7ff8fdd8b3e6d62abf89b28c0cc008f3a54de45496a0b3811a08a3b5cfc76bc2",
+    "TRAIN_SYSTEM_PROMPT.txt": "36027a7d4db7da91ad7646c16bf04810c13e6bd0a3561f31dc17e55c3f9fd6f3",
+    "schema/goal_contract_v1_1.schema.json": "90baf87d207b5dd41ac443a01b57d4735ad7d2b66ea9753bacc2ceb16e103f66",
+    "benchmarks/gold_v1.jsonl": "8f06498986c2888dd840e38b2a4d4613b91349877f1f68246d153007796baf19",
+    "jase/metrics.py": "0a205cbdda091f7a96aaafd90a45e5213662c3d32c9b41c056104cbe1e108a77",
+    "jase/canon.py": "1e6349acc7e55ed7423022f4f650c80bc2dcf2f22a9704c0df0b3c4c5eea3252",
+    "jase/dataset_quality.py": "75fc152f0a8404599653ec2934afd4333a51cbce40bd8518a859c31969ba6b0c",
+    "jase/__init__.py": "898df5ad8919b0b2e3a0d5d4340a373faf3664b67194d5a50e9273e595ec5231",
+    "jase/leakage.py": "0be23100226b8c6036a5cddf9c0116da5c7b24695f715d512faa890a1e056460",
+    "jase/lexicon.py": "2f95f9b279a1de2a47b70c1a8f87c3a6d41954e9503f19f144b23b6addd18f6b",
+    "jase/guard.py": "826412600141bd6b1fd5e8d7adf062f438a469b580705ee27de6b41a5f52d751",
+    "scripts/generate_dataset_v2.py": "a13027145c7bbc1492deffbf1d2a1bf63425614e12ff58ec366eefc8e73af328",
+    "scripts/prepare_v20.py": "2393fee6921c53d15565ee32179313e56208124f457d97bd030d2adb7c1ee36a",
+    "scripts/run_v20_experiment.py": "dd9b418a35bd7120cedc1d4138c593df737c96535ab639d2dc8b054301f4b482",
+    "scripts/eval_v2.py": "624cd882404a81178a53a34db275b1d0bfccaa847feeb842ef565a46ee3f02a1",
+    "scripts/interpret.py": "b0a490036dbd587e4aeddcc29396791f5bc2e3e2ebe6b35113914d76d29d22b7",
+    "data/v20_quality/train.jsonl": "e5f29521ef453781c5770d9c1a274eaeaed4c0b9961c7789735d1211828bde81",
+    "data/v20_quality/quarantine.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/v20_quality/dev.jsonl": "fd5ca08016fd72a92376aa5aa5dfcfdfb9dd33de77a0b9acd1fb44ed1ad13c64",
+    "data/v20_quality/manifest.json": "fe48bbfebcca36ea2f0a658e7466b0c99a79be9a02341d0d25e944f7aa83367b",
+    "data/v20_quality/valid.jsonl": "e07c0ae7e8c0747c617bddf3ab3418c219bc2689fe52c864b32f040371635239",
+    "adapters/jase-v19-cap16/adapter_config.json": "66cf3b452f87c8832dbdf83fe828b8ec0eb67433c4bb428009c6dde84d00a91b",
+    "adapters/jase-v19-cap16/adapters.safetensors": "8631220f80b841abeb1bac8bf4a5a2a57d1221b52fce6e94e40d9670f7f1f2aa"
+  }
+}

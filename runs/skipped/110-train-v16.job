@@ -1,0 +1,1 @@
+{"id": "110-train-v16", "cmd": [".venv/bin/mlx_lm.lora", "--config", "configs/mlx_lora_v16.yaml"], "timeout": 45000, "tail_lines": 30}

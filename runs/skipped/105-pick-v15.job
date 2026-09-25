@@ -1,0 +1,1 @@
+{"id": "105-pick-v15", "cmd": [".venv/bin/python", "scripts/pick_checkpoint.py", "adapters/jase-v15", "12000", "14000", "16000"], "timeout": 900, "tail_lines": 30}
