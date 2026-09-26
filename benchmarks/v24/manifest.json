@@ -1,0 +1,7 @@
+{
+  "version": "V24_SAFETY",
+  "cases": 20,
+  "sha256": "e7ae143126c3cd24ee93d1171e055c6dee899e7ffc4ae63c87b2326bea90c3a3",
+  "method": "Newly authored diagnostic requests, frozen before V24 changes; no model outputs copied",
+  "limitation": "Small feature-targeted panel; AI-authored gold requires independent human review"
+}
