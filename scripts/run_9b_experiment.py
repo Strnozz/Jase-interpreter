@@ -149,10 +149,21 @@ def main() -> int:
             call("evaluation/run_v20_9b.py", "--run", str(full.relative_to(ROOT)),
                  "--output", str(best_out.relative_to(ROOT)), *extra)
         if not final_out.joinpath("summary.json").is_file():
-            write("evaluation_final_running", evaluation_best=str(best_out.relative_to(ROOT)))
-            call("evaluation/run_v20_9b.py", "--run", str(full.relative_to(ROOT)),
-                 "--adapter", manifest["final_adapter"],
-                 "--output", str(final_out.relative_to(ROOT)), *extra)
+            selected = (ROOT / manifest["adapter"]).resolve()
+            final = (ROOT / manifest["final_adapter"]).resolve()
+            if selected == final:
+                write("evaluation_final_copying", evaluation_best=str(best_out.relative_to(ROOT)))
+                final_out.mkdir(parents=True, exist_ok=True)
+                for source_file in best_out.iterdir():
+                    target_file = final_out / source_file.name
+                    if target_file.exists() and sha256(target_file) != sha256(source_file):
+                        raise RuntimeError(f"Refusing to replace different evaluation file: {target_file}")
+                    shutil.copy2(source_file, target_file)
+            else:
+                write("evaluation_final_running", evaluation_best=str(best_out.relative_to(ROOT)))
+                call("evaluation/run_v20_9b.py", "--run", str(full.relative_to(ROOT)),
+                     "--adapter", manifest["final_adapter"],
+                     "--output", str(final_out.relative_to(ROOT)), *extra)
         if not best_out.joinpath("summary.json").is_file() or not final_out.joinpath("summary.json").is_file():
             raise RuntimeError("Incomplete benchmark summaries")
         write("complete", full_run=str(full.relative_to(ROOT)),
