@@ -1,0 +1,46 @@
+{
+  "version": "V26",
+  "schema_version": "1.3",
+  "frozen_before_v25_data": true,
+  "cases": 120,
+  "families": {
+    "find_place_time": 6,
+    "appointment_book": 6,
+    "appointment_reschedule": 6,
+    "appointment_cancel": 6,
+    "vehicle_rent": 6,
+    "vehicle_find": 6,
+    "transport_sort": 6,
+    "food_order": 6,
+    "compare_count": 6,
+    "result_limit": 6,
+    "contact_message": 6,
+    "reminder_content": 6,
+    "find_then_book": 6,
+    "two_temporal_roles": 6,
+    "group_context": 6,
+    "conditional_fallback": 6,
+    "non_actionable": 6,
+    "table_missing": 6,
+    "flight_missing": 6,
+    "monitor_price": 6
+  },
+  "panel_sha256": "47e9083090684f3d998597e44bee0a288cfd8950f36e332fb51fee3c49a22389",
+  "prior_corpus_and_panels": {
+    "benchmarks\\v20\\hard_dev.jsonl": "91a5377ec85ba19af633ea2c598161a465edc58720bf16002952f5fcaa34450e",
+    "benchmarks\\v20\\holdout.jsonl": "2b1cd1818da2f96afa6b736eddc31c8655acac943bf3654fe401996c7dd1ce35",
+    "benchmarks\\v23\\transfer.jsonl": "c2aa1f4cef1b9734b91aed4996b7b89b5f3686d8d527cdb4ff9bca481fd9455b",
+    "benchmarks\\v24\\safety.jsonl": "e7ae143126c3cd24ee93d1171e055c6dee899e7ffc4ae63c87b2326bea90c3a3",
+    "benchmarks\\v25\\blind.jsonl": "acb5dbfdf2f849bc8e0e16d5ee447052142dd60e891e48a8a2dccfdaaa04de7a",
+    "data\\v24_9b\\train.jsonl": "5efd88f8947736863b016483af086f4e7044b11a93a807378de4f1c614f74d82",
+    "data\\v24_9b\\valid.jsonl": "6c0976ca01973625dfd19d545cfa325373e1a00e54440b6637cdaa872f70128a"
+  },
+  "max_prior_jaccard": 0.58824,
+  "generator_sha256": "2de0ea91367f968a3e329d14d463086ee1bde2603694eb96967ea77c1678dde3",
+  "limitations": [
+    "AI-authored targeted panel",
+    "Six lexical variants per family",
+    "Not a production prevalence estimate",
+    "Gold needs independent human audit"
+  ]
+}
