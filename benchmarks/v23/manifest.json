@@ -1,0 +1,7 @@
+{
+  "version": "V23_TRANSFER",
+  "cases": 30,
+  "sha256": "c2aa1f4cef1b9734b91aed4996b7b89b5f3686d8d527cdb4ff9bca481fd9455b",
+  "method": "Manually authored diagnostic, frozen before V23 dataset construction; no model outputs copied",
+  "limitation": "Feature-targeted small panel, not a population-level independent production sample"
+}

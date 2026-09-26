@@ -58,6 +58,9 @@ def main() -> int:
     ap.add_argument("--run", default=str(RUN.relative_to(ROOT)))
     ap.add_argument("--output", default=str(OUT.relative_to(ROOT)))
     ap.add_argument("--adapter", help="Override manifest-selected adapter for checkpoint comparison")
+    ap.add_argument("--extra-panel", action="append", default=[], metavar="NAME=PATH",
+                    help="Additional frozen JSONL panel inside the repository")
+    ap.add_argument("--only-extra", action="store_true", help="Evaluate only --extra-panel entries")
     args = ap.parse_args()
     run = (ROOT / args.run).resolve()
     out = (ROOT / args.output).resolve()
@@ -77,14 +80,32 @@ def main() -> int:
         raise RuntimeError("Training is not complete")
     cfg = load_config(manifest["model"])
     prompt = (ROOT / cfg["system_prompt_file"]).read_text(encoding="utf-8").strip()
-    panels = {
+    panel_paths = {
+        "hard_dev": ROOT / "benchmarks/v20/hard_dev.jsonl",
+        "holdout": ROOT / "benchmarks/v20/holdout.jsonl",
+        "v19_common": ROOT / "data/v20_quality/dev.jsonl",
+    }
+    panels = {} if args.only_extra else {
         "hard_dev": read_jsonl(ROOT / "benchmarks/v20/hard_dev.jsonl"),
         "holdout": read_jsonl(ROOT / "benchmarks/v20/holdout.jsonl"),
         "v19_common": historical_cases(),
     }
+    if args.only_extra and not args.extra_panel:
+        ap.error("--only-extra requires --extra-panel")
+    for spec in args.extra_panel:
+        if "=" not in spec:
+            ap.error("--extra-panel must be NAME=PATH")
+        name, path_text = spec.split("=", 1)
+        path = (ROOT / path_text).resolve()
+        if (not name.isidentifier() or name in panels or ROOT not in path.parents or
+                not path.is_file() or path.suffix != ".jsonl"):
+            ap.error(f"Invalid extra panel: {spec}")
+        panels[name] = read_jsonl(path)
+        panel_paths[name] = path
     out.mkdir(parents=True, exist_ok=True)
-    (out / "baseline_2b_common.json").write_text(
-        json.dumps(baseline_2b(panels["v19_common"]), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if "v19_common" in panels:
+        (out / "baseline_2b_common.json").write_text(
+            json.dumps(baseline_2b(panels["v19_common"]), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     model, tokenizer = load_base(cfg)
     adapter = adapter or ROOT / manifest["adapter"]
     model = PeftModel.from_pretrained(model, str(adapter))
@@ -136,8 +157,7 @@ def main() -> int:
             raise RuntimeError(f"Incomplete panel {panel}")
         metrics = [r["metric"] for r in produced]
         seconds = sum(r["latency_seconds"] for r in produced)
-        report = {"cases": len(rows), "gold_sha256": (sha256(ROOT / f"benchmarks/v20/{panel}.jsonl")
-                  if panel != "v19_common" else sha256(ROOT / "data/v20_quality/dev.jsonl")),
+        report = {"cases": len(rows), "gold_sha256": sha256(panel_paths[panel]),
                   "json_valid_rate": sum(r["json_valid"] for r in metrics) / len(rows),
                   "metrics": aggregate_v12(metrics),
                   "tokens_per_second": sum(r["output_tokens"] for r in produced) / seconds,

@@ -30,6 +30,8 @@ def main() -> int:
     runs = ROOT / "training/runs" / cfg["name"]
     best_out = ROOT / f"benchmarks/outputs/{version}-9b-best"
     final_out = ROOT / f"benchmarks/outputs/{version}-9b-final"
+    extra = (["--extra-panel", "transfer=" + cfg["extra_benchmark"]]
+             if cfg.get("extra_benchmark") else [])
     state = json.loads(launch.read_text(encoding="utf-8")) if launch.exists() else {}
     os.environ.setdefault("HF_HOME", str(ROOT / "hf-cache"))
     os.environ.setdefault("HF_HUB_OFFLINE", "1")
@@ -75,10 +77,27 @@ def main() -> int:
                     or audit["splits"][split]["rows"] != cfg[count_key]
                     or audit["splits"][split]["max_total_tokens"] > cfg["max_length"]):
                 raise RuntimeError(f"{split} changed after audit")
+        for relative, digest in source.get("excluded_benchmark_sha256", {}).items():
+            if sha256(ROOT / relative) != digest:
+                raise RuntimeError(f"Excluded benchmark changed after corpus build: {relative}")
+        builder = ROOT / f"scripts/build_{version}_9b_data.py"
+        if builder.is_file() and source.get("generator_sha256") != sha256(builder):
+            raise RuntimeError("Corpus generator changed after dataset build")
         if source["system_prompt_sha256"] != sha256(ROOT / cfg["system_prompt_file"]):
             raise RuntimeError("System prompt changed after corpus build")
         if shutil.disk_usage(ROOT).free < 10 * 1024**3:
             raise RuntimeError("Less than 10 GiB free; inspect disk without deleting checkpoints")
+        if cfg.get("baseline_transfer_run"):
+            baseline_out = ROOT / cfg["baseline_transfer_output"]
+            baseline_run = ROOT / cfg["baseline_transfer_run"]
+            if not baseline_out.joinpath("summary.json").is_file():
+                baseline_manifest = json.loads((baseline_run / "manifest.json").read_text(encoding="utf-8"))
+                if baseline_manifest["status"] != "complete" or not extra:
+                    raise RuntimeError("Baseline transfer evaluation needs a complete run and extra panel")
+                write("baseline_transfer_running")
+                call("evaluation/run_v20_9b.py", "--run", cfg["baseline_transfer_run"],
+                     "--adapter", baseline_manifest["final_adapter"],
+                     "--output", cfg["baseline_transfer_output"], "--only-extra", *extra)
         if state.get("smoke_run"):
             smoke, manifest = load_run(state["smoke_run"])
             if manifest["status"] != "complete" or not smoke.joinpath("post_train_inference.json").is_file():
@@ -128,12 +147,12 @@ def main() -> int:
         if not best_out.joinpath("summary.json").is_file():
             write("evaluation_best_running", full_run=str(full.relative_to(ROOT)))
             call("evaluation/run_v20_9b.py", "--run", str(full.relative_to(ROOT)),
-                 "--output", str(best_out.relative_to(ROOT)))
+                 "--output", str(best_out.relative_to(ROOT)), *extra)
         if not final_out.joinpath("summary.json").is_file():
             write("evaluation_final_running", evaluation_best=str(best_out.relative_to(ROOT)))
             call("evaluation/run_v20_9b.py", "--run", str(full.relative_to(ROOT)),
                  "--adapter", manifest["final_adapter"],
-                 "--output", str(final_out.relative_to(ROOT)))
+                 "--output", str(final_out.relative_to(ROOT)), *extra)
         if not best_out.joinpath("summary.json").is_file() or not final_out.joinpath("summary.json").is_file():
             raise RuntimeError("Incomplete benchmark summaries")
         write("complete", full_run=str(full.relative_to(ROOT)),

@@ -14,6 +14,10 @@ training/v22_9b_launch.json
 training/v22_9b_launch.log
 training/v23_9b_launch.json
 training/v23_9b_launch.log
+training/v22_9b_runner.out.log
+training/v22_9b_runner.err.log
+training/v23_9b_runner.out.log
+training/v23_9b_runner.err.log
 *.safetensors
 *.pt
 *.pth
