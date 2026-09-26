@@ -29,8 +29,10 @@ def main() -> int:
     labels = json.loads(label_path.read_text(encoding="utf-8")) if label_path else None
     if labels and set(labels["labels"]) != {row["id"] for row in rows}:
         raise RuntimeError("Operational review IDs do not match prediction IDs")
-    if labels and labels["panel_sha256"] != sha256(ROOT / "benchmarks/v24/safety.jsonl"):
-        raise RuntimeError("Panel changed after operational review")
+    if labels:
+        panel = (ROOT / labels.get("panel_path", "benchmarks/v24/safety.jsonl")).resolve()
+        if ROOT not in panel.parents or labels["panel_sha256"] != sha256(panel):
+            raise RuntimeError("Panel changed after operational review")
     if labels and labels["prediction_sha256"] != sha256(source):
         raise RuntimeError("Predictions changed after operational review")
 

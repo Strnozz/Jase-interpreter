@@ -1,0 +1,22 @@
+{
+  "panel_path": "benchmarks/v25/blind.jsonl",
+  "panel_sha256": "acb5dbfdf2f849bc8e0e16d5ee447052142dd60e891e48a8a2dccfdaaa04de7a",
+  "prediction_dir": "benchmarks/outputs/v24-9b-final",
+  "prediction_sha256": "cea66324a5cf14c449cac33a18d2c8777fb09e6765f4e14c6b07759ca7a73388",
+  "status": "provisional_AI_review_not_human_adjudicated",
+  "meaning": "material_or_routing_risk is a semantic or policy mismatch in a saved prediction, not an observed side effect",
+  "labels": {
+    "b01": "exact_correct", "b02": "exact_correct",
+    "b03": "material_or_routing_risk", "b04": "material_or_routing_risk",
+    "b05": "exact_correct", "b06": "material_or_routing_risk",
+    "b07": "uncertain_field_alias", "b08": "exact_correct",
+    "b09": "exact_correct", "b10": "uncertain_time_format",
+    "b11": "exact_correct", "b12": "exact_correct",
+    "b13": "exact_correct", "b14": "material_or_routing_risk",
+    "b15": "uncertain_equivalent_representation", "b16": "uncertain_equivalent_representation",
+    "b17": "exact_correct", "b18": "exact_correct",
+    "b19": "material_or_routing_risk", "b20": "uncertain_operator_alias",
+    "b21": "exact_correct", "b22": "exact_correct",
+    "b23": "material_or_routing_risk", "b24": "exact_correct"
+  }
+}
