@@ -1,0 +1,7 @@
+{
+  "version": "V25_BLIND",
+  "cases": 24,
+  "sha256": "acb5dbfdf2f849bc8e0e16d5ee447052142dd60e891e48a8a2dccfdaaa04de7a",
+  "method": "Manually authored diagnostic, frozen before V24 dataset; never used for training",
+  "limitation": "Small feature-targeted AI-authored panel; human gold review still needed"
+}
