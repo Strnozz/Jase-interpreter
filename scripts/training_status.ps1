@@ -6,34 +6,25 @@ param(
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $runsRoot = Join-Path $repoRoot 'training\runs'
-$v20Launch = Join-Path $repoRoot 'training\v20_9b_launch.json'
-$v21Launch = Join-Path $repoRoot 'training\v21_9b_launch.json'
+$launchDir = Join-Path $repoRoot 'training'
 
 function Show-TrainingStatus {
-    if (Test-Path -LiteralPath $v21Launch) {
+    foreach ($launchFile in @(Get-ChildItem -LiteralPath $launchDir -Filter 'v*_9b_launch.json' -File | Sort-Object Name)) {
         try {
-            $launch = Get-Content -LiteralPath $v21Launch -Raw | ConvertFrom-Json
-            $launchState = switch ($launch.stage) {
-                'complete' { 'OK' }
-                'failed' { 'FAILED' }
-                default { 'RUNNING' }
-            }
-            Write-Host "train qwen35-9b-v21 pipeline: $launchState ($($launch.stage))"
-        } catch {
-            Write-Host 'train qwen35-9b-v21 pipeline: INVALID STATUS'
-        }
-    }
-    if (Test-Path -LiteralPath $v20Launch) {
-        try {
-            $launch = Get-Content -LiteralPath $v20Launch -Raw | ConvertFrom-Json
+            $launch = Get-Content -LiteralPath $launchFile.FullName -Raw | ConvertFrom-Json
+            $version = $launchFile.BaseName.Split('_')[0]
             $launchState = switch ($launch.stage) {
                 'training_complete' { 'OK' }
+                'complete' { 'OK' }
                 'failed' { 'FAILED' }
-                default { 'RUNNING' }
+                default {
+                    if ($launchFile.LastWriteTime -gt (Get-Date).AddMinutes(-10)) { 'RUNNING' }
+                    else { 'INTERRUPTED' }
+                }
             }
-            Write-Host "train qwen35-9b-v20 pipeline: $launchState ($($launch.stage))"
+            Write-Host "train qwen35-9b-$version pipeline: $launchState ($($launch.stage))"
         } catch {
-            Write-Host 'train qwen35-9b-v20 pipeline: INVALID STATUS'
+            Write-Host "train $($launchFile.BaseName) pipeline: INVALID STATUS"
         }
     }
     if (-not (Test-Path -LiteralPath $runsRoot)) {

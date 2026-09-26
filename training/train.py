@@ -484,7 +484,8 @@ def main() -> int:
         metadata["steps"] = profile["max_steps"]
         metadata["examples_seen"] = profile["max_steps"] * accum
         metadata["effective_epochs"] = metadata["examples_seen"] / len(train_rows)
-        metadata["checkpoint_selection"] = "final; smoke run has no model selection" if args.smoke else "lowest loss on fixed 64-case validation sample"
+        metadata["checkpoint_selection"] = ("final; smoke run has no model selection" if args.smoke else
+            f"lowest loss on fixed {len(valid)}-case validation sample")
         by_step = {}
         for line in (out / "steps.jsonl").read_text(encoding="utf-8").splitlines():
             if line:
