@@ -121,7 +121,16 @@ def write_checkpoint(out, step, model, optimizer, scheduler, elapsed_seconds,
                 "best_validation_loss": best_loss if math.isfinite(best_loss) else None,
                 "best_step": best_step, "validation_history": validation_history},
                staged / "state.pt")
-    staged.rename(final)
+    # Windows antivirus/indexing can hold a newly written safetensors file briefly.
+    # Keep the staged checkpoint intact and retry the atomic directory rename.
+    for attempt in range(20):
+        try:
+            staged.rename(final)
+            break
+        except PermissionError:
+            if attempt == 19:
+                raise
+            time.sleep(min(0.5 * (attempt + 1), 3.0))
     return final
 
 
