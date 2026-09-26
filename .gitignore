@@ -16,6 +16,10 @@ training/v23_9b_launch.json
 training/v23_9b_launch.log
 training/v24_9b_launch.json
 training/v24_9b_launch.log
+training/v25_9b_launch.json
+training/v25_9b_launch.log
+training/v25_9b_launch.out.log
+training/v25_9b_launch.err.log
 training/v22_9b_runner.out.log
 training/v22_9b_runner.err.log
 training/v23_9b_runner.out.log
