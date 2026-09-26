@@ -6,6 +6,10 @@ models/merged/
 models/quantized/
 benchmarks/outputs/
 training/runs/
+training/v20_9b_launch.json
+training/v20_9b_launch.log
+training/v21_9b_launch.json
+training/v21_9b_launch.log
 *.safetensors
 *.pt
 *.pth

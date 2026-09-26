@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.2",
+  "panels": {
+    "hard_dev": {
+      "rows": 16,
+      "sha256": "91a5377ec85ba19af633ea2c598161a465edc58720bf16002952f5fcaa34450e",
+      "tags": [
+        "anaphora",
+        "conditional",
+        "confirmation",
+        "context",
+        "dependency",
+        "fallback",
+        "hard_soft",
+        "location",
+        "missing",
+        "multi_goal",
+        "negation",
+        "negative",
+        "numbers",
+        "numeric",
+        "ordinal",
+        "policy",
+        "progressive_execution",
+        "quoted_action",
+        "ranking",
+        "reference",
+        "side_effect",
+        "temporal",
+        "theoretical",
+        "units"
+      ]
+    },
+    "holdout": {
+      "rows": 12,
+      "sha256": "2b1cd1818da2f96afa6b736eddc31c8655acac943bf3654fe401996c7dd1ce35",
+      "tags": [
+        "anaphora",
+        "conditional",
+        "confirmation",
+        "context",
+        "fallback",
+        "hard_soft",
+        "missing",
+        "multi_goal",
+        "negation",
+        "negative",
+        "numbers",
+        "policy",
+        "quoted_action",
+        "ranking",
+        "reference",
+        "side_effect",
+        "temporal",
+        "theoretical",
+        "units"
+      ]
+    }
+  },
+  "schema_sha256": "84b0b15670281321746d3e2fb4a0fa5ad693fe9583b83e0f721c1a40dc69b923",
+  "builder_sha256": "1e40b90f55fc9320b74a1118a07b72f2e381dd646040b21116380fa890392644",
+  "protocol": "hard_dev may guide development; holdout sealed after construction, no training/tuning or per-case inference feedback",
+  "normalized_exact_overlap_with_v20_train_valid_and_v19_release": 0
+}

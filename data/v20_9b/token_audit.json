@@ -1,0 +1,166 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "method": "exact chat template, thinking disabled; no truncation",
+  "configured_v19_length": 512,
+  "splits": {
+    "train": {
+      "input": {
+        "count": 19948,
+        "min": 91,
+        "mean": 107.31,
+        "median": 106.0,
+        "p90": 117,
+        "p95": 121,
+        "p99": 128,
+        "max": 148
+      },
+      "target": {
+        "count": 19948,
+        "min": 39,
+        "mean": 81.78,
+        "median": 79.0,
+        "p90": 111,
+        "p95": 118,
+        "p99": 136,
+        "max": 159
+      },
+      "total": {
+        "count": 19948,
+        "min": 130,
+        "mean": 189.08,
+        "median": 185.0,
+        "p90": 224,
+        "p95": 237,
+        "p99": 262,
+        "max": 298
+      },
+      "matched_v19_target": {
+        "count": 19948,
+        "min": 62,
+        "mean": 98.76,
+        "median": 96.0,
+        "p90": 121,
+        "p95": 128,
+        "p99": 142,
+        "max": 163
+      },
+      "over_512": 0,
+      "source_sha256": "aa63a1c96ce9f584b2a7f876deb0edfb59d17efcb51a57e44399309e9ca54e89"
+    },
+    "valid": {
+      "input": {
+        "count": 1411,
+        "min": 93,
+        "mean": 108.16,
+        "median": 106,
+        "p90": 120,
+        "p95": 123,
+        "p99": 129,
+        "max": 139
+      },
+      "target": {
+        "count": 1411,
+        "min": 39,
+        "mean": 83.05,
+        "median": 78,
+        "p90": 115,
+        "p95": 121,
+        "p99": 138,
+        "max": 151
+      },
+      "total": {
+        "count": 1411,
+        "min": 134,
+        "mean": 191.21,
+        "median": 185,
+        "p90": 234,
+        "p95": 244,
+        "p99": 265,
+        "max": 290
+      },
+      "matched_v19_target": {
+        "count": 1411,
+        "min": 63,
+        "mean": 99.86,
+        "median": 96,
+        "p90": 126,
+        "p95": 132,
+        "p99": 145,
+        "max": 157
+      },
+      "over_512": 0,
+      "source_sha256": "1ec2825767f18dac5db9bbf3cd09f1a920fc4a318bd708f6b8e09813d545de23"
+    }
+  },
+  "panels": {
+    "hard_dev": {
+      "input": {
+        "count": 16,
+        "min": 96,
+        "mean": 105.38,
+        "median": 105.0,
+        "p90": 109,
+        "p95": 110,
+        "p99": 110,
+        "max": 116
+      },
+      "target": {
+        "count": 16,
+        "min": 19,
+        "mean": 86.5,
+        "median": 84.0,
+        "p90": 130,
+        "p95": 131,
+        "p99": 131,
+        "max": 132
+      },
+      "total": {
+        "count": 16,
+        "min": 122,
+        "mean": 191.88,
+        "median": 188.5,
+        "p90": 239,
+        "p95": 239,
+        "p99": 239,
+        "max": 241
+      },
+      "over_512": 0,
+      "sha256": "91a5377ec85ba19af633ea2c598161a465edc58720bf16002952f5fcaa34450e"
+    },
+    "holdout": {
+      "input": {
+        "count": 12,
+        "min": 99,
+        "mean": 106.92,
+        "median": 107.0,
+        "p90": 111,
+        "p95": 113,
+        "p99": 113,
+        "max": 113
+      },
+      "target": {
+        "count": 12,
+        "min": 19,
+        "mean": 83.17,
+        "median": 87.0,
+        "p90": 112,
+        "p95": 115,
+        "p99": 115,
+        "max": 143
+      },
+      "total": {
+        "count": 12,
+        "min": 123,
+        "mean": 190.08,
+        "median": 197.5,
+        "p90": 218,
+        "p95": 226,
+        "p99": 226,
+        "max": 254
+      },
+      "over_512": 0,
+      "sha256": "2b1cd1818da2f96afa6b736eddc31c8655acac943bf3654fe401996c7dd1ce35"
+    }
+  }
+}

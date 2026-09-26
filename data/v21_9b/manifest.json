@@ -1,0 +1,71 @@
+{
+  "version": "V21_9B",
+  "schema_version": "1.2",
+  "seed": 2027,
+  "source": "V20 adapter continuation + authored V1.2 templates + V20 rehearsal",
+  "source_sha256": {
+    "train": "aa63a1c96ce9f584b2a7f876deb0edfb59d17efcb51a57e44399309e9ca54e89",
+    "valid": "1ec2825767f18dac5db9bbf3cd09f1a920fc4a318bd708f6b8e09813d545de23"
+  },
+  "excluded_benchmark_sha256": {
+    "benchmarks\\v20\\hard_dev.jsonl": "91a5377ec85ba19af633ea2c598161a465edc58720bf16002952f5fcaa34450e",
+    "benchmarks\\v20\\holdout.jsonl": "2b1cd1818da2f96afa6b736eddc31c8655acac943bf3654fe401996c7dd1ce35",
+    "data\\v20_quality\\dev.jsonl": "cbb5906ce72196f28358be57d51ce3bd47ea4b99152325a821bfe0d16be999ad",
+    "benchmarks\\release_holdout_v1.jsonl": "c625dc1fe83cd82b2f01b509f5e4ef4d90700c06f53d6a6fbb6ff30a7e9c7638"
+  },
+  "generator_sha256": "ab99f3d18a2240462ed6b5d0e382028a6fffec96dbae43bba7c8d1e23011e4f5",
+  "system_prompt_sha256": "ef937538e61f7d6bc6e03a67eef64b6c0086769d6e2951583043049fbb26fe53",
+  "rows": {
+    "train": 2781,
+    "valid": 437
+  },
+  "near_validation_quarantined": 4,
+  "category_counts": {
+    "train": {
+      "v20_rehearsal": 1000,
+      "confirm_contact": 99,
+      "ordinal_chain": 180,
+      "missing_flight": 78,
+      "independent_goals": 180,
+      "missing_reference": 60,
+      "hard_soft": 180,
+      "missing_message": 99,
+      "context": 117,
+      "fallback": 180,
+      "non_actionable_theory": 72,
+      "forbid_side_effect": 117,
+      "non_actionable_quote": 96,
+      "missing_table": 129,
+      "v19_multi_independent": 38,
+      "ranking": 78,
+      "positive_condition": 78
+    },
+    "valid": {
+      "missing_flight": 14,
+      "independent_goals": 30,
+      "v20_rehearsal": 90,
+      "ordinal_chain": 30,
+      "non_actionable_theory": 30,
+      "hard_soft": 30,
+      "positive_condition": 30,
+      "non_actionable_quote": 30,
+      "ranking": 14,
+      "missing_message": 22,
+      "missing_reference": 10,
+      "confirm_contact": 30,
+      "missing_table": 21,
+      "context": 21,
+      "fallback": 14,
+      "forbid_side_effect": 21
+    }
+  },
+  "output_sha256": {
+    "train": "503285eb68dbae8c85c08cc6059e6c8b39cbdc7da89ee53c071e766643ee1ef0",
+    "valid": "cbb3ce4cdfb65197f9f3c89825abb12b2a76a87a4173be6c4efccb892660e0be"
+  },
+  "limitations": [
+    "Synthetic templates require real-world review",
+    "No contradiction/blocked contract in V1.2",
+    "Prior-conversation reference lacks a state ID"
+  ]
+}

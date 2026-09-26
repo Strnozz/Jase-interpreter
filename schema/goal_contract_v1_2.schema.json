@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jase.local/schemas/goal-contract-v1_2.json",
+  "title": "Jase GoalContract v1.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "goals"],
+  "properties": {
+    "schema_version": {"const": "1.2"},
+    "kind": {"enum": ["task", "non_actionable"]},
+    "goals": {"type": "array", "items": {"$ref": "#/$defs/goal"}},
+    "context": {"type": "array", "items": {"$ref": "#/$defs/predicate"}}
+  },
+  "$defs": {
+    "action": {"enum": ["find", "book", "buy", "compare", "contact", "rent", "monitor", "order", "hire", "cancel", "notify"]},
+    "operator": {"enum": ["eq", "neq", "lt", "lte", "gt", "gte", "contains", "excludes", "before", "after", "near", "within", "between", "in", "not_in"]},
+    "scalar": {"type": ["string", "number", "boolean"]},
+    "value_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["goal", "field"],
+      "properties": {
+        "goal": {"type": "string", "pattern": "^g[1-9][0-9]*$"},
+        "field": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "ordinal": {"type": "integer", "minimum": 1}
+      }
+    },
+    "predicate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["field", "op"],
+      "properties": {
+        "field": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "op": {"$ref": "#/$defs/operator"},
+        "value": {"$ref": "#/$defs/scalar"},
+        "value_ref": {"$ref": "#/$defs/value_ref"},
+        "value_to": {"$ref": "#/$defs/scalar"},
+        "unit": {"type": "string", "minLength": 1},
+        "currency": {"type": "string", "pattern": "^[A-Z]{3}$"}
+      },
+      "oneOf": [{"required": ["value"]}, {"required": ["value_ref"]}]
+    },
+    "fact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["field", "op", "strength"],
+      "properties": {
+        "field": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "op": {"$ref": "#/$defs/operator"},
+        "value": {"$ref": "#/$defs/scalar"},
+        "value_ref": {"$ref": "#/$defs/value_ref"},
+        "value_to": {"$ref": "#/$defs/scalar"},
+        "unit": {"type": "string", "minLength": 1},
+        "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+        "strength": {"enum": ["hard", "soft"]}
+      },
+      "oneOf": [{"required": ["value"]}, {"required": ["value_ref"]}]
+    },
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "type": {"type": "string", "minLength": 1}
+      }
+    },
+    "missing": {
+      "type": "object", "additionalProperties": false,
+      "required": ["field", "blocks", "reason"],
+      "properties": {
+        "field": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "blocks": {"enum": ["search", "action"]},
+        "reason": {"enum": ["unspecified", "unresolved_reference"]}
+      }
+    },
+    "policy": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "forbid": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/action"}},
+        "confirm_before": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/action"}}
+      },
+      "anyOf": [{"required": ["forbid"]}, {"required": ["confirm_before"]}]
+    },
+    "condition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["goal", "test"],
+      "properties": {
+        "goal": {"type": "string", "pattern": "^g[1-9][0-9]*$"},
+        "test": {"$ref": "#/$defs/predicate"}
+      }
+    },
+    "ranking": {
+      "type": "object", "additionalProperties": false,
+      "required": ["field", "direction"],
+      "properties": {
+        "field": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "direction": {"enum": ["asc", "desc"]}
+      }
+    },
+    "goal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "action", "target", "facts"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^g[1-9][0-9]*$"},
+        "action": {"$ref": "#/$defs/action"},
+        "target": {"$ref": "#/$defs/target"},
+        "facts": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+        "depends_on": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^g[1-9][0-9]*$"}},
+        "condition": {"$ref": "#/$defs/condition"},
+        "ranking": {"$ref": "#/$defs/ranking"},
+        "missing": {"type": "array", "items": {"$ref": "#/$defs/missing"}},
+        "policy": {"$ref": "#/$defs/policy"}
+      }
+    }
+  }
+}

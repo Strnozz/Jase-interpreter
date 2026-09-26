@@ -137,7 +137,8 @@ def verified_smoke(cfg, dataset_hashes):
                 and prior.get("config") == cfg and prior.get("dataset_sha256") == dataset_hashes
                 and prior.get("trainer_sha256") == sha256(Path(__file__))
                 and prior.get("pipeline_sha256") == sha256(ROOT / "jase" / "multimodel.py")
-                and prior.get("system_prompt_sha256") == sha256(ROOT / "TRAIN_SYSTEM_PROMPT.txt")
+                and prior.get("system_prompt_sha256") == sha256(ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt"))
+                and prior.get("initial_adapter_sha256") == initial_adapter_sha256(cfg)
                 and prior.get("schema_sha256") == sha256(ROOT / cfg["schema"])
                 and isinstance(prior.get("smoke_max_tokens"), int)
                 and prior["smoke_max_tokens"] > 0
@@ -145,6 +146,25 @@ def verified_smoke(cfg, dataset_hashes):
                 and inference.get("status") == "complete"):
             return prior["run_id"]
     raise RuntimeError("Full training requires a completed smoke run with saved adapter reload/inference on this exact config and corpus")
+
+
+def initial_adapter_sha256(cfg):
+    """Fingerprint warm-start weights and PEFT topology, if configured."""
+    adapter_text = cfg.get("initial_adapter")
+    if not adapter_text:
+        return None
+    adapter = (ROOT / adapter_text).resolve()
+    if ROOT not in adapter.parents:
+        raise ValueError("Initial adapter must be inside the repository")
+    import hashlib
+    digest = hashlib.sha256()
+    for name in ("adapter_config.json", "adapter_model.safetensors"):
+        path = adapter / name
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        digest.update(name.encode("utf-8"))
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
 
 
 def loss_on(model, examples, torch):
@@ -172,6 +192,8 @@ def main() -> int:
     if args.resume_from_checkpoint and not args.full:
         ap.error("--resume-from-checkpoint requires --full")
     cfg = load_config(args.model)
+    system_prompt = (ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt")).read_text(encoding="utf-8").strip()
+    adapter_hash = initial_adapter_sha256(cfg)
     if cfg["backend"] != "transformers":
         ap.error("Training this backend is not supported by this runner")
     os.environ.setdefault("HF_HOME", str(ROOT / "hf-cache"))
@@ -199,7 +221,8 @@ def main() -> int:
                 or metadata.get("config") != cfg or metadata.get("dataset_sha256") != dataset_hashes
                 or metadata.get("trainer_sha256") != sha256(Path(__file__))
                 or metadata.get("pipeline_sha256") != sha256(ROOT / "jase" / "multimodel.py")
-                or metadata.get("system_prompt_sha256") != sha256(ROOT / "TRAIN_SYSTEM_PROMPT.txt")
+                or metadata.get("system_prompt_sha256") != sha256(ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt"))
+                or metadata.get("initial_adapter_sha256") != adapter_hash
                 or metadata.get("schema_sha256") != sha256(ROOT / cfg["schema"])):
             raise RuntimeError("Resume checkpoint provenance differs from current run inputs or code")
         metadata.setdefault("resume_events", []).append({
@@ -219,7 +242,8 @@ def main() -> int:
                     "verified_smoke_run": prerequisite,
                     "trainer_sha256": sha256(Path(__file__)),
                     "pipeline_sha256": sha256(ROOT / "jase" / "multimodel.py"),
-                    "system_prompt_sha256": sha256(ROOT / "TRAIN_SYSTEM_PROMPT.txt"),
+                    "system_prompt_sha256": sha256(ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt")),
+                    "initial_adapter_sha256": adapter_hash,
                     "schema_sha256": sha256(ROOT / cfg["schema"]),
                     "checkpoint_parameter_count": checkpoint_parameter_count(cfg),
                     "versions": {p: importlib.metadata.version(p) for p in
@@ -250,6 +274,9 @@ def main() -> int:
         metadata["vram_free_after_base_load_bytes"] = torch.cuda.mem_get_info()[0]
         train_rows = read_jsonl(data / "train.jsonl")
         valid_rows = read_jsonl(data / "valid.jsonl")
+        if any(row["messages"][0] != {"role": "system", "content": system_prompt}
+               for row in train_rows + valid_rows):
+            raise RuntimeError("Dataset system prompt differs from configured training prompt")
         if (len(train_rows) != cfg["expected_train_rows"]
                 or len(valid_rows) != cfg["expected_validation_rows"]):
             raise RuntimeError(f"Dataset split counts changed: train={len(train_rows)}, validation={len(valid_rows)}")
@@ -296,6 +323,14 @@ def main() -> int:
         targets = select_language_linears(model, lc["last_n_layers"])
         if resume:
             model = PeftModel.from_pretrained(model, str(resume / "adapter"), is_trainable=True)
+        elif cfg.get("initial_adapter"):
+            initial = ROOT / cfg["initial_adapter"]
+            peft_cfg = json.loads((initial / "adapter_config.json").read_text(encoding="utf-8"))
+            if (peft_cfg.get("r") != lc["r"] or peft_cfg.get("lora_alpha") != lc["alpha"]
+                    or peft_cfg.get("lora_dropout") != lc["dropout"]
+                    or set(peft_cfg.get("target_modules", [])) != set(targets)):
+                raise RuntimeError("Initial adapter LoRA topology differs from V21 config")
+            model = PeftModel.from_pretrained(model, str(initial), is_trainable=True)
         else:
             model = get_peft_model(model, LoraConfig(r=lc["r"], lora_alpha=lc["alpha"],
                 lora_dropout=lc["dropout"], bias="none", target_modules=targets))
@@ -423,7 +458,8 @@ def main() -> int:
                     save()
                     print(json.dumps({"validation_step": step, "validation_loss": value,
                                       "best_step": best_step, "best_validation_loss": best_validation_loss}), flush=True)
-                if args.full and step % profile["checkpoint_every_steps"] == 0:
+                if args.full and (step in profile.get("early_checkpoint_steps", [])
+                                  or step % profile["checkpoint_every_steps"] == 0):
                     checkpoint = write_checkpoint(out, step, model, optimizer, scheduler,
                         elapsed_offset + time.monotonic() - started,
                         best_validation_loss, best_step, validation_history, torch)

@@ -1,0 +1,84 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "max_length": 512,
+  "splits": {
+    "train": {
+      "rows": 2781,
+      "sha256": "503285eb68dbae8c85c08cc6059e6c8b39cbdc7da89ee53c071e766643ee1ef0",
+      "mean_total_tokens": 326.92,
+      "p99_total_tokens": 432,
+      "max_total_tokens": 432,
+      "mean_target_tokens": 91.22,
+      "over_512": 0,
+      "categories": {
+        "v20_rehearsal": 1000,
+        "confirm_contact": 99,
+        "ordinal_chain": 180,
+        "missing_flight": 78,
+        "independent_goals": 180,
+        "missing_reference": 60,
+        "hard_soft": 180,
+        "missing_message": 99,
+        "context": 117,
+        "fallback": 180,
+        "non_actionable_theory": 72,
+        "forbid_side_effect": 117,
+        "non_actionable_quote": 96,
+        "missing_table": 129,
+        "v19_multi_independent": 38,
+        "ranking": 78,
+        "positive_condition": 78
+      },
+      "features": {
+        "non_actionable": 168,
+        "multi_goal": 656,
+        "context": 117,
+        "missing": 366,
+        "policy": 183,
+        "dependency": 438,
+        "condition": 258,
+        "ranking": 78,
+        "value_reference": 180
+      }
+    },
+    "valid": {
+      "rows": 437,
+      "sha256": "cbb3ce4cdfb65197f9f3c89825abb12b2a76a87a4173be6c4efccb892660e0be",
+      "mean_total_tokens": 322.91,
+      "p99_total_tokens": 432,
+      "max_total_tokens": 432,
+      "mean_target_tokens": 86.32,
+      "over_512": 0,
+      "categories": {
+        "missing_flight": 14,
+        "independent_goals": 30,
+        "v20_rehearsal": 90,
+        "ordinal_chain": 30,
+        "non_actionable_theory": 30,
+        "hard_soft": 30,
+        "positive_condition": 30,
+        "non_actionable_quote": 30,
+        "ranking": 14,
+        "missing_message": 22,
+        "missing_reference": 10,
+        "confirm_contact": 30,
+        "missing_table": 21,
+        "context": 21,
+        "fallback": 14,
+        "forbid_side_effect": 21
+      },
+      "features": {
+        "non_actionable": 60,
+        "multi_goal": 104,
+        "context": 21,
+        "missing": 67,
+        "policy": 43,
+        "dependency": 74,
+        "condition": 44,
+        "ranking": 14,
+        "value_reference": 30
+      }
+    }
+  }
+}

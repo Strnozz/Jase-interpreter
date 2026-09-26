@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.2",
+  "source": "data/v19_clean",
+  "source_sha256": {
+    "train": "be60aeff915621af70be3d786de8f1712af9354a1394e6918701d52118f3a4a9",
+    "valid": "cc21ce6ef600d09b30078674ae0ed8d7f0f3fa7956b5f65720e7c2ca11ea83f2"
+  },
+  "migration_rule": "one find goal, no gate/clarification/reference, source Guard ACCEPT, V1.2 valid",
+  "near_overlap_threshold": 0.85,
+  "code_sha256": {
+    "scripts\\migrate_v19_to_v20.py": "d0a094f5cb217dc1dd3dd7e683ff6d9d46e3835443b8e27fce46226069810eab",
+    "jase\\goal_contract_v1_2.py": "12ddbbaf1638966b0560ce9f5618fe0be857a7e62cf19884c4af39ae7e53b36c",
+    "schema\\goal_contract_v1_2.schema.json": "84b0b15670281321746d3e2fb4a0fa5ad693fe9583b83e0f721c1a40dc69b923",
+    "V20_SYSTEM_PROMPT.txt": "86ebd43abc8bd19b9d9c9fb309d0c333f6327bfc63915b10fcda24fa09feb408",
+    "jase\\guard.py": "49511fd78faf61d296cffebb7f9af8624f2435ee5e6cabb0705484ea841b5930",
+    "jase\\canon.py": "a15c0997cfc8e51ae8c8db3c2ac38725384e43ad6eae532227687921936e2384",
+    "jase\\leakage.py": "385a2dc8c846bfe20ad54f1fd17404ad8c89e7e72549fec48c410e6f978dd898"
+  },
+  "exclusion_sha256": {
+    "data\\v20_quality\\dev.jsonl": "cbb5906ce72196f28358be57d51ce3bd47ea4b99152325a821bfe0d16be999ad",
+    "benchmarks\\release_holdout_v1.jsonl": "c625dc1fe83cd82b2f01b509f5e4ef4d90700c06f53d6a6fbb6ff30a7e9c7638"
+  },
+  "source_rows": {
+    "train": 27504,
+    "valid": 2310
+  },
+  "automatically_converted": {
+    "train": 12022,
+    "valid": 803
+  },
+  "requires_review": 16989,
+  "rejected": 0,
+  "reason_counts": {
+    "clarification_requires_review": 662,
+    "conflicting_normalized_prompt": 2,
+    "duplicate_normalized_prompt": 1384,
+    "free_text_reference_requires_review": 833,
+    "gate_requires_review": 2371,
+    "multi_goal_requires_review": 968,
+    "near_train_overlap": 305,
+    "side_effect_or_nonfind_action_requires_review": 11174,
+    "target_type_unknown": 1007,
+    "train_valid_overlap": 8,
+    "v12_currency_missing": 537
+  },
+  "output_sha256": {
+    "train": "b4b4603118c1c5a65a4e27ed791ae6f4546b38512e7865bc5e530cfefa771ac7",
+    "valid": "4891ddbe7414cdabd48b672e978a7ba6361d410d3cd00cbbafefbeb9a275fb5a",
+    "review": "6ad1962571e636a6fbe2c8439195ea67f21e08582ca298f9119151d79e03f273",
+    "rejected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "newly_generated_train": 0,
+  "semantic_review_completed": 0,
+  "training_readiness": "NOT_READY"
+}

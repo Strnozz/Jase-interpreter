@@ -1,0 +1,215 @@
+{
+  "input_sha256": {
+    "train": "b4b4603118c1c5a65a4e27ed791ae6f4546b38512e7865bc5e530cfefa771ac7",
+    "valid": "4891ddbe7414cdabd48b672e978a7ba6361d410d3cd00cbbafefbeb9a275fb5a",
+    "hard_dev": "91a5377ec85ba19af633ea2c598161a465edc58720bf16002952f5fcaa34450e",
+    "holdout": "2b1cd1818da2f96afa6b736eddc31c8655acac943bf3654fe401996c7dd1ce35",
+    "v19_train": "be60aeff915621af70be3d786de8f1712af9354a1394e6918701d52118f3a4a9",
+    "v19_valid": "cc21ce6ef600d09b30078674ae0ed8d7f0f3fa7956b5f65720e7c2ca11ea83f2",
+    "v19_dev": "cbb5906ce72196f28358be57d51ce3bd47ea4b99152325a821bfe0d16be999ad",
+    "v19_release": "c625dc1fe83cd82b2f01b509f5e4ef4d90700c06f53d6a6fbb6ff30a7e9c7638"
+  },
+  "distribution": {
+    "train": {
+      "counts": {
+        "rows": 12022,
+        "non_actionable": 0,
+        "multi_goal": 0,
+        "context": 0,
+        "long_input_100_chars": 575,
+        "goals": 12022,
+        "facts": 26723,
+        "soft_facts": 1990,
+        "hard_facts": 24733,
+        "missing": 0,
+        "dependency": 0,
+        "condition": 0,
+        "confirmation": 0,
+        "prohibition": 0,
+        "ranking": 0,
+        "value_reference": 0
+      },
+      "actions": {
+        "find": 12022
+      },
+      "facts_per_goal": {
+        "0": 330,
+        "1": 2760,
+        "2": 4375,
+        "3": 3281,
+        "4": 1028,
+        "5": 230,
+        "6": 18
+      }
+    },
+    "valid": {
+      "counts": {
+        "rows": 803,
+        "non_actionable": 0,
+        "multi_goal": 0,
+        "context": 0,
+        "long_input_100_chars": 54,
+        "goals": 803,
+        "facts": 1818,
+        "soft_facts": 120,
+        "hard_facts": 1698,
+        "missing": 0,
+        "dependency": 0,
+        "condition": 0,
+        "confirmation": 0,
+        "prohibition": 0,
+        "ranking": 0,
+        "value_reference": 0
+      },
+      "actions": {
+        "find": 803
+      },
+      "facts_per_goal": {
+        "0": 33,
+        "1": 172,
+        "2": 288,
+        "3": 200,
+        "4": 80,
+        "5": 30
+      }
+    },
+    "hard_dev": {
+      "counts": {
+        "rows": 16,
+        "non_actionable": 2,
+        "multi_goal": 4,
+        "context": 2,
+        "long_input_100_chars": 0,
+        "goals": 18,
+        "facts": 24,
+        "soft_facts": 2,
+        "hard_facts": 22,
+        "missing": 5,
+        "dependency": 4,
+        "condition": 2,
+        "confirmation": 1,
+        "prohibition": 2,
+        "ranking": 1,
+        "value_reference": 2
+      },
+      "actions": {
+        "find": 14,
+        "contact": 1,
+        "book": 2,
+        "notify": 1
+      },
+      "facts_per_goal": {
+        "0": 4,
+        "1": 7,
+        "2": 5,
+        "3": 1,
+        "4": 1
+      }
+    },
+    "holdout": {
+      "counts": {
+        "rows": 12,
+        "non_actionable": 2,
+        "multi_goal": 2,
+        "context": 1,
+        "long_input_100_chars": 0,
+        "goals": 12,
+        "facts": 20,
+        "soft_facts": 2,
+        "hard_facts": 18,
+        "missing": 3,
+        "dependency": 2,
+        "condition": 1,
+        "confirmation": 1,
+        "prohibition": 1,
+        "ranking": 1,
+        "value_reference": 1
+      },
+      "actions": {
+        "find": 9,
+        "contact": 1,
+        "book": 1,
+        "buy": 1
+      },
+      "facts_per_goal": {
+        "0": 2,
+        "1": 4,
+        "2": 3,
+        "3": 2,
+        "4": 1
+      }
+    }
+  },
+  "leakage": {
+    "train_to_valid": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.846,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "train_to_hard_dev": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.444,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "valid_to_hard_dev": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.444,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "train_to_holdout": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.429,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "valid_to_holdout": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.28,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "hard_dev_to_holdout": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.0,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "v19_train_to_holdout": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.429,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "v19_valid_to_holdout": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.333,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "v19_dev_to_holdout": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.133,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    },
+    "v19_release_to_holdout": {
+      "exact_normalized_overlap": 0,
+      "near_candidates_ge_0_85": 0,
+      "max_token_jaccard": 0.0,
+      "near_examples": [],
+      "method": "token-set Jaccard after rare-token candidate selection; heuristic, not proof of independence"
+    }
+  }
+}

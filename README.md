@@ -1,6 +1,7 @@
 # Jase Interpreter 2B — Starter Kit
 
 > Pipeline multi-model NVIDIA: [fase iniziale](docs/MULTIMODEL_PHASE1.md) e [training Jase 9B](docs/JASE_9B_TRAINING.md).
+> GoalContract 1.2 / Interpreter V20: [preparazione](JASE_V20_PRETRAINING_REPORT.md) e [training 9B completato](JASE_V20_9B_TRAINING_REPORT.md). L'adapter V20 non è pronto per la promozione.
 > La baseline MLX 2B resta invariata; il nuovo runner QLoRA usa un ambiente
 > `.venv-nvidia` separato e configurazioni in `configs/models/`.
 

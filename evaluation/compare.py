@@ -241,7 +241,7 @@ def main():
                 model_record["by_tag"] = {tag: summarize([row for row, item in zip(rows, cases)
                                                            if tag in item.get("tags", [])])
                                           for tag in sorted({tag for item in cases for tag in item.get("tags", [])})}
-            if args.text:
+            if args.text or args.include_outputs:
                 model_record["cases"] = rows
         except Exception as exc:
             model_record["error"] = str(exc)

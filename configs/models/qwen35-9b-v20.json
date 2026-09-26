@@ -1,0 +1,22 @@
+{
+  "name": "qwen35-9b-v20",
+  "model_id": "Qwen/Qwen3.5-9B",
+  "backend": "transformers",
+  "params_billion": 9,
+  "quantization_label": "bitsandbytes NF4 4-bit",
+  "model_class": "AutoModelForMultimodalLM",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "dataset": "data/v20_9b",
+  "expected_train_rows": 19948,
+  "expected_validation_rows": 1411,
+  "benchmark": "benchmarks/v20/hard_dev.jsonl",
+  "schema": "schema/goal_contract_v1_2.schema.json",
+  "system_prompt_file": "V20_SYSTEM_PROMPT.txt",
+  "seed": 2026,
+  "max_length": 512,
+  "max_new_tokens": 420,
+  "quantization": {"bits": 4, "type": "nf4", "double_quant": true, "compute_dtype": "bfloat16"},
+  "lora": {"r": 16, "alpha": 32, "dropout": 0.05, "last_n_layers": 16},
+  "training": {"batch_size": 1, "gradient_accumulation_steps": 4, "learning_rate": 0.00003, "weight_decay": 0.01, "max_grad_norm": 1.0, "max_steps": 5000, "warmup_steps": 100, "validation_examples": 64, "eval_every_steps": 500, "checkpoint_every_steps": 250},
+  "smoke": {"max_steps": 3, "train_examples": 24, "validation_examples": 8}
+}
