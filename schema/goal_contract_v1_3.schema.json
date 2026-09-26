@@ -1,0 +1,496 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jase.local/schemas/goal-contract-v1_3.json",
+  "title": "Jase GoalContract v1.3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "goals"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.3"
+    },
+    "kind": {
+      "enum": [
+        "task",
+        "non_actionable"
+      ]
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/goal"
+      }
+    },
+    "context": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/context_v13"
+      }
+    }
+  },
+  "$defs": {
+    "action": {
+      "enum": [
+        "find",
+        "book",
+        "buy",
+        "compare",
+        "contact",
+        "rent",
+        "monitor",
+        "order",
+        "hire",
+        "cancel",
+        "notify",
+        "reschedule"
+      ]
+    },
+    "operator": {
+      "enum": [
+        "eq",
+        "neq",
+        "lt",
+        "lte",
+        "gt",
+        "gte",
+        "contains",
+        "excludes",
+        "before",
+        "after",
+        "near",
+        "within",
+        "between",
+        "in",
+        "not_in"
+      ]
+    },
+    "scalar": {
+      "type": [
+        "string",
+        "number",
+        "boolean"
+      ]
+    },
+    "value_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goal",
+        "field"
+      ],
+      "properties": {
+        "goal": {
+          "type": "string",
+          "pattern": "^g[1-9][0-9]*$"
+        },
+        "field": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "op"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "op": {
+          "$ref": "#/$defs/operator"
+        },
+        "value": {
+          "$ref": "#/$defs/scalar"
+        },
+        "value_ref": {
+          "$ref": "#/$defs/value_ref"
+        },
+        "value_to": {
+          "$ref": "#/$defs/scalar"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "value"
+          ]
+        },
+        {
+          "required": [
+            "value_ref"
+          ]
+        }
+      ]
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "op",
+        "strength"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "op": {
+          "$ref": "#/$defs/operator"
+        },
+        "value": {
+          "$ref": "#/$defs/scalar"
+        },
+        "value_ref": {
+          "$ref": "#/$defs/value_ref"
+        },
+        "value_to": {
+          "$ref": "#/$defs/scalar"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "strength": {
+          "enum": [
+            "hard",
+            "soft"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "value"
+          ]
+        },
+        {
+          "required": [
+            "value_ref"
+          ]
+        }
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "place",
+            "accommodation",
+            "real_estate",
+            "transport",
+            "vehicle",
+            "product",
+            "electronics",
+            "flower",
+            "professional_service",
+            "person",
+            "appointment",
+            "medical_appointment",
+            "reminder",
+            "food",
+            "ticket",
+            "media",
+            "education",
+            "animal",
+            "service",
+            "drink"
+          ]
+        }
+      }
+    },
+    "missing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "blocks",
+        "reason"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "blocks": {
+          "enum": [
+            "search",
+            "action"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "unspecified",
+            "unresolved_reference"
+          ]
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "forbid": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "confirm_before": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "forbid"
+          ]
+        },
+        {
+          "required": [
+            "confirm_before"
+          ]
+        }
+      ]
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goal",
+        "test"
+      ],
+      "properties": {
+        "goal": {
+          "type": "string",
+          "pattern": "^g[1-9][0-9]*$"
+        },
+        "test": {
+          "$ref": "#/$defs/predicate"
+        }
+      }
+    },
+    "ranking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "direction"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "direction": {
+          "enum": [
+            "asc",
+            "desc"
+          ]
+        }
+      }
+    },
+    "goal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "action",
+        "target",
+        "facts"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^g[1-9][0-9]*$"
+        },
+        "action": {
+          "$ref": "#/$defs/action"
+        },
+        "target": {
+          "$ref": "#/$defs/target"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^g[1-9][0-9]*$"
+          }
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/missing"
+          }
+        },
+        "policy": {
+          "$ref": "#/$defs/policy"
+        },
+        "modifiers": {
+          "$ref": "#/$defs/modifiers"
+        },
+        "temporal": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/temporal"
+          }
+        }
+      }
+    },
+    "temporal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "op",
+        "strength"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "search_date",
+            "search_time",
+            "arrival_time",
+            "departure_time",
+            "action_date",
+            "action_time",
+            "notification_date",
+            "notification_time"
+          ]
+        },
+        "op": {
+          "enum": [
+            "eq",
+            "before",
+            "after",
+            "between"
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/scalar"
+        },
+        "value_ref": {
+          "$ref": "#/$defs/value_ref"
+        },
+        "value_to": {
+          "$ref": "#/$defs/scalar"
+        },
+        "strength": {
+          "enum": [
+            "hard",
+            "soft"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "value"
+          ]
+        },
+        {
+          "required": [
+            "value_ref"
+          ]
+        }
+      ]
+    },
+    "modifiers": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sort": {
+          "$ref": "#/$defs/ranking"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "compare_count": {
+          "type": "integer",
+          "minimum": 2
+        }
+      },
+      "minProperties": 1
+    },
+    "context_v13": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "field",
+        "op",
+        "value"
+      ],
+      "properties": {
+        "scope": {
+          "enum": [
+            "user",
+            "conversation",
+            "resource"
+          ]
+        },
+        "field": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "op": {
+          "$ref": "#/$defs/operator"
+        },
+        "value": {
+          "$ref": "#/$defs/scalar"
+        }
+      }
+    }
+  }
+}

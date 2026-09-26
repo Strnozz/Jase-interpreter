@@ -12,7 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from jase.goal_contract_v1_2 import validate_contract  # noqa: E402
+from jase.goal_contract_v1_2 import validate_contract as validate_v12  # noqa: E402
+from jase.semantic_contract_v1_3 import validate_contract as validate_v13  # noqa: E402
 from jase.leakage import normalize_text  # noqa: E402
 from jase.multimodel import encode_supervised, load_config, read_jsonl, sha256  # noqa: E402
 
@@ -48,7 +49,8 @@ def main() -> int:
                 raise RuntimeError(f"Duplicate/cross-split prompt: {key}")
             seen.add(key)
             gold = json.loads(row["messages"][-1]["content"])
-            issues = validate_contract(gold)
+            issues = (validate_v13(gold, user_text=row["messages"][1]["content"])
+                      if gold.get("schema_version") == "1.3" else validate_v12(gold))
             if issues:
                 raise RuntimeError(f"Invalid gold: {row['source_id']}: {issues}")
             encoded = encode_supervised(tok, row, cfg["max_length"])
@@ -65,9 +67,11 @@ def main() -> int:
             for goal in gold["goals"]:
                 for field, key in (("missing", "missing"), ("policy", "policy"),
                                    ("depends_on", "dependency"), ("condition", "condition"),
-                                   ("ranking", "ranking")):
+                                   ("ranking", "ranking"), ("modifiers", "modifiers"),
+                                   ("temporal", "temporal")):
                     features[key] += bool(goal.get(field))
                 features["value_reference"] += any("value_ref" in f for f in goal["facts"])
+                features["value_reference"] += any("value_ref" in f for f in goal.get("temporal", []))
         values = sorted(lengths)
         report["splits"][split] = {"rows": len(rows), "sha256": sha256(path),
             "mean_total_tokens": round(statistics.mean(values), 2),

@@ -11,7 +11,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from jase.goal_contract_v1_2 import parse_contract, validate_contract  # noqa: E402
+from jase.goal_contract_v1_2 import parse_contract, validate_contract as validate_v12  # noqa: E402
+from jase.semantic_contract_v1_3 import validate_contract as validate_v13  # noqa: E402
 from jase.multimodel import load_config  # noqa: E402
 
 
@@ -48,7 +49,8 @@ def main() -> int:
         raise RuntimeError("Reloaded adapter produced empty output")
     try:
         contract = parse_contract(raw)
-        issues = [item.as_dict() for item in validate_contract(contract)]
+        validator = validate_v13 if cfg["schema"].endswith("v1_3.schema.json") else validate_v12
+        issues = [item.as_dict() for item in validator(contract)]
     except (ValueError, TypeError, KeyError) as exc:
         contract, issues = None, [{"code": "parse", "message": repr(exc)}]
     report = {"status": "complete", "adapter": str(adapter.relative_to(ROOT)),
