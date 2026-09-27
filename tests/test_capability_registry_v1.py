@@ -33,7 +33,7 @@ class CapabilityRegistryTests(unittest.TestCase):
     def test_generic_person_contact_still_requires_provider_binding(self):
         status, cap = self.registry.resolve(goal("contact", "person", "Marco"))
         self.assertEqual(status, "RESOLVED")
-        self.assertIn("fact.provider_ref", cap.required_slots)
+        self.assertIn("external.provider_ref", cap.required_slots)
         self.assertTrue(cap.confirmation_required)
 
     def test_ambiguous_registry_fails_closed(self):

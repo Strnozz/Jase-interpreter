@@ -237,7 +237,7 @@
       "aliases": [],
       "required_slots": [
         "fact.selection",
-        "fact.party_size",
+        "external.party_size",
         "temporal.action_date",
         "temporal.action_time"
       ],
@@ -273,9 +273,9 @@
       "aliases": [],
       "required_slots": [
         "fact.selection",
-        "fact.check_in",
-        "fact.check_out",
-        "fact.guests"
+        "external.check_in",
+        "external.check_out",
+        "external.guests"
       ],
       "optional_slots": [
         "fact.location"
@@ -392,7 +392,7 @@
         "visita dal dentista"
       ],
       "required_slots": [
-        "fact.provider_ref",
+        "external.provider_ref",
         "temporal.action_date",
         "temporal.action_time"
       ],
@@ -431,7 +431,7 @@
       ],
       "aliases": [],
       "required_slots": [
-        "fact.provider_ref",
+        "external.provider_ref",
         "fact.original_date",
         "temporal.action_date"
       ],
@@ -469,7 +469,7 @@
       ],
       "aliases": [],
       "required_slots": [
-        "fact.provider_ref",
+        "external.provider_ref",
         "fact.original_date"
       ],
       "optional_slots": [
@@ -530,7 +530,7 @@
       ],
       "aliases": [],
       "required_slots": [
-        "fact.provider_ref",
+        "external.provider_ref",
         "fact.message"
       ],
       "optional_slots": [
@@ -564,7 +564,7 @@
       "aliases": [],
       "required_slots": [
         "fact.message",
-        "fact.provider_ref"
+        "external.provider_ref"
       ],
       "optional_slots": [],
       "supported_modifiers": [],
@@ -602,7 +602,7 @@
         "tecnico"
       ],
       "required_slots": [
-        "fact.provider_ref",
+        "external.provider_ref",
         "fact.location"
       ],
       "optional_slots": [
