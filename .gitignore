@@ -24,6 +24,10 @@ training/v25_9b_resume.out.log
 training/v25_9b_resume.err.log
 training/v25_9b_retry.out.log
 training/v25_9b_retry.err.log
+training/v26_9b_launch.json
+training/v26_9b_launch.log
+training/v26_9b_launch.out.log
+training/v26_9b_launch.err.log
 training/v22_9b_runner.out.log
 training/v22_9b_runner.err.log
 training/v23_9b_runner.out.log
