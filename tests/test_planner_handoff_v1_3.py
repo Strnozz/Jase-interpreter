@@ -117,6 +117,17 @@ class PlannerHandoffTests(unittest.TestCase):
         self.assertEqual(inspect_handoff(request, text, (train_spec, bus_spec)).status,
                          READY_FOR_PLANNING)
 
+    def test_capability_required_slot_holds_when_model_omits_missing(self):
+        request = c(g("book", "hotel", "accommodation", [f("location", "Piombino", "near")],
+                      policy={"confirm_before": ["book"]}))
+        spec = CapabilitySpec("mock.hotel.book", "book", "accommodation",
+                              fact_params={"location": "city"},
+                              policy_actions=frozenset({"book"}),
+                              required_slots=frozenset({"temporal.action_date"}))
+        result = inspect_handoff(request, "Prenota un hotel a Piombino dopo il mio ok.", (spec,))
+        self.assertEqual(result.status, HOLD_MISSING_INFORMATION)
+        self.assertIn("temporal.action_date", result.codes[0])
+
 
 if __name__ == "__main__":
     unittest.main()

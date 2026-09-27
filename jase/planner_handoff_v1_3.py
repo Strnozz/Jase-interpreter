@@ -37,6 +37,7 @@ class CapabilitySpec:
     accepts_ordinal_references: bool = False
     supports_dependencies: bool = False
     condition_ops: frozenset[str] = frozenset()
+    required_slots: frozenset[str] = frozenset()
 
     def matches(self, goal: dict[str, Any]) -> bool:
         return (self.action == goal["action"] and self.target_type == goal["target"]["type"] and
@@ -86,6 +87,13 @@ def inspect_handoff(raw: str | dict[str, Any], user_text: str,
         if goal.get("missing"):
             return Handoff(HOLD_MISSING_INFORMATION,
                            tuple(f"{goal['id']}.missing.{m['field']}" for m in goal["missing"]))
+        supplied_slots = ({f"fact.{item['field']}" for item in goal["facts"]} |
+                          {f"temporal.{item['role']}" for item in goal.get("temporal", [])} |
+                          {f"context.{item['field']}" for item in contract.get("context", [])})
+        absent_slots = spec.required_slots - supplied_slots
+        if absent_slots:
+            return Handoff(HOLD_MISSING_INFORMATION,
+                           tuple(f"{goal['id']}.required.{slot}" for slot in sorted(absent_slots)))
         facts, temporal, modifiers = {}, {}, {}
         dependencies = goal.get("depends_on", [])
         if dependencies and (not spec.supports_dependencies or
