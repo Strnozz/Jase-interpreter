@@ -1,0 +1,7 @@
+# GoalContract 1.3: stato del passaggio al Planner
+
+Audit del repository prima della valutazione V30. `jase/field_ontology_v1_3.py` definisce un vocabolario **sperimentale** per il passaggio Guard→Planner, non un mapping a capability/provider. Qui non esistono registro di capability, Planner 1.3 o test end-to-end che dimostrino l'esecuzione dei contratti 1.3. `ACCEPT` dei Guard significa solo che il contratto può essere ispezionato, non che un'azione possa partire.
+
+Perciò non normalizziamo automaticamente `direct=true` o `route=diretto` in `stops=0`, né `result_count` in `results_count`: potrebbero cambiare o perdere il parametro che un Planner futuro userà. `cuisine=vegetariana` e il nome target «ristorante vegetariano» non sono equiparati finché non si verifica il binding dei filtri. Analogamente `forbid.buy` e `forbid.order` restano distinti. Gli alias non provati sono HOLD, e le differenze di rappresentazione restano evidenziate separatamente dagli errori operativi chiari.
+
+V30 è stato congelato prima del nuovo Guard. Il routing V3 è solo opt-in e aggiunge HOLD per conferma esplicita omessa, orario esterno del reminder non rispettato, provider mancante nell'azione hire e divieti espliciti buy/order, hire o rent omessi. Non riscrive output e non tocca il frontend. Anche un Guard che blocca tutti gli esempi di test non dimostrerebbe la correttezza del Planner o dei provider reali.
