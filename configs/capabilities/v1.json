@@ -1,0 +1,760 @@
+{
+  "version": "1",
+  "capabilities": [
+    {
+      "capability_id": "find.restaurant",
+      "version": "1.0",
+      "action": "find",
+      "target_type": "place",
+      "target_names": [
+        "ristorante",
+        "pizzeria",
+        "trattoria"
+      ],
+      "aliases": [
+        "restaurant"
+      ],
+      "required_slots": [
+        "fact.location"
+      ],
+      "optional_slots": [
+        "fact.open_now",
+        "fact.availability",
+        "fact.diet",
+        "fact.cuisine",
+        "fact.access"
+      ],
+      "supported_modifiers": [
+        "limit",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date",
+        "search_time"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.hotel",
+      "version": "1.0",
+      "action": "find",
+      "target_type": "accommodation",
+      "target_names": [
+        "hotel",
+        "albergo",
+        "ostello"
+      ],
+      "aliases": [
+        "hostel"
+      ],
+      "required_slots": [
+        "fact.location"
+      ],
+      "optional_slots": [
+        "fact.availability"
+      ],
+      "supported_modifiers": [
+        "limit",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date",
+        "search_time"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.flight",
+      "version": "1.0",
+      "action": "find",
+      "target_type": "transport",
+      "target_names": [
+        "volo"
+      ],
+      "aliases": [
+        "flight"
+      ],
+      "required_slots": [
+        "fact.origin",
+        "fact.destination"
+      ],
+      "optional_slots": [
+        "fact.stops",
+        "fact.direct"
+      ],
+      "supported_modifiers": [
+        "limit",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date",
+        "departure_time",
+        "arrival_time"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.train",
+      "version": "1.0",
+      "action": "find",
+      "target_type": "transport",
+      "target_names": [
+        "treno"
+      ],
+      "aliases": [
+        "treno regionale",
+        "regionale",
+        "train"
+      ],
+      "required_slots": [
+        "fact.origin",
+        "fact.destination"
+      ],
+      "optional_slots": [
+        "fact.stops"
+      ],
+      "supported_modifiers": [
+        "limit",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date",
+        "departure_time",
+        "arrival_time"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.vehicle_rental",
+      "version": "1.0",
+      "action": "find",
+      "target_type": "vehicle",
+      "target_names": [
+        "auto",
+        "bicicletta",
+        "furgone",
+        "canoa",
+        "monopattino"
+      ],
+      "aliases": [
+        "bici",
+        "car"
+      ],
+      "required_slots": [
+        "fact.location"
+      ],
+      "optional_slots": [
+        "fact.availability",
+        "fact.access"
+      ],
+      "supported_modifiers": [
+        "limit",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date",
+        "search_time"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.service_provider",
+      "version": "1.0",
+      "action": "find",
+      "target_type": "professional_service",
+      "target_names": [
+        "idraulico",
+        "elettricista",
+        "imbianchino",
+        "giardiniere",
+        "gommista",
+        "meccanico",
+        "tecnico lavatrice",
+        "tecnico caldaia",
+        "officina"
+      ],
+      "aliases": [
+        "tecnico"
+      ],
+      "required_slots": [
+        "fact.location"
+      ],
+      "optional_slots": [
+        "fact.specialization",
+        "fact.availability",
+        "fact.open_now"
+      ],
+      "supported_modifiers": [
+        "limit",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date",
+        "search_time"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "book.restaurant",
+      "version": "1.0",
+      "action": "book",
+      "target_type": "place",
+      "target_names": [
+        "ristorante",
+        "pizzeria",
+        "trattoria"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "fact.selection",
+        "fact.party_size",
+        "temporal.action_date",
+        "temporal.action_time"
+      ],
+      "optional_slots": [
+        "fact.location"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "result_ordinal",
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:book"
+      ],
+      "provider_binding": "mock_booking",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "book.hotel",
+      "version": "1.0",
+      "action": "book",
+      "target_type": "accommodation",
+      "target_names": [
+        "hotel",
+        "albergo"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "fact.selection",
+        "fact.check_in",
+        "fact.check_out",
+        "fact.guests"
+      ],
+      "optional_slots": [
+        "fact.location"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date"
+      ],
+      "supported_reference_types": [
+        "result_ordinal",
+        "offer_ref",
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:book"
+      ],
+      "provider_binding": "mock_booking",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "book.flight",
+      "version": "1.0",
+      "action": "book",
+      "target_type": "transport",
+      "target_names": [
+        "volo"
+      ],
+      "aliases": [
+        "flight"
+      ],
+      "required_slots": [
+        "fact.selection",
+        "fact.origin",
+        "fact.destination",
+        "temporal.action_date"
+      ],
+      "optional_slots": [
+        "fact.stops"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "result_ordinal",
+        "offer_ref",
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:book"
+      ],
+      "provider_binding": "mock_booking",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "rent.vehicle",
+      "version": "1.0",
+      "action": "rent",
+      "target_type": "vehicle",
+      "target_names": [
+        "auto",
+        "bicicletta",
+        "furgone",
+        "canoa",
+        "monopattino"
+      ],
+      "aliases": [
+        "bici",
+        "car"
+      ],
+      "required_slots": [
+        "fact.selection",
+        "temporal.action_date"
+      ],
+      "optional_slots": [
+        "fact.location"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "result_ordinal",
+        "offer_ref",
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:rent"
+      ],
+      "provider_binding": "mock_rental",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "appointment.create",
+      "version": "1.0",
+      "action": "book",
+      "target_type": "appointment",
+      "target_names": [
+        "dentista",
+        "visita fisioterapica",
+        "visita veterinaria",
+        "appuntamento",
+        "visita"
+      ],
+      "aliases": [
+        "visita dal dentista"
+      ],
+      "required_slots": [
+        "fact.provider_ref",
+        "temporal.action_date",
+        "temporal.action_time"
+      ],
+      "optional_slots": [
+        "fact.location",
+        "fact.specialization"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:book"
+      ],
+      "provider_binding": "mock_calendar",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "appointment.reschedule",
+      "version": "1.0",
+      "action": "reschedule",
+      "target_type": "appointment",
+      "target_names": [
+        "appuntamento",
+        "visita",
+        "visita ortopedica",
+        "visita cardiologica",
+        "revisione moto",
+        "tagliando auto"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "fact.provider_ref",
+        "fact.original_date",
+        "temporal.action_date"
+      ],
+      "optional_slots": [
+        "fact.original_time"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:reschedule"
+      ],
+      "provider_binding": "mock_calendar",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "appointment.cancel",
+      "version": "1.0",
+      "action": "cancel",
+      "target_type": "appointment",
+      "target_names": [
+        "appuntamento",
+        "visita",
+        "visita ortopedica",
+        "visita cardiologica",
+        "revisione moto",
+        "tagliando auto"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "fact.provider_ref",
+        "fact.original_date"
+      ],
+      "optional_slots": [
+        "fact.original_time",
+        "fact.location"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [],
+      "supported_reference_types": [
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:cancel"
+      ],
+      "provider_binding": "mock_calendar",
+      "consequentiality": "destructive",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "reminder.create",
+      "version": "1.0",
+      "action": "notify",
+      "target_type": "reminder",
+      "target_names": [
+        "promemoria"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "fact.message",
+        "temporal.notification_date",
+        "temporal.notification_time"
+      ],
+      "optional_slots": [],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "notification_date",
+        "notification_time"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_reminder",
+      "consequentiality": "write",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "contact.provider",
+      "version": "1.0",
+      "action": "contact",
+      "target_type": "professional_service",
+      "target_names": [
+        "idraulico",
+        "elettricista",
+        "meccanico",
+        "tecnico",
+        "giardiniere"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "fact.provider_ref",
+        "fact.message"
+      ],
+      "optional_slots": [
+        "fact.selection"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "provider_ref",
+        "result_ordinal"
+      ],
+      "required_policies": [
+        "confirm_before:contact"
+      ],
+      "provider_binding": "mock_message",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "contact.person",
+      "version": "1.0",
+      "action": "contact",
+      "target_type": "person",
+      "target_names": [
+        "*"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "fact.message",
+        "fact.provider_ref"
+      ],
+      "optional_slots": [],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "provider_ref"
+      ],
+      "required_policies": [
+        "confirm_before:contact"
+      ],
+      "provider_binding": "mock_message",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "hire.service_provider",
+      "version": "1.0",
+      "action": "hire",
+      "target_type": "professional_service",
+      "target_names": [
+        "idraulico",
+        "elettricista",
+        "imbianchino",
+        "giardiniere",
+        "gommista",
+        "meccanico",
+        "tecnico lavatrice",
+        "tecnico caldaia"
+      ],
+      "aliases": [
+        "tecnico"
+      ],
+      "required_slots": [
+        "fact.provider_ref",
+        "fact.location"
+      ],
+      "optional_slots": [
+        "fact.specialization"
+      ],
+      "supported_modifiers": [],
+      "supported_temporal_roles": [
+        "action_date",
+        "action_time"
+      ],
+      "supported_reference_types": [
+        "provider_ref",
+        "result_ordinal"
+      ],
+      "required_policies": [
+        "confirm_before:hire"
+      ],
+      "provider_binding": "mock_hiring",
+      "consequentiality": "write",
+      "confirmation_required": true,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "compare.results.product",
+      "version": "1.0",
+      "action": "compare",
+      "target_type": "product",
+      "target_names": [
+        "lavatrice",
+        "stampante laser",
+        "stampante",
+        "pc portatile",
+        "bicicletta usata"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "modifiers.compare_count"
+      ],
+      "optional_slots": [
+        "fact.location",
+        "fact.price",
+        "fact.condition"
+      ],
+      "supported_modifiers": [
+        "compare_count",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_compare",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "compare.results.vehicle",
+      "version": "1.0",
+      "action": "compare",
+      "target_type": "vehicle",
+      "target_names": [
+        "bicicletta",
+        "bicicletta usata"
+      ],
+      "aliases": [
+        "bici"
+      ],
+      "required_slots": [
+        "modifiers.compare_count"
+      ],
+      "optional_slots": [
+        "fact.location",
+        "fact.price",
+        "fact.condition"
+      ],
+      "supported_modifiers": [
+        "compare_count",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_compare",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "compare.results.accommodation",
+      "version": "1.0",
+      "action": "compare",
+      "target_type": "accommodation",
+      "target_names": [
+        "hotel",
+        "albergo"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "modifiers.compare_count"
+      ],
+      "optional_slots": [
+        "fact.location",
+        "fact.price"
+      ],
+      "supported_modifiers": [
+        "compare_count",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_compare",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "compare.results.service",
+      "version": "1.0",
+      "action": "compare",
+      "target_type": "service",
+      "target_names": [
+        "fibra"
+      ],
+      "aliases": [],
+      "required_slots": [
+        "modifiers.compare_count"
+      ],
+      "optional_slots": [
+        "fact.location",
+        "fact.price",
+        "fact.condition"
+      ],
+      "supported_modifiers": [
+        "compare_count",
+        "sort"
+      ],
+      "supported_temporal_roles": [
+        "search_date"
+      ],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_compare",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    }
+  ]
+}
