@@ -1,0 +1,46 @@
+{
+  "version": "V32",
+  "schema_version": "1.3",
+  "cases": 30,
+  "families": {
+    "narrative": 3,
+    "messages": 3,
+    "transport": 3,
+    "flights": 3,
+    "lodging": 3,
+    "multi_step": 3,
+    "alternatives": 3,
+    "local": 3,
+    "actions": 3,
+    "shopping_service": 3
+  },
+  "panel_sha256": "af76398ca906a2a794dd8f682739290c54daf3ea68b0e984ae929fc6743c3097",
+  "generator_sha256": "5220bc5238b81000de4bd797d3596105efce34bc7442fbc7ba1bf435eb84b2e5",
+  "helper_sha256": "45ce8780a5e1f580b6396e1459cd021f59be4b12dbc617feb069adbd782938e8",
+  "max_prior_jaccard": 0.5,
+  "prior_sha256": {
+    "benchmarks\\v20\\hard_dev.jsonl": "91a5377ec85ba19af633ea2c598161a465edc58720bf16002952f5fcaa34450e",
+    "benchmarks\\v20\\holdout.jsonl": "2b1cd1818da2f96afa6b736eddc31c8655acac943bf3654fe401996c7dd1ce35",
+    "data\\v20_quality\\dev.jsonl": "cbb5906ce72196f28358be57d51ce3bd47ea4b99152325a821bfe0d16be999ad",
+    "benchmarks\\release_holdout_v1.jsonl": "c625dc1fe83cd82b2f01b509f5e4ef4d90700c06f53d6a6fbb6ff30a7e9c7638",
+    "benchmarks\\v23\\transfer.jsonl": "c2aa1f4cef1b9734b91aed4996b7b89b5f3686d8d527cdb4ff9bca481fd9455b",
+    "benchmarks\\v24\\safety.jsonl": "e7ae143126c3cd24ee93d1171e055c6dee899e7ffc4ae63c87b2326bea90c3a3",
+    "benchmarks\\v25\\blind.jsonl": "acb5dbfdf2f849bc8e0e16d5ee447052142dd60e891e48a8a2dccfdaaa04de7a",
+    "benchmarks\\v26\\blind.jsonl": "47e9083090684f3d998597e44bee0a288cfd8950f36e332fb51fee3c49a22389",
+    "benchmarks\\v27\\fresh.jsonl": "b2d622a7c8f5515c4ac4420139ff3ffc7c8b326d35dfcdcdc2902dff8787f050",
+    "benchmarks\\v28\\blind.jsonl": "0f0a08f2ab7829c49ab29aff5901e43a6915f4660ef24206e4f17ef384ac2c01",
+    "benchmarks\\v29\\blind.jsonl": "4aac94d42333ee02812f0da81fef2189508c5f3a3f3c7b36e5a21622cc0b80e6",
+    "benchmarks\\v30\\blind.jsonl": "1f6c18d8983035076bdac667d137884dee22bb4cf63ae35f5405c91ae6cec11a",
+    "benchmarks\\v31\\blind.jsonl": "d3816e6eece2446861d0ef70b4cb01679c8c3ce7dc96a0f08c4a8f6de4e63c1f",
+    "data\\v24_9b\\train.jsonl": "5efd88f8947736863b016483af086f4e7044b11a93a807378de4f1c614f74d82",
+    "data\\v24_9b\\valid.jsonl": "6c0976ca01973625dfd19d545cfa325373e1a00e54440b6637cdaa872f70128a",
+    "data\\v25_9b\\train.jsonl": "5a5e7e036e918a66b47191631b3580c08a925ea6d9c2b2b2c06f242d117531db",
+    "data\\v25_9b\\valid.jsonl": "c2fe66ddd133f77c41d06083abb7ab2ae38a69d6a259d454d51ac13e5c720d77",
+    "data\\v26_9b\\train.jsonl": "54c5e512f5b837b0e9b9d9d35841df5ee968fcee179b6f3095a5dfa1bdce0a6d",
+    "data\\v26_9b\\valid.jsonl": "cc748b1330cac27264faccf040d440bd17e627723889ab2ac2c772bfce1ec934"
+  },
+  "limitations": [
+    "Agent-authored panel; independent human review pending",
+    "Not a random production sample"
+  ]
+}
