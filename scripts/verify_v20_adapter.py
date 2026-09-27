@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 from jase.goal_contract_v1_2 import parse_contract, validate_contract as validate_v12  # noqa: E402
 from jase.semantic_contract_v1_3 import validate_contract as validate_v13  # noqa: E402
 from jase.multimodel import load_config  # noqa: E402
+from jase.foundation import chat_template_kwargs, load_base  # noqa: E402
 
 
 def main() -> int:
@@ -26,8 +27,6 @@ def main() -> int:
     os.environ.setdefault("HF_HOME", str(ROOT / "hf-cache"))
     import torch
     from peft import PeftModel
-    from transformers import AutoTokenizer
-    from training.train import load_base
 
     model, tokenizer = load_base(cfg)
     adapter = ROOT / manifest["adapter"]
@@ -37,7 +36,7 @@ def main() -> int:
     request = "Trovami un ristorante giapponese stasera sotto i 40 euro"
     turns = [{"role": "system", "content": prompt_text}, {"role": "user", "content": request}]
     encoded = tokenizer.apply_chat_template(turns, tokenize=True, return_dict=True,
-        return_tensors="pt", add_generation_prompt=True, enable_thinking=False).to("cuda")
+        return_tensors="pt", add_generation_prompt=True, **chat_template_kwargs(cfg)).to("cuda")
     started = time.perf_counter()
     with torch.inference_mode():
         ids = model.generate(**encoded, max_new_tokens=cfg["max_new_tokens"], do_sample=False,

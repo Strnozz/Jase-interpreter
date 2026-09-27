@@ -103,6 +103,7 @@ def verified_smoke(cfg, dataset_hashes):
                 and prior.get("config") == cfg and prior.get("dataset_sha256") == dataset_hashes
                 and prior.get("trainer_sha256") == sha256(Path(__file__))
                 and prior.get("pipeline_sha256") == sha256(ROOT / "jase" / "multimodel.py")
+                and prior.get("foundation_sha256") == sha256(ROOT / "jase" / "foundation.py")
                 and prior.get("system_prompt_sha256") == sha256(ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt"))
                 and prior.get("initial_adapter_sha256") == initial_adapter_sha256(cfg)
                 and prior.get("schema_sha256") == sha256(ROOT / cfg["schema"])
@@ -188,6 +189,7 @@ def main() -> int:
                 or metadata.get("config") != cfg or metadata.get("dataset_sha256") != dataset_hashes
                 or metadata.get("trainer_sha256") != sha256(Path(__file__))
                 or metadata.get("pipeline_sha256") != sha256(ROOT / "jase" / "multimodel.py")
+                or metadata.get("foundation_sha256") != sha256(ROOT / "jase" / "foundation.py")
                 or metadata.get("system_prompt_sha256") != sha256(ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt"))
                 or metadata.get("initial_adapter_sha256") != adapter_hash
                 or metadata.get("schema_sha256") != sha256(ROOT / cfg["schema"])):
@@ -209,6 +211,7 @@ def main() -> int:
                     "verified_smoke_run": prerequisite,
                     "trainer_sha256": sha256(Path(__file__)),
                     "pipeline_sha256": sha256(ROOT / "jase" / "multimodel.py"),
+                    "foundation_sha256": sha256(ROOT / "jase" / "foundation.py"),
                     "system_prompt_sha256": sha256(ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt")),
                     "initial_adapter_sha256": adapter_hash,
                     "schema_sha256": sha256(ROOT / cfg["schema"]),
