@@ -1,0 +1,45 @@
+{
+  "version": "V27",
+  "schema_version": "1.3",
+  "cases": 100,
+  "families": {
+    "quoted_no_action": 5,
+    "actionable_quoted_message": 5,
+    "find_then_book": 5,
+    "flight_direct": 5,
+    "flight_missing_origin": 5,
+    "explicit_no_booking": 5,
+    "transport_sort": 5,
+    "food_order": 5,
+    "compare_cardinality": 5,
+    "result_limit": 5,
+    "conditional_fallback": 5,
+    "appointment_reschedule": 5,
+    "appointment_cancel": 5,
+    "reminder_content": 5,
+    "group_context": 5,
+    "search_then_later_action_date": 5,
+    "arrival_role": 5,
+    "vehicle_rent": 5,
+    "vehicle_find_only": 5,
+    "unresolved_reminder": 5
+  },
+  "panel_sha256": "b2d622a7c8f5515c4ac4420139ff3ffc7c8b326d35dfcdcdc2902dff8787f050",
+  "generator_sha256": "7f1a98d44759c73d13a1d2c46de7322c12799e349586b177b24488c819088112",
+  "max_prior_jaccard": 0.58333,
+  "prior_sha256": {
+    "benchmarks\\v20\\hard_dev.jsonl": "91a5377ec85ba19af633ea2c598161a465edc58720bf16002952f5fcaa34450e",
+    "benchmarks\\v20\\holdout.jsonl": "2b1cd1818da2f96afa6b736eddc31c8655acac943bf3654fe401996c7dd1ce35",
+    "benchmarks\\v23\\transfer.jsonl": "c2aa1f4cef1b9734b91aed4996b7b89b5f3686d8d527cdb4ff9bca481fd9455b",
+    "benchmarks\\v24\\safety.jsonl": "e7ae143126c3cd24ee93d1171e055c6dee899e7ffc4ae63c87b2326bea90c3a3",
+    "benchmarks\\v25\\blind.jsonl": "acb5dbfdf2f849bc8e0e16d5ee447052142dd60e891e48a8a2dccfdaaa04de7a",
+    "benchmarks\\v26\\blind.jsonl": "47e9083090684f3d998597e44bee0a288cfd8950f36e332fb51fee3c49a22389",
+    "data\\v25_9b\\train.jsonl": "5a5e7e036e918a66b47191631b3580c08a925ea6d9c2b2b2c06f242d117531db",
+    "data\\v25_9b\\valid.jsonl": "c2fe66ddd133f77c41d06083abb7ab2ae38a69d6a259d454d51ac13e5c720d77"
+  },
+  "limitations": [
+    "AI-authored targeted routing panel, not production prevalence",
+    "Five related contexts per family",
+    "Independent human gold review pending"
+  ]
+}
