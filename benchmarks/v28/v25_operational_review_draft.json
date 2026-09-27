@@ -1,0 +1,30 @@
+{
+  "status": "provisional_agent_review_human_adjudication_pending",
+  "panel_sha256": "0f0a08f2ab7829c49ab29aff5901e43a6915f4660ef24206e4f17ef384ac2c01",
+  "prediction_sha256": "d6d2b98fcd1934c56e8485a020885de6bbaf340becda127c8c47e2d5572c42a7",
+  "routing_v2_commit": "40b30dd",
+  "base_guard_accept": 23,
+  "routing_v1_accept": 19,
+  "routing_v2_accept": 15,
+  "routing_v2_accepted_exact": 13,
+  "routing_v2_accepted_clear_material_risk": {
+    "missing_confirmation_and_invented_action_time_from_message_content": ["v28-006"]
+  },
+  "routing_v2_accepted_representational_mapping_unverified": {
+    "target_cuisine_vs_cuisine_fact": ["v28-040"]
+  },
+  "routing_v2_newly_held_from_v1": {
+    "no_booking_policy_and_result_limit": ["v28-015"],
+    "restaurant_booking_missing_required_slots": ["v28-022"],
+    "open_now_missing": ["v28-023"],
+    "walking_access_missing": ["v28-024"]
+  },
+  "routing_v2_newly_held_canonical_exact": 0,
+  "grounded_spatial_origin_repairs": 0,
+  "limitations": [
+    "Agent-authored panel and review; independent human adjudication pending",
+    "The false-hold check covers canonical-exact predictions only",
+    "Cuisine in the target name versus a cuisine fact may be equivalent but Planner mapping is unverified",
+    "The repair handles one grounded spatial-origin shape only; V28 model errors used different malformed slots"
+  ]
+}
