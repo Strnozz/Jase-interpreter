@@ -1,0 +1,29 @@
+{
+  "status": "provisional_agent_review_human_adjudication_pending",
+  "panel_sha256": "b2d622a7c8f5515c4ac4420139ff3ffc7c8b326d35dfcdcdc2902dff8787f050",
+  "prediction_sha256": "5c3e48265a808d8ce931ef2a1dc496f8186b779b23c4016b1ba7d62d12f26e50",
+  "guard_commit": "6cec92e",
+  "new_guard_accepted": 48,
+  "accepted_canonical_exact": 40,
+  "accepted_clear_operational_risk": {
+    "vehicle_routing_and_no_rent_policy": ["v27-019"],
+    "arrival_deadline_mislabelled_search_time": ["v27-047", "v27-087"],
+    "open_pharmacy_requirement_missing": ["v27-050"],
+    "walking_access_requirement_missing": ["v27-055"]
+  },
+  "accepted_immaterial_date_article_difference": ["v27-065", "v27-074", "v27-078"],
+  "accepted_clear_operational_risk_lower_bound": 5,
+  "newly_held_from_previous_accept": {
+    "missing_no_booking_policy": ["v27-006", "v27-026", "v27-046", "v27-066", "v27-086"],
+    "missing_result_limit": ["v27-010", "v27-030", "v27-070", "v27-090"],
+    "unverified_result_count_alias": ["v27-011", "v27-031", "v27-051", "v27-071", "v27-091"],
+    "temporal_role_stored_as_fact": ["v27-060", "v27-100"]
+  },
+  "newly_held_canonical_exact": 0,
+  "limitations": [
+    "Agent-authored panel and agent review, not independent human adjudication",
+    "Canonical exact is stricter than operational equivalence",
+    "The false-hold count measures exact-correct only; semantically correct non-exact holds remain unknown",
+    "No V1.3 Planner/provider mapping has been verified"
+  ]
+}
