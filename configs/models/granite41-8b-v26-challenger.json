@@ -1,0 +1,39 @@
+{
+  "name": "granite41-8b-v26-challenger",
+  "model_id": "ibm-granite/granite-4.1-8b",
+  "tokenizer_id": "ibm-granite/granite-4.1-8b",
+  "backend": "transformers",
+  "model_class": "AutoModelForCausalLM",
+  "revision": "1504002f650e656a0a3789d99574df12e3e94ed0",
+  "tokenizer_revision": "1504002f650e656a0a3789d99574df12e3e94ed0",
+  "trust_remote_code": false,
+  "attention_implementation": "sdpa",
+  "chat_template_kwargs": {},
+  "pad_strategy": "model_or_eos",
+  "params_billion": 8,
+  "quantization_label": "bitsandbytes NF4 4-bit",
+  "dataset": "data/v26_9b",
+  "expected_train_rows": 6026,
+  "expected_validation_rows": 1087,
+  "benchmark": "benchmarks/v33/blind.jsonl",
+  "schema": "schema/goal_contract_v1_3.schema.json",
+  "system_prompt_file": "V26_SYSTEM_PROMPT.txt",
+  "seed": 2032,
+  "max_length": 512,
+  "max_new_tokens": 480,
+  "decoding": {"max_new_tokens": 480, "do_sample": false},
+  "quantization": {"bits": 4, "type": "nf4", "double_quant": true, "compute_dtype": "bfloat16"},
+  "lora": {
+    "r": 16, "alpha": 32, "dropout": 0.05, "last_n_layers": 16,
+    "target_strategy": "causal_last_n",
+    "target_leaf_names": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+  },
+  "training": {
+    "batch_size": 1, "gradient_accumulation_steps": 4,
+    "learning_rate": 0.000008, "weight_decay": 0.01,
+    "max_grad_norm": 1.0, "max_steps": 1500, "warmup_steps": 60,
+    "validation_examples": 256, "eval_every_steps": 300,
+    "checkpoint_every_steps": 300, "early_checkpoint_steps": [25, 75]
+  },
+  "smoke": {"max_steps": 3, "train_examples": 24, "validation_examples": 8}
+}

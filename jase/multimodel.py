@@ -65,9 +65,11 @@ def messages(text: str) -> list[dict]:
     return [{"role": "system", "content": system}, {"role": "user", "content": text}]
 
 
-def encode_supervised(tokenizer, row: dict, max_length: int) -> dict:
+def encode_supervised(tokenizer, row: dict, max_length: int,
+                      template_kwargs: dict | None = None) -> dict:
     turns = row["messages"]
-    common = dict(tokenize=True, return_dict=False, enable_thinking=False)
+    common = dict(tokenize=True, return_dict=False,
+                  **({"enable_thinking": False} if template_kwargs is None else template_kwargs))
     prefix = tokenizer.apply_chat_template(turns[:-1], add_generation_prompt=True, **common)
     full = tokenizer.apply_chat_template(turns, **common)
     if full[:len(prefix)] != prefix:

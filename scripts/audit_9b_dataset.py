@@ -16,17 +16,21 @@ from jase.goal_contract_v1_2 import validate_contract as validate_v12  # noqa: E
 from jase.semantic_contract_v1_3 import validate_contract as validate_v13  # noqa: E402
 from jase.leakage import normalize_text  # noqa: E402
 from jase.multimodel import encode_supervised, load_config, read_jsonl, sha256  # noqa: E402
+from jase.foundation import chat_template_kwargs  # noqa: E402
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
+    ap.add_argument("--output", help="Audit JSON path; use this for challengers to preserve prior audits")
     args = ap.parse_args()
     os.environ.setdefault("HF_HOME", str(ROOT / "hf-cache"))
     os.environ["HF_HUB_OFFLINE"] = "1"
     from transformers import AutoTokenizer
     cfg = load_config(args.model)
-    tok = AutoTokenizer.from_pretrained(cfg["model_id"], revision=cfg["revision"], local_files_only=True)
+    tok = AutoTokenizer.from_pretrained(cfg.get("tokenizer_id", cfg["model_id"]),
+        revision=cfg.get("tokenizer_revision", cfg["revision"]), local_files_only=True,
+        trust_remote_code=cfg.get("trust_remote_code", False))
     dataset = ROOT / cfg["dataset"]
     prompt = (ROOT / cfg["system_prompt_file"]).read_text(encoding="utf-8").strip()
     report = {"model": cfg["model_id"], "revision": cfg["revision"],
@@ -53,7 +57,7 @@ def main() -> int:
                       if gold.get("schema_version") == "1.3" else validate_v12(gold))
             if issues:
                 raise RuntimeError(f"Invalid gold: {row['source_id']}: {issues}")
-            encoded = encode_supervised(tok, row, cfg["max_length"])
+            encoded = encode_supervised(tok, row, cfg["max_length"], chat_template_kwargs(cfg))
             labels = encoded["labels"]
             masked = sum(value == -100 for value in labels)
             if masked <= 0 or masked >= len(labels) or labels[masked:] != encoded["input_ids"][masked:]:
@@ -80,7 +84,9 @@ def main() -> int:
             "mean_target_tokens": round(statistics.mean(target_lengths), 2),
             "over_512": sum(x > 512 for x in values),
             "categories": dict(categories), "features": dict(features)}
-    (dataset / "token_audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    destination = ROOT / args.output if args.output else dataset / "token_audit.json"
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({s: {k: v for k, v in item.items() if k not in ("categories", "features")}
                       for s, item in report["splits"].items()}, ensure_ascii=False, indent=2))
     return 0

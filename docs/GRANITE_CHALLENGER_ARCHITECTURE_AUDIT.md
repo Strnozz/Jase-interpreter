@@ -6,6 +6,8 @@ Data: 2026-09-27. Questo audit precede qualsiasi modifica alla pipeline per Gran
 
 Il modello instruct ufficiale è [`ibm-granite/granite-4.1-8b`](https://huggingface.co/ibm-granite/granite-4.1-8b), anche se l'ID non contiene `instruct`. La [model card IBM](https://huggingface.co/ibm-granite/granite-4.1-8b) lo chiama esplicitamente modello instruct e mostra l'uso di `AutoModelForCausalLM`, `AutoTokenizer` e `apply_chat_template`. La revisione esatta va ancora congelata prima del download dei pesi. Non usare `granite-4.1-8b-base` come challenger.
 
+Revisione poi fissata con Hugging Face Hub: `1504002f650e656a0a3789d99574df12e3e94ed0` (licenza Apache-2.0). Quattro shard safetensors, 17.583.228.152 byte complessivi. Metadata locale: `GraniteConfig`, `GraniteForCausalLM`, 40 layer, hidden 4096, MLP 12800, tokenizer con EOS 100257 e PAD 100256. Il template nativo usa i delimitatori di ruolo Granite.
+
 ## Pipeline attuale
 
 | Componente | Implementazione | Specificità / intervento necessario |
@@ -35,3 +37,7 @@ Qwen V26 best è `training/runs/qwen35-9b-v26/20260927T061719Z-780ce06c/best_ada
 5. Congelare V33 prima del training Granite; ottenere revisione umana del gold se disponibile. L'assenza di tale revisione va dichiarata, non sostituita con auto-conferma.
 
 Nessun benchmark storico, dataset, adapter, Guard, Planner o frontend deve essere modificato.
+
+## Regressione del refactor
+
+Il nuovo loader mantiene i default Qwen; la selezione dei 124 moduli LoRA coincide **esattamente e nell'ordine** con il manifest V26. Tre generazioni greedy V26 su casi V32 (`001`, `005`, `021`) coincidono byte-per-byte con i raw storici. I test di chat template e completion mask Qwen/Granite passano. L'audit tokenizer Granite sul corpus V26 invariato produce 6026 train e 1087 valid, SHA identici al manifest V26, massimo 491/489 token, zero oltre 512 e mask completion-only valida. Questi controlli non sostituiscono il futuro smoke/backward 4-bit Granite.

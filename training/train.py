@@ -7,7 +7,6 @@ import json
 import math
 import os
 import random
-import re
 import shutil
 import subprocess
 import sys
@@ -19,6 +18,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from jase.multimodel import clean_validation, encode_supervised, load_config, read_jsonl, sha256  # noqa: E402
+from jase.foundation import load_base, select_lora_targets  # noqa: E402
+from jase.foundation import chat_template_kwargs  # noqa: E402
 
 
 def git_head() -> str | None:
@@ -28,50 +29,6 @@ def git_head() -> str | None:
                                        text=True, stderr=subprocess.DEVNULL).strip()
     except (OSError, subprocess.CalledProcessError):
         return None
-
-
-def select_language_linears(model, last_n_layers: int):
-    """Use exact text-model module paths; never attach LoRA to the vision tower."""
-    import bitsandbytes as bnb
-    names = [name for name, module in model.named_modules()
-             if isinstance(module, bnb.nn.Linear4bit)
-             and any(f".{part}." in f".{name}." for part in ("language_model", "text_model"))]
-    if not names or any("visual" in n or "vision" in n for n in names):
-        raise RuntimeError("Could not isolate quantized language-model layers; inspect architecture before training")
-    by_layer = {int(match.group(1)) for name in names
-                if (match := re.search(r"(?:^|\.)(?:language_model|text_model)\.layers\.(\d+)\.", name))}
-    if len(by_layer) < last_n_layers:
-        raise RuntimeError(f"Expected at least {last_n_layers} quantized text layers, found {sorted(by_layer)}")
-    selected_layers = set(sorted(by_layer)[-last_n_layers:])
-    selected = [name for name in names if (match := re.search(
-        r"(?:^|\.)(?:language_model|text_model)\.layers\.(\d+)\.", name))
-        and int(match.group(1)) in selected_layers]
-    if not selected:
-        raise RuntimeError("No trainable text linear modules selected")
-    return selected
-
-
-def load_base(cfg):
-    import torch
-    from transformers import AutoModelForMultimodalLM, AutoTokenizer, BitsAndBytesConfig
-    if not torch.cuda.is_available():
-        raise RuntimeError("CUDA PyTorch is required")
-    if torch.cuda.get_device_properties(0).total_memory < 14 * 1024**3:
-        raise RuntimeError("At least 14 GiB VRAM required for this 9B profile")
-    q = cfg["quantization"]
-    dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-    if q["compute_dtype"] == "bfloat16" and dtype != torch.bfloat16:
-        raise RuntimeError("This profile requires bf16; change config only after a validated fp16 smoke test")
-    tok = AutoTokenizer.from_pretrained(cfg["model_id"], revision=cfg["revision"])
-    if tok.pad_token_id is None:
-        tok.pad_token = tok.eos_token
-    model = AutoModelForMultimodalLM.from_pretrained(
-        cfg["model_id"], revision=cfg["revision"], device_map={"": 0},
-        dtype=dtype, attn_implementation="sdpa",
-        quantization_config=BitsAndBytesConfig(load_in_4bit=True,
-            bnb_4bit_quant_type=q["type"], bnb_4bit_use_double_quant=q["double_quant"],
-            bnb_4bit_compute_dtype=dtype))
-    return model, tok
 
 
 def checkpoint_parameter_count(cfg):
@@ -201,6 +158,7 @@ def main() -> int:
     if args.resume_from_checkpoint and not args.full:
         ap.error("--resume-from-checkpoint requires --full")
     cfg = load_config(args.model)
+    template_kwargs = chat_template_kwargs(cfg)
     system_prompt = (ROOT / cfg.get("system_prompt_file", "TRAIN_SYSTEM_PROMPT.txt")).read_text(encoding="utf-8").strip()
     adapter_hash = initial_adapter_sha256(cfg)
     if cfg["backend"] != "transformers":
@@ -294,9 +252,9 @@ def main() -> int:
         valid_rows, metadata["validation_cleaning"] = clean_validation(train_rows, valid_rows)
         if args.smoke:
             longest = max(train_rows, key=lambda row: len(
-                encode_supervised(tokenizer, row, cfg["max_length"])["input_ids"]))
+                encode_supervised(tokenizer, row, cfg["max_length"], template_kwargs)["input_ids"]))
             metadata["corpus_max_tokens"] = len(
-                encode_supervised(tokenizer, longest, cfg["max_length"])["input_ids"])
+                encode_supervised(tokenizer, longest, cfg["max_length"], template_kwargs)["input_ids"])
             rng = random.Random(cfg["seed"])
             train_rows = rng.sample(train_rows, profile["train_examples"])
             if longest not in train_rows:
@@ -308,10 +266,10 @@ def main() -> int:
         metadata["train_order"] = "Python random.Random(seed).shuffle, once before tokenization"
         valid_rows = random.Random(cfg["seed"] + 1).sample(
             valid_rows, profile["validation_examples"])
-        train = [encode_supervised(tokenizer, row, cfg["max_length"]) for row in train_rows]
+        train = [encode_supervised(tokenizer, row, cfg["max_length"], template_kwargs) for row in train_rows]
         if args.smoke:
             metadata["smoke_max_tokens"] = max(len(row["input_ids"]) for row in train)
-        valid = [encode_supervised(tokenizer, row, cfg["max_length"]) for row in valid_rows]
+        valid = [encode_supervised(tokenizer, row, cfg["max_length"], template_kwargs) for row in valid_rows]
         metadata["validation_sample_rows"] = len(valid)
         example = train[0]
         masked = sum(label == -100 for label in example["labels"])
@@ -329,7 +287,7 @@ def main() -> int:
         model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
         model.config.use_cache = False
         lc = cfg["lora"]
-        targets = select_language_linears(model, lc["last_n_layers"])
+        targets = select_lora_targets(model, cfg)
         if resume:
             model = PeftModel.from_pretrained(model, str(resume / "adapter"), is_trainable=True)
         elif cfg.get("initial_adapter"):
