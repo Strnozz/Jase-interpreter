@@ -1,0 +1,18 @@
+{
+  "status": "provisional_AI_review_lower_bound",
+  "panel_sha256": "47e9083090684f3d998597e44bee0a288cfd8950f36e332fb51fee3c49a22389",
+  "prediction_sha256": "9d13ee92febf6c6b3e3bd33538007dafd60b0f99c6e58fea42b016ead770acd8",
+  "accepted_clear_material_or_routing_risk": {
+    "non_actionable_became_book": ["v26-017", "v26-037", "v26-057", "v26-077", "v26-097", "v26-117"],
+    "requested_booking_goal_missing": ["v26-033", "v26-113"],
+    "direct_flight_constraint_missing": ["v26-019", "v26-039", "v26-059", "v26-079", "v26-099", "v26-119"],
+    "explicit_no_booking_policy_missing": ["v26-010", "v26-030", "v26-050", "v26-090"]
+  },
+  "count": 18,
+  "limitations": [
+    "Lower bound: only four clear, disjoint failure families were labelled",
+    "Some frozen V26 wording is awkward and gold needs independent human review",
+    "Other accepted exact mismatches may be routing risks or harmless ontology variants",
+    "Guard ACCEPT allows Planner inspection only, not execution"
+  ]
+}
