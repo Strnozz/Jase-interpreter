@@ -1,0 +1,46 @@
+{
+  "variant": "before",
+  "cases": 42,
+  "panel_sha256": "af40145327eb755a2496344df858f5ec26264a881a72b099ab73ee7640f5078d",
+  "prediction_sha256": "c7eab2979a758cee8cd0ec7542fc2764ffdd0aca58db44b83c4ae181bbec01df",
+  "planner_sha256": "edfc3f055205ed338e63c27180b05419e7a18e6c7078865c733562d1d707c1ed",
+  "registry_sha256": "32f54a8246c86e7105869283eb58d8db1de14628156563b4594414b08bf6b0c7",
+  "guard_sha256": "1b57cd3c80db7684299c58d05209e2de6af4e8e54e6b3abae247f5cb9ab40754",
+  "status_counts": {
+    "HOLD_GUARD": 18,
+    "HOLD": 14,
+    "READY_FOR_DRY_RUN": 5,
+    "NO_ACTION": 5
+  },
+  "reason_counts": {
+    "cardinality_lost": 1,
+    "compare_cardinality_missing": 1,
+    "compare_count_missing_v4": 1,
+    "HOLD_UNGROUNDED_FACT": 1,
+    "HOLD_UNMAPPED_SLOT": 4,
+    "invalid_json": 1,
+    "compare_count_action_mismatch": 1,
+    "missing_user_context": 1,
+    "unknown_planner_field": 1,
+    "schema": 7,
+    "HOLD_MISSING_INFORMATION": 7,
+    "HOLD_NO_CAPABILITY": 6,
+    "HOLD_CONFIRMATION_PENDING": 3,
+    "missing_required_information": 1,
+    "reschedule_provider_not_verified": 1,
+    "provider_identity_missing_v3": 1,
+    "result_limit_missing_v2": 1,
+    "open_now_missing": 1,
+    "wrong_block_phase": 1,
+    "HOLD_POLICY_REQUIRED": 1,
+    "missing_but_present": 1
+  },
+  "canonical_exact_raw": 11,
+  "guard_accept_raw": 28,
+  "exact_held": 3,
+  "execution_permitted": false,
+  "limits": [
+    "Agent-authored gold, no independent human review",
+    "Provider execution is disabled"
+  ]
+}
