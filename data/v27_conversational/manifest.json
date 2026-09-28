@@ -1,0 +1,131 @@
+{
+  "version": "V27_CONVERSATIONAL",
+  "seed": 2041,
+  "source": "V26 train/valid semantic projection plus independent contextual and discourse generation",
+  "v37_sha256": "1f44fa9512dc1c2b8b5947da406f86083f48d98f3fc499998d450d98794e55e1",
+  "splits": {
+    "train": {
+      "rows": 3780,
+      "sha256": "48b3a708b43df5e9949a0a3b36e8da2b7e106fafc2e53a43a2e7d2558c5ce8ba",
+      "categories": {
+        "nonaction": 650,
+        "confirmation": 46,
+        "multi_goal": 180,
+        "incomplete": 540,
+        "verbalization": 500,
+        "selection": 180,
+        "complete": 650,
+        "contextual": 530,
+        "correction": 339,
+        "cancellation": 165
+      },
+      "quotas": {
+        "nonaction": {
+          "target": 650,
+          "actual": 650,
+          "available": 940
+        },
+        "incomplete": {
+          "target": 540,
+          "actual": 540,
+          "available": 1503
+        },
+        "contextual": {
+          "target": 530,
+          "actual": 530,
+          "available": 685
+        },
+        "correction": {
+          "target": 550,
+          "actual": 550,
+          "available": 1724
+        },
+        "selection": {
+          "target": 180,
+          "actual": 180,
+          "available": 192
+        },
+        "multi_goal": {
+          "target": 180,
+          "actual": 180,
+          "available": 336
+        },
+        "complete": {
+          "target": 650,
+          "actual": 650,
+          "available": 1265
+        },
+        "verbalization": {
+          "target": 500,
+          "actual": 500,
+          "available": 1045
+        }
+      }
+    },
+    "valid": {
+      "rows": 655,
+      "sha256": "00ac5f34767f7be0fdc1430ae76d9d1702e596e043462097e1acee8b9080b24a",
+      "categories": {
+        "contextual": 93,
+        "nonaction": 117,
+        "cancellation": 32,
+        "correction": 60,
+        "verbalization": 70,
+        "selection": 28,
+        "incomplete": 97,
+        "complete": 120,
+        "multi_goal": 32,
+        "confirmation": 6
+      },
+      "quotas": {
+        "nonaction": {
+          "target": 160,
+          "actual": 160,
+          "available": 224
+        },
+        "incomplete": {
+          "target": 110,
+          "actual": 110,
+          "available": 458
+        },
+        "contextual": {
+          "target": 110,
+          "actual": 110,
+          "available": 132
+        },
+        "correction": {
+          "target": 100,
+          "actual": 100,
+          "available": 294
+        },
+        "selection": {
+          "target": 28,
+          "actual": 28,
+          "available": 32
+        },
+        "multi_goal": {
+          "target": 32,
+          "actual": 32,
+          "available": 112
+        },
+        "complete": {
+          "target": 120,
+          "actual": 120,
+          "available": 220
+        },
+        "verbalization": {
+          "target": 90,
+          "actual": 90,
+          "available": 185
+        }
+      }
+    }
+  },
+  "leakage": {
+    "exact_benchmark_overlap": 0,
+    "max_benchmark_token_jaccard": 0.555556
+  },
+  "generator_sha256": "ff156d43ba94fceb72a135f465090638aad9ffbf9d9975aaae6e6a3a6f4f94e5",
+  "human_review": "not independently reviewed",
+  "note": "Stage-A and Stage-B tasks share one model; no benchmark gold used as training target"
+}

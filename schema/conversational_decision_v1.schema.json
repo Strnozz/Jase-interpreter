@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jase.local/schemas/conversational-decision-v1.json",
+  "title": "Jase conversational semantic proposal V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "mode", "operation", "updates"],
+  "properties": {
+    "protocol_version": {"const": "conversation-v1"},
+    "mode": {"enum": ["CHAT", "QUESTION", "META", "TRANSLATION", "HYPOTHETICAL", "ACTIONABLE_GOAL", "CONTINUATION", "ANSWER_TO_CLARIFICATION", "CONFIRMATION", "REJECTION", "CANCELLATION"]},
+    "operation": {"enum": ["NO_GOAL", "OPEN_DRAFT", "UPDATE_DRAFT", "CANCEL_DRAFT", "CONFIRM_DRAFT", "REJECT_DRAFT"]},
+    "draft_id": {"type": "string", "pattern": "^d[1-9][0-9]*$"},
+    "reference": {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"enum": ["ordinal", "cheapest"]}, "ordinal": {"type": "integer", "minimum": 1}}},
+    "additional_goals": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["action", "target", "updates"], "properties": {"action": {"type": "string", "minLength": 1}, "target": {"type": "object", "additionalProperties": false, "required": ["name", "type"], "properties": {"name": {"type": "string"}, "type": {"type": "string"}}}, "updates": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["slot", "value"], "properties": {"slot": {"type": "string"}, "value": {"type": ["string", "number", "boolean"]}, "op": {"type": "string"}, "value_to": {"type": ["string", "number", "boolean"]}}}}}}},
+    "action": {"type": "string", "minLength": 1},
+    "target": {"type": "object", "additionalProperties": false, "required": ["name", "type"], "properties": {"name": {"type": "string", "minLength": 1}, "type": {"type": "string", "minLength": 1}}},
+    "updates": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["slot", "value"], "properties": {"slot": {"type": "string", "pattern": "^(fact|temporal|external|modifier|policy)\\.[a-z][a-z0-9_]*$"}, "op": {"enum": ["eq", "neq", "before", "after", "between", "lt", "lte", "gt", "gte", "near", "contains", "excludes", "within", "in", "not_in"]}, "value": {"type": ["string", "number", "boolean"]}, "value_to": {"type": ["string", "number", "boolean"]}}}}
+  }
+}

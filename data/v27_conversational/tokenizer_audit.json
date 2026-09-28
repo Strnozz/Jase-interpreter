@@ -1,0 +1,75 @@
+{
+  "model_id": "Qwen/Qwen3.5-9B",
+  "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "tokenizer": "Qwen2Tokenizer",
+  "max_length": 512,
+  "splits": {
+    "train": {
+      "rows": 3780,
+      "sha256": "48b3a708b43df5e9949a0a3b36e8da2b7e106fafc2e53a43a2e7d2558c5ce8ba",
+      "categories": {
+        "nonaction": 650,
+        "confirmation": 46,
+        "multi_goal": 180,
+        "incomplete": 540,
+        "verbalization": 500,
+        "selection": 180,
+        "complete": 650,
+        "contextual": 530,
+        "correction": 339,
+        "cancellation": 165
+      },
+      "max_tokens": 422,
+      "p50_tokens": 355,
+      "p95_tokens": 403,
+      "over_512": 0,
+      "over_configured_limit": 0,
+      "min_target_tokens": 12,
+      "max_target_tokens": 112,
+      "completion_mask_verified_rows": 3780,
+      "first_inspection": {
+        "index": 0,
+        "category": "nonaction",
+        "total_tokens": 312,
+        "masked_tokens": 285,
+        "target_tokens": 27,
+        "masked_prefix_preview": "<|im_start|>system\nYou are Jase's conversational semantic interpreter. Read the JSON user input. For",
+        "active_target_preview": "{\"mode\":\"HYPOTHETICAL\",\"operation\":\"NO_GOAL\",\"protocol_version\":\"conversation-v1\",\"updates\":[]}"
+      }
+    },
+    "valid": {
+      "rows": 655,
+      "sha256": "00ac5f34767f7be0fdc1430ae76d9d1702e596e043462097e1acee8b9080b24a",
+      "categories": {
+        "contextual": 93,
+        "nonaction": 117,
+        "cancellation": 32,
+        "correction": 60,
+        "verbalization": 70,
+        "selection": 28,
+        "incomplete": 97,
+        "complete": 120,
+        "multi_goal": 32,
+        "confirmation": 6
+      },
+      "max_tokens": 432,
+      "p50_tokens": 357,
+      "p95_tokens": 403,
+      "over_512": 0,
+      "over_configured_limit": 0,
+      "min_target_tokens": 12,
+      "max_target_tokens": 122,
+      "completion_mask_verified_rows": 655,
+      "first_inspection": {
+        "index": 0,
+        "category": "contextual",
+        "total_tokens": 387,
+        "masked_tokens": 343,
+        "target_tokens": 44,
+        "masked_prefix_preview": "<|im_start|>system\nYou are Jase's conversational semantic interpreter. Read the JSON user input. For",
+        "active_target_preview": "{\"draft_id\":\"d1\",\"mode\":\"ANSWER_TO_CLARIFICATION\",\"operation\":\"UPDATE_DRAFT\",\"protocol_version\":\""
+      }
+    }
+  },
+  "cross_split_exact_prompt_overlap": 0
+}
