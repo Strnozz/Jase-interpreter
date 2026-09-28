@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from jase.planner_v1_3 import plan_contract  # noqa: E402
+from jase.capability_registry_v1 import REGISTRY_PATH, REGISTRY_V2_PATH  # noqa: E402
 
 PANEL = ROOT / "benchmarks/v34/blind.jsonl"
 PREDICTIONS = ROOT / "benchmarks/outputs/qwen-v26-v34-blind/cases.jsonl"
@@ -30,7 +31,7 @@ def rows(path: Path) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--variant", required=True, choices=("before", "after"))
+    parser.add_argument("--variant", required=True, choices=("before", "after", "after_v2"))
     args = parser.parse_args()
     if sha(PANEL) != SHA:
         raise RuntimeError("Frozen V34 panel changed")
@@ -65,7 +66,7 @@ def main() -> None:
     summary = {"variant": args.variant, "cases": len(outcomes), "panel_sha256": sha(PANEL),
                "prediction_sha256": sha(PREDICTIONS),
                "planner_sha256": sha(ROOT / "jase/planner_v1_3.py"),
-               "registry_sha256": sha(ROOT / "configs/capabilities/v1.json"),
+               "registry_sha256": sha(REGISTRY_PATH if args.variant == "before" else REGISTRY_V2_PATH),
                "guard_sha256": sha(ROOT / "jase/semantic_guard_v1_3_routing_v5.py"),
                "status_counts": dict(statuses), "reason_counts": dict(reasons),
                "canonical_exact_raw": sum(x["canonical_exact_raw"] for x in outcomes),

@@ -1,0 +1,43 @@
+{
+  "version": "2",
+  "extends": "v1.json",
+  "extends_sha256": "c75e1e46f6c4afc73cf29c8ebf62a21bb5a358e3138667951341dc03f5f28d83",
+  "capabilities": [
+    {
+      "capability_id": "find.local_place",
+      "version": "2.0",
+      "action": "find",
+      "target_type": "place",
+      "target_names": ["lavanderia", "panetteria", "biblioteca", "osteria", "negozio di ferramenta", "ferramenta", "cartoleria", "supermercato", "sala riunioni", "farmacia", "museo", "libreria", "bar"],
+      "aliases": [],
+      "required_slots": ["fact.location"],
+      "optional_slots": ["fact.open_now", "fact.availability", "fact.access"],
+      "supported_modifiers": ["limit", "sort"],
+      "supported_temporal_roles": ["search_date", "search_time"],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.bus",
+      "version": "2.0",
+      "action": "find",
+      "target_type": "transport",
+      "target_names": ["autobus", "pullman", "corriera"],
+      "aliases": ["bus"],
+      "required_slots": ["fact.origin", "fact.destination"],
+      "optional_slots": ["fact.stops"],
+      "supported_modifiers": ["limit", "sort"],
+      "supported_temporal_roles": ["search_date", "departure_time", "arrival_time"],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    }
+  ]
+}

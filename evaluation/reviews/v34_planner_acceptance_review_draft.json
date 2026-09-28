@@ -1,0 +1,24 @@
+{
+  "panel": "V34",
+  "review_status": "agent-authored provisional triage; no independent human review",
+  "scope": "All ready or no-action outputs from either Planner replay, plus the transient V2 registry-only admission",
+  "accepted_before": ["v34-001", "v34-002", "v34-003", "v34-010", "v34-015", "v34-016", "v34-021", "v34-032", "v34-037"],
+  "accepted_after": ["v34-001", "v34-002", "v34-003", "v34-010", "v34-012", "v34-015", "v34-016", "v34-032", "v34-037"],
+  "case_labels": {
+    "v34-001": {"label": "correct_no_action", "note": "Quoted example is a request for explanation."},
+    "v34-002": {"label": "correct_no_action", "note": "Quoted email command is being explained."},
+    "v34-003": {"label": "correct_no_action", "note": "Hypothetical question about verification."},
+    "v34-010": {"label": "correct_read_only", "note": "Arrival deadline is represented as a before operator."},
+    "v34-012": {"label": "correct_read_only", "note": "Exact bus route and departure constraint; V1 lacked a mock bus interface."},
+    "v34-015": {"label": "correct_read_only", "note": "Search only and explicit booking prohibition."},
+    "v34-016": {"label": "correct_read_only", "note": "Rental search only with rent prohibition."},
+    "v34-021": {"label": "clear_material_content_omission", "note": "Model drops 'dire a Paolo che' from reminder content, changing the requested task."},
+    "v34-032": {"label": "correct_read_only", "note": "Both independent search goals retained."},
+    "v34-037": {"label": "ambiguous_gold", "note": "User says a provider has not been chosen; immediate search may be reasonable, while agent gold labels a blocked hire. Human adjudication required."},
+    "v34-007": {"label": "transient_false_accept_prevented", "note": "The first V2 registry replay accepted this nonexact read-only result; final policy-scope rule holds it because the decision is deferred. Availability time role also differs and needs independent review."}
+  },
+  "clear_material_accepted_before_lower_bound": 1,
+  "clear_material_accepted_after_lower_bound": 0,
+  "remaining_accepted_nonexact_ambiguous": 1,
+  "limits": ["Labels are provisional", "Panel and gold are agent-authored", "No provider binding or execution was tested"]
+}

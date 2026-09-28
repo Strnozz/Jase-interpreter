@@ -6,11 +6,13 @@ grant permission to execute. Unknown names and ambiguous mappings fail closed.
 from __future__ import annotations
 
 import json
+import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 REGISTRY_PATH = Path(__file__).resolve().parents[1] / "configs/capabilities/v1.json"
+REGISTRY_V2_PATH = REGISTRY_PATH.with_name("v2.json")
 
 
 @dataclass(frozen=True)
@@ -74,7 +76,7 @@ class Capability:
 
 class CapabilityRegistry:
     def __init__(self, version: str, capabilities: tuple[Capability, ...]):
-        if version != "1":
+        if version not in {"1", "2"}:
             raise ValueError("Unsupported capability registry version")
         ids = [item.capability_id for item in capabilities]
         if len(ids) != len(set(ids)):
@@ -85,9 +87,18 @@ class CapabilityRegistry:
     @classmethod
     def load(cls, path: Path = REGISTRY_PATH) -> "CapabilityRegistry":
         raw = json.loads(path.read_text(encoding="utf-8"))
-        if set(raw) != {"version", "capabilities"}:
+        if raw.get("version") == "2":
+            if set(raw) != {"version", "extends", "extends_sha256", "capabilities"} or raw["extends"] != "v1.json":
+                raise ValueError("Invalid V2 registry envelope")
+            base_path = path.with_name(raw["extends"])
+            if hashlib.sha256(base_path.read_bytes()).hexdigest() != raw["extends_sha256"]:
+                raise ValueError("V2 registry base hash changed")
+            base = cls.load(base_path)
+            additions = tuple(Capability.from_dict(x) for x in raw["capabilities"])
+            return cls("2", base.capabilities + additions)
+        if set(raw) != {"version", "capabilities"} or raw["version"] != "1":
             raise ValueError("Invalid registry envelope")
-        return cls(raw["version"], tuple(Capability.from_dict(x) for x in raw["capabilities"]))
+        return cls("1", tuple(Capability.from_dict(x) for x in raw["capabilities"]))
 
     def resolve(self, goal: dict[str, Any]) -> tuple[str, Capability | None]:
         matches = [spec for spec in self.capabilities if spec.matches(goal["action"],

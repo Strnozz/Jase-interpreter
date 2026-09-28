@@ -9,14 +9,14 @@ import json
 import re
 from typing import Any, Mapping
 
-from .capability_registry_v1 import Capability, CapabilityRegistry
+from .capability_registry_v1 import Capability, CapabilityRegistry, REGISTRY_V2_PATH
 from .provenance_v1 import (DETERMINISTIC_DERIVATION, MODEL_INFERENCE,
                             TRUSTED_CONVERSATION_CONTEXT, USER_EXPLICIT,
                             ground_value)
 from .semantic_guard_v1_3 import ACCEPT
 from .semantic_guard_v1_3_routing_v5 import check_contract
 
-VERSION = "1.3-dry-run-1"
+VERSION = "1.3-dry-run-2"
 _TRUSTED = {USER_EXPLICIT, TRUSTED_CONVERSATION_CONTEXT, DETERMINISTIC_DERIVATION,
             "PROVIDER_RESULT", "CAPABILITY_RESULT"}
 _CONTEXT_FIELDS = {"has_car", "party_size", "user_location", "vehicle_location", "pet", "lodging_owned"}
@@ -29,18 +29,18 @@ _HYPOTHETICAL = re.compile(r"\b(?:se qualcuno|supponiamo che|ipotizziamo che|in 
 _EXPLANATION = re.compile(r"\b(?:cosa significa|che significa|spiegami|spiega|what would|what does|significato)\b", re.I)
 _QUOTED = re.compile(r"['\"‘“][^'\"’”]+['\"’”]")
 _FORBIDS = {
-    "book": re.compile(r"\b(?:senza|non)\s+(?:prenotare|prenotarlo|prenotarla|riservare)\b|\bnessuna prenotazione\b", re.I),
-    "buy": re.compile(r"\b(?:senza|non)\s+(?:comprare|acquistare|ordinare|fare acquisti)\b|\bniente acquisti\b", re.I),
+    "book": re.compile(r"\b(?:senza|non)\s+(?:prenotare|prenotarlo|prenotarla|riservare)\b|\bnessuna prenotazione\b|\b(?:decido|deciderò|scelgo|sceglierò)\s+dopo\b", re.I),
+    "buy": re.compile(r"\b(?:senza|non)\s+(?:comprare|acquistare|ordinare|fare acquisti)\b|\bniente acquisti\b|\bnon acquistare nulla\b", re.I),
     "rent": re.compile(r"\b(?:senza|non)\s+(?:affittare|noleggiare|prenderne)\b|\bsolo ricerche\b", re.I),
     "hire": re.compile(r"\b(?:senza|non)\s+(?:assumere|ingaggiare|incaricare)\b|\bnessun incarico\b", re.I),
 }
 _FORBID_TYPES = {"book": {"accommodation", "place", "transport", "appointment"},
-                 "buy": {"product", "food", "transport"},
+                 "buy": {"product", "food", "transport", "place"},
                  "rent": {"vehicle"}, "hire": {"professional_service"}}
 
 
-def _shell(status: str, codes: list[str] | None = None) -> dict[str, Any]:
-    return {"planner_version": VERSION, "registry_version": "1", "planner_status": status,
+def _shell(status: str, codes: list[str] | None = None, registry_version: str = "2") -> dict[str, Any]:
+    return {"planner_version": VERSION, "registry_version": registry_version, "planner_status": status,
             "reason_codes": codes or [], "resolved_capabilities": [], "goal_bindings": [],
             "resolved_references": [], "missing_slots": [], "unresolved_references": [],
             "semantic_conflicts": [], "provenance_issues": [], "policy_state": [],
@@ -58,6 +58,14 @@ def _meta_only(text: str) -> bool:
     for match in quotes:
         outside[match.start():match.end()] = " " * (match.end() - match.start())
     return _ACTION_WORDS.search("".join(outside)) is None
+
+
+def _reminder_content(text: str) -> str | None:
+    """Extract a single explicit reminder clause; ambiguity stays with the Guard."""
+    match = re.search(r"\b(?:ricordami|avvisami)\b[^,.;!?]{0,45}?\bdi\s+([^.;!?]+)", text, re.I)
+    if not match or "," in match.group(1):
+        return None
+    return " ".join(match.group(1).strip().casefold().split())
 
 
 def _reference(ref: dict[str, Any], results: Mapping[str, list[dict[str, Any]]],
@@ -108,23 +116,23 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
     never grants provider execution. Missing slots come from the registry, not
     from the model's `missing` array.
     """
-    registry = registry or CapabilityRegistry.load()
+    registry = registry or CapabilityRegistry.load(REGISTRY_V2_PATH)
     trusted_context = trusted_context or {}
     results_by_goal = results_by_goal or {}
     external_bindings_by_goal = external_bindings_by_goal or {}
     confirmation_by_goal = confirmation_by_goal or {}
     decision = check_contract(raw, user_text)
     if decision.status != ACCEPT or decision.contract is None:
-        result = _shell("HOLD_GUARD", list(decision.codes) or [decision.status])
+        result = _shell("HOLD_GUARD", list(decision.codes) or [decision.status], registry.version)
         result["guard_status"] = decision.status
         return result
     contract = decision.contract
     if contract["kind"] == "non_actionable":
-        return _shell("NO_ACTION")
+        return _shell("NO_ACTION", registry_version=registry.version)
     if _meta_only(user_text):
-        return _shell("HOLD_NON_ACTIONABLE_CONTEXT", ["quoted_or_meta_intent"])
+        return _shell("HOLD_NON_ACTIONABLE_CONTEXT", ["quoted_or_meta_intent"], registry.version)
 
-    result = _shell("READY_FOR_DRY_RUN")
+    result = _shell("READY_FOR_DRY_RUN", registry_version=registry.version)
     result["guard_status"] = decision.status
     seen: set[str] = set()
     blocked_ids: set[str] = set()
@@ -197,6 +205,15 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
                         step_codes.append("HOLD_TEMPORAL_ROLE_CONFLICT")
                         result["semantic_conflicts"].append({"goal": ident, "slot": slot,
                                                              "reason": "message_time_used_as_action_time"})
+        if goal["action"] == "notify":
+            expected_message = _reminder_content(user_text)
+            if expected_message is not None:
+                actual_messages = [" ".join(str(item.get("value", "")).strip().casefold().split())
+                                   for item in goal["facts"] if item["field"] == "message"]
+                if actual_messages != [expected_message]:
+                    step_codes.append("HOLD_MESSAGE_CONTENT_INCOMPLETE")
+                    result["semantic_conflicts"].append({"goal": ident, "slot": "fact.message",
+                                                         "reason": "explicit_reminder_clause_not_preserved"})
         for key, value in goal.get("modifiers", {}).items():
             slot = f"modifiers.{key}"
             supplied.add(slot)
