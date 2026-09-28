@@ -1,3 +1,4 @@
 benchmarks/v33/*.jsonl text eol=lf
 benchmarks/v34/*.jsonl text eol=lf
 benchmarks/v35/*.jsonl text eol=lf
+benchmarks/v36/*.jsonl text eol=lf
