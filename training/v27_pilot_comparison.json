@@ -1,0 +1,21 @@
+{
+  "pilots": {
+    "qwen35-9b-v27-pilot-a": {
+      "run": "training\\runs\\qwen35-9b-v27-pilot-a\\20260928T113103Z-067c6f46",
+      "best_validation_loss": 0.5499489009380341,
+      "best_step": 60,
+      "peak_vram_bytes": 13788885504
+    },
+    "qwen35-9b-v27-pilot-b": {
+      "run": "training\\runs\\qwen35-9b-v27-pilot-b\\20260928T113652Z-989567cb",
+      "best_validation_loss": 1.0863813168834895,
+      "best_step": 60,
+      "peak_vram_bytes": 13788885504
+    }
+  },
+  "selected_model": "qwen35-9b-v27",
+  "warm_start_loss": 0.5499489009380341,
+  "base_init_loss": 1.0863813168834895,
+  "selection_rule": "base only if validation loss < 0.90 * warm-start loss",
+  "blind_panel_used_for_selection": false
+}
