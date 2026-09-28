@@ -1,0 +1,47 @@
+{
+  "status": "complete",
+  "review_status": "agent-authored; no independent human adjudication",
+  "v37_panel_sha256": "1f44fa9512dc1c2b8b5947da406f86083f48d98f3fc499998d450d98794e55e1",
+  "v27": {
+    "run": "training/runs/qwen35-9b-v27/20260928T114238Z-d2316823",
+    "best_step": 600,
+    "best_validation_loss": 0.01895738551591819,
+    "full_steps": 900,
+    "v37_cases_sha256": "b2cc3c3e232d35def9ba23e7546e6ac81aff571f8630ca3437a0e7c2d0f098bd",
+    "v37_turns": 150,
+    "v37_json_valid": 137,
+    "v37_protocol_valid": 130,
+    "v37_actionable_correct": 136,
+    "v37_false_action": 1,
+    "v37_false_nonaction_or_invalid": 12,
+    "v37_post_state_action_correct_on_98_actionable": 90,
+    "v37_post_state_target_correct_on_98_actionable": 67,
+    "v37_second_turn_protocol_and_state_valid_on_30": 20,
+    "v37_second_turn_textual_slot_matches_on_26": 7,
+    "v37_planner_calls": 26,
+    "v37_ready_for_dry_run": 19,
+    "v37_clear_material_false_ready_lower_bound": 6,
+    "v37_all_planner_execution_permitted_false": true,
+    "v33_v36_draft_replay_cases_sha256": "0d3a79d331e4f6c99f3d70cc23d659016b1b910e1051106cd94a45adb6996522",
+    "v33_v36_cases": 242,
+    "v33_v36_protocol_valid": 202,
+    "v33_v36_actionable_correct": 203,
+    "v33_v36_ready_candidates": 67
+  },
+  "v26_legacy": {
+    "v37_cases_sha256": "49c3c3bf45279942c3e512d547f8681d7008a8d2f46dbff9564a2f3ae9b0c7ed",
+    "v37_turns": 150,
+    "v37_json_valid": 145,
+    "v37_actionable_correct": 133,
+    "v37_false_action": 12,
+    "v37_false_nonaction": 2,
+    "v37_first_action_correct_on_98_actionable": 93,
+    "v37_first_target_correct_on_98_actionable": 69
+  },
+  "comparability_note": "V26 emits a one-shot GoalContract; V27 emits draft updates. Post-state action/target and actionable detection can be compared cautiously. V27 GoalContract canonical exact, next_correct and material_false_ready_candidate from the automatic V37 summary must not be compared directly.",
+  "source_summaries": [
+    "benchmarks/outputs/v27-conversational-v37/summary.json",
+    "benchmarks/outputs/v26-legacy-v37/summary.json",
+    "benchmarks/outputs/v27-v33-v36-draft-regression/summary.json"
+  ]
+}

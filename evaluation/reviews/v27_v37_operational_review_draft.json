@@ -1,0 +1,59 @@
+{
+  "review_type": "agent-authored operational triage",
+  "independent_human_review": false,
+  "panel": "benchmarks/v37_conversational/blind.jsonl",
+  "panel_sha256": "1f44fa9512dc1c2b8b5947da406f86083f48d98f3fc499998d450d98794e55e1",
+  "output": "benchmarks/outputs/v27-conversational-v37/cases.jsonl",
+  "output_sha256": "b2cc3c3e232d35def9ba23e7546e6ac81aff571f8630ca3437a0e7c2d0f098bd",
+  "scope": "Clear materially incomplete or incorrect READY_FOR_DRY_RUN cases only; a lower bound, not an exhaustive safety audit",
+  "material_false_ready_lower_bound": 6,
+  "cases": [
+    {
+      "id": "v37-051",
+      "failure": "Morning travel constraint omitted from the draft; Planner marked the train search ready with date and stops but no daypart.",
+      "class": "INTERPRETER_FACT_OMISSION"
+    },
+    {
+      "id": "v37-052",
+      "failure": "The user requested an albergo in central Trieste; the draft retained Trieste but lost the central-area constraint and was marked ready.",
+      "class": "INTERPRETER_LOCATION_CONSTRAINT_OMISSION"
+    },
+    {
+      "id": "v37-068",
+      "failure": "The user requested regional trains; the draft omitted the regional category and was marked ready.",
+      "class": "INTERPRETER_CATEGORY_OMISSION"
+    },
+    {
+      "id": "v37-085",
+      "failure": "The bathroom was grounded as the provider search location, although the user gave no geographic location. The draft and Planner marked the provider search ready.",
+      "class": "INTERPRETER_ROLE_ERROR_AND_PREMATURE_FINALIZATION"
+    },
+    {
+      "id": "v37-104",
+      "failure": "The user requested a room for Sunday; the draft omitted the day and was marked ready.",
+      "class": "INTERPRETER_TEMPORAL_OMISSION"
+    },
+    {
+      "id": "v37-118",
+      "failure": "A hotel and a train were requested. The runtime finalized and passed only the hotel to the Planner while the train draft remained active, exposing a partial request as ready.",
+      "class": "CONVERSATION_RUNTIME_MULTI_GOAL_COMPLETENESS"
+    }
+  ],
+  "other_clear_failures_without_ready": [
+    {
+      "id": "v37-005",
+      "failure": "A chat utterance about finishing a book opened a find-book draft, but the capability lookup blocked it.",
+      "class": "FALSE_ACTION_BLOCKED"
+    },
+    {
+      "id": "v37-099",
+      "failure": "Arrival deadline continuation opened an unrelated reminder draft rather than updating the active train search.",
+      "class": "CONTEXT_AND_TEMPORAL_ROLE_ERROR"
+    },
+    {
+      "id": "v37-113",
+      "failure": "The reply 'the second' was interpreted as a new goal. No result list was supplied in the benchmark, so actual reference resolution cannot be certified.",
+      "class": "CONTEXT_AND_REFERENCE_ERROR"
+    }
+  ]
+}
