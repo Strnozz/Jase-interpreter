@@ -1,0 +1,43 @@
+{
+  "variant": "before",
+  "cases": 40,
+  "panel_sha256": "b4a86432b691eb64220b64a24be29d29ee8dbd9b7b59d2d0fd75e2e900ff7734",
+  "prediction_sha256": "79d58fbc386244cd1c3a196197aa63a7d5ec9153b32f807db09364ed5f9f7933",
+  "planner_sha256": "aa328a974d8cd973ce11e59586dfed339c24a858d12fc59eeedbd8bd482b8b4f",
+  "registry_sha256": "c75e1e46f6c4afc73cf29c8ebf62a21bb5a358e3138667951341dc03f5f28d83",
+  "guard_sha256": "1b57cd3c80db7684299c58d05209e2de6af4e8e54e6b3abae247f5cb9ab40754",
+  "status_counts": {
+    "NO_ACTION": 3,
+    "HOLD_GUARD": 21,
+    "HOLD": 10,
+    "READY_FOR_DRY_RUN": 6
+  },
+  "reason_counts": {
+    "open_now_missing": 1,
+    "HOLD_NO_CAPABILITY": 8,
+    "explicit_no_book_policy_missing_v5": 1,
+    "schema": 9,
+    "direct_flight_constraint_missing": 1,
+    "unknown_planner_field": 3,
+    "wrong_block_phase": 1,
+    "provider_identity_missing_v3": 1,
+    "temporal_role_action_mismatch": 1,
+    "HOLD_CONFIRMATION_PENDING": 1,
+    "HOLD_MISSING_INFORMATION": 2,
+    "requested_booking_goal_missing": 1,
+    "alias_requires_planner_mapping": 2,
+    "explicit_confirmation_missing_v3": 1,
+    "reschedule_provider_not_verified": 1,
+    "missing_required_information": 1,
+    "walking_access_missing": 1,
+    "missing_user_context": 1
+  },
+  "canonical_exact_raw": 9,
+  "guard_accept_raw": 26,
+  "exact_held": 2,
+  "execution_permitted": false,
+  "limits": [
+    "Gold agent-authored; no independent human review",
+    "READY_FOR_DRY_RUN is not authorization to call a provider"
+  ]
+}
