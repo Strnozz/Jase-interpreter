@@ -1,6 +1,7 @@
 .venv/
 .venv-nvidia/
 hf-cache/
+data/provider_cache/
 models/original/
 models/merged/
 models/quantized/
