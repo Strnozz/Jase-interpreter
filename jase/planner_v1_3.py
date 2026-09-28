@@ -29,7 +29,7 @@ _HYPOTHETICAL = re.compile(r"\b(?:se qualcuno|supponiamo che|ipotizziamo che|in 
 _EXPLANATION = re.compile(r"\b(?:cosa significa|che significa|spiegami|spiega|what would|what does|significato)\b", re.I)
 _QUOTED = re.compile(r"['\"‘“][^'\"’”]+['\"’”]")
 _FORBIDS = {
-    "book": re.compile(r"\b(?:senza|non)\s+(?:prenotare|prenotarlo|prenotarla|riservare)\b|\bnessuna prenotazione\b|\b(?:decido|deciderò|scelgo|sceglierò)\s+dopo\b", re.I),
+    "book": re.compile(r"\b(?:senza|non)\s+(?:prenotare|prenotarlo|prenotarla|riservare)\b|\bnessuna prenotazione\b|\b(?:decido|deciderò|scelgo|sceglierò)\s+dopo\b|\bdecido\s+io\s+quale\b", re.I),
     "buy": re.compile(r"\b(?:senza|non)\s+(?:comprare|acquistare|ordinare|fare acquisti)\b|\bniente acquisti\b|\bnon acquistare nulla\b", re.I),
     "rent": re.compile(r"\b(?:senza|non)\s+(?:affittare|noleggiare|prenderne)\b|\bsolo ricerche\b", re.I),
     "hire": re.compile(r"\b(?:senza|non)\s+(?:assumere|ingaggiare|incaricare)\b|\bnessun incarico\b", re.I),
@@ -37,6 +37,9 @@ _FORBIDS = {
 _FORBID_TYPES = {"book": {"accommodation", "place", "transport", "appointment"},
                  "buy": {"product", "food", "transport", "place"},
                  "rent": {"vehicle"}, "hire": {"professional_service"}}
+_AVAILABILITY_REQUEST = re.compile(r"\b(?:disponibil[ei]|visitabil[ei]|apert[oaie])\b", re.I)
+_DAY_PART = {"mattino", "mattina", "pomeriggio", "sera", "serata", "notte"}
+_GENERIC_LANDMARK = {"stazione", "centro", "porto", "aeroporto"}
 
 
 def _shell(status: str, codes: list[str] | None = None, registry_version: str = "2") -> dict[str, Any]:
@@ -194,6 +197,10 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
                     result["provenance_issues"].append({"goal": ident, "slot": slot,
                                                        "evidence": evidence.as_dict()})
                 if section == "temporal":
+                    if name.endswith("_date") and isinstance(value, str) and value.casefold() in _DAY_PART:
+                        step_codes.append("HOLD_TEMPORAL_ROLE_CONFLICT")
+                        result["semantic_conflicts"].append({"goal": ident, "slot": slot,
+                                                             "reason": "day_part_used_as_date"})
                     if name == "arrival_time" and item["op"] == "eq" and re.search(
                             r"\b(?:entro|prima di|prima delle|by|before)\b", user_text, re.I):
                         step_codes.append("HOLD_TEMPORAL_ROLE_CONFLICT")
@@ -214,6 +221,21 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
                     step_codes.append("HOLD_MESSAGE_CONTENT_INCOMPLETE")
                     result["semantic_conflicts"].append({"goal": ident, "slot": "fact.message",
                                                          "reason": "explicit_reminder_clause_not_preserved"})
+        if cap.consequentiality == "read":
+            if (_AVAILABILITY_REQUEST.search(user_text) and
+                    goal["target"]["type"] in {"place", "accommodation", "professional_service"} and
+                    not any(item["field"] in {"availability", "open_now"} for item in goal["facts"])):
+                step_codes.append("HOLD_AVAILABILITY_MISSING")
+                result["semantic_conflicts"].append({"goal": ident, "slot": "fact.availability",
+                                                     "reason": "explicit_availability_request_not_bound"})
+            for item in goal["facts"]:
+                if (item["field"] == "location" and isinstance(item.get("value"), str) and
+                        item["value"].casefold() in _GENERIC_LANDMARK and
+                        re.search(r"\b[Aa]\s+[A-ZÀ-Ý][a-zà-ÿ]+\b", user_text) and
+                        re.search(r"\b(?:stazione|centro|porto|aeroporto)\b", user_text, re.I)):
+                    step_codes.append("HOLD_LOCATION_SCOPE_INCOMPLETE")
+                    result["semantic_conflicts"].append({"goal": ident, "slot": "fact.location",
+                                                         "reason": "landmark_without_explicit_city"})
         for key, value in goal.get("modifiers", {}).items():
             slot = f"modifiers.{key}"
             supplied.add(slot)

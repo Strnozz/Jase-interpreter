@@ -22,6 +22,7 @@ _NUMBERS = {"uno": 1, "una": 1, "due": 2, "tre": 3, "quattro": 4, "cinque": 5,
             "sei": 6, "sette": 7, "otto": 8, "nove": 9, "dieci": 10}
 _OPEN_NOW = re.compile(r"\b(?:apert[oaie]|open)\b.{0,32}\b(?:ora|adesso|now)\b", re.I)
 _DIRECT = re.compile(r"\b(?:dirett[oaie]|senza scali|nonstop|non-stop)\b", re.I)
+_BARE_CLOCK = re.compile(r"\b(?:alle|entro le|dopo le|prima delle)\s+(\d{1,2})(?![:\d])\b", re.I)
 
 
 @dataclass(frozen=True)
@@ -74,6 +75,13 @@ def ground_value(field: str, value: Any, user_text: str, *,
     if _DIRECT.search(user_text) and ((field == "stops" and type(value) is int and value == 0) or
                                       (field == "direct" and value is True)):
         return Evidence(DETERMINISTIC_DERIVATION, field, value, note="explicit_direct_route_phrase")
+    if field in {"arrival_time", "departure_time", "notification_time", "action_time", "search_time"}:
+        match = re.fullmatch(r"(\d{2}):00", str(value))
+        clock_mentions = list(_BARE_CLOCK.finditer(user_text))
+        if match and len(clock_mentions) == 1 and int(match.group(1)) == int(clock_mentions[0].group(1)):
+            return Evidence(DETERMINISTIC_DERIVATION, field, value,
+                            span=(clock_mentions[0].start(1), clock_mentions[0].end(1)),
+                            note="unique_explicit_hour_normalized_to_hh00")
     if isinstance(value, int) and not isinstance(value, bool):
         for word, number in _NUMBERS.items():
             if number == value and re.search(r"(?<!\w)" + word + r"(?!\w)", user_text, re.I):
