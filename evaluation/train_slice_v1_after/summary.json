@@ -1,0 +1,35 @@
+{
+  "panel_sha256": "339aad6389e9076e4a2f08436dbe44fcc9f920c3fa58f8f79e204df83ae96783",
+  "qwen_cases_sha256": "77bf9aa4596b4c2584ca737c3c86dfede1ff2690fcddca5df2fe9b14eca73f70",
+  "feed_sha256": "b4296f145b42ccb35c26085470ff4b3fd5dffe533251c0aab312312a73820ad6",
+  "feed_coverage": [
+    "2026-07-26",
+    "2026-12-12"
+  ],
+  "provider_source_kind": "REAL_PROVIDER",
+  "request_at": "2026-09-28T12:00:00+02:00",
+  "cases": 61,
+  "counts": {
+    "called_when_explicit_no_call_expected": 0,
+    "canonical_exact_legacy": 3,
+    "consequential_permission_true": 0,
+    "empty_optional_fields_equivalent": 10,
+    "false_hold_against_agent_gold": 17,
+    "gold_provider_called": 21,
+    "json_valid": 60,
+    "material_flagged_for_review": 0,
+    "provider_called": 4,
+    "schema_valid": 40,
+    "status_HOLD": 55,
+    "status_HOLD_INCOMPLETE_COVERAGE": 1,
+    "status_NO_ACTION": 2,
+    "status_READY_RESULTS": 3
+  },
+  "replay_sha256": "90d88e1ffcebcd3e7162406bd55a4584f3242159049198ba49dca766bebf23f5",
+  "limitations": [
+    "Agent-authored gold pending independent human review",
+    "Provisional material flags require case review",
+    "GTFS static scheduled direct trains only; no fare or live availability",
+    "Legacy exact penalizes empty optional arrays in frozen gold"
+  ]
+}

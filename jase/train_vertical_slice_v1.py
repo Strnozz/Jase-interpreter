@@ -97,6 +97,8 @@ def _declared_coverage(goal: dict, user_text: str) -> list[str]:
         codes.append("HOLD_OMITTED_PRICE_CONSTRAINT")
     if re.search(r"\b(?:arriv(?:are|i|o)|essere\s+(?:a|in))\b.{0,40}\b(?:entro|prima delle|non oltre)\b", text) and "arrival_time" not in temporal:
         codes.append("HOLD_OMITTED_ARRIVAL_DEADLINE")
+    if re.search(r"\b(?:mattina|mattino|pomeriggio|sera|serata)\b", text) and not ({"search_time", "departure_time", "arrival_time"} & temporal):
+        codes.append("HOLD_OMITTED_DAYPART")
     return codes
 
 
@@ -215,7 +217,10 @@ def run_train_search(raw: str | dict, user_text: str, *, request_at: datetime,
         if "sort" in modifiers:
             term = {"departure_time": r"partenz|parte|parti", "arrival_time": r"arriv",
                     "duration": r"durata|percorso|veloc"}[sorting["field"]]
-            if not re.search(term, _norm(user_text)):
+            normalized_text = _norm(user_text)
+            direction_term = (r"\b(?:prima|presto|minore|breve|crescente|iniziale)\b" if sorting["direction"] == "asc"
+                              else r"\b(?:tardi|tardiva|maggiore|lunga|decrescente|ultima)\b")
+            if not re.search(term, normalized_text) or not re.search(direction_term, normalized_text):
                 raise UnsupportedConstraint("sort_not_grounded_in_request")
             provenance["sort"] = {"source": "DETERMINISTIC_DERIVATION", "derived_from": user_text,
                                   "value": sorting}
@@ -247,4 +252,9 @@ def run_train_search(raw: str | dict, user_text: str, *, request_at: datetime,
     outcome["provider_read_permitted"] = True
     outcome["provider_source_kind"] = provider.source_kind
     outcome["coverage"] = getattr(provider, "coverage", "unknown")
+    if not results and not direct:
+        # The pilot reconstructs only direct trips. An empty subset cannot
+        # assert that no connecting journey exists for an unrestricted query.
+        outcome["status"] = "HOLD_INCOMPLETE_COVERAGE"
+        outcome["reason_codes"] = ["no_direct_result_does_not_exclude_connections"]
     return outcome

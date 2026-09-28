@@ -1,0 +1,39 @@
+{
+  "status": "agent_case_review_pending_independent_human_review",
+  "panel_sha256": "339aad6389e9076e4a2f08436dbe44fcc9f920c3fa58f8f79e204df83ae96783",
+  "reviewed_provider_calls": 4,
+  "clear_material_false_ready_lower_bound": 0,
+  "cases": [
+    {
+      "id": "train-v1-001",
+      "judgment": "provider_request_matches_explicit_request",
+      "material_false_ready": false,
+      "evidence": "Lecco → Monza, 14 ottobre; fonte GTFS restituisce 10 viaggi diretti con identità di risultato e orari programmati. Il pannello chiede orari, non prezzo o disponibilità."
+    },
+    {
+      "id": "train-v1-004",
+      "judgment": "provider_request_matches_but_direct_feed_returns_zero_and_system_holds",
+      "material_false_ready": false,
+      "evidence": "Pavia → Lodi, martedì 29 settembre; zero viaggi diretti nel feed. Lo stato finale è HOLD_INCOMPLETE_COVERAGE, poiché il pilot non prova assenza di collegamenti con cambio."
+    },
+    {
+      "id": "train-v1-005",
+      "judgment": "provider_request_matches_explicit_request",
+      "material_false_ready": false,
+      "evidence": "Varese è risolto nel gruppo registrato di stazioni Varese/Varese Nord, senza scegliere una stazione inventata; 10 viaggi diretti Varese Nord → Saronno, domani. Il punto di partenza preciso resta visibile nei risultati."
+    },
+    {
+      "id": "train-v1-006",
+      "judgment": "provider_request_matches_explicit_request",
+      "material_false_ready": false,
+      "evidence": "Milano Porta Garibaldi → Novara, dopodomani 30 settembre; due orari programmati con trip/stop ID. Il nome esplicito della stazione è conservato."
+    }
+  ],
+  "prior_material_false_ready_fixed": {
+    "id": "train-v1-018",
+    "before": "provider_read_without_morning_filter",
+    "after": "HOLD_OMITTED_DAYPART",
+    "scope": "one general lexical safety rule; no model contract value was inserted"
+  },
+  "remaining_risk": "The lower bound is for four admitted cases on one small agent-authored panel, not a production false-ready rate. Temporal constrained requests did not reach the provider through Qwen V26 in this run."
+}

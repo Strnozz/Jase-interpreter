@@ -37,7 +37,7 @@ class TrainVerticalSliceTests(unittest.TestCase):
         contract = c(g("find", "treno", "transport", [f("origin", "Lecco"), f("destination", "Monza")],
                        temporal=[t("search_date", "domani"), t("arrival_time", "10:00", "before")]))
         result = run_train_search(contract, request, request_at=NOW, provider=provider)
-        self.assertEqual(result["status"], "READY_RESULTS")
+        self.assertEqual(result["status"], "HOLD_INCOMPLETE_COVERAGE")
         self.assertTrue(result["provider_read_permitted"])
         self.assertFalse(result["execution_permitted"])
         self.assertFalse(result["external_side_effect_permitted"])
@@ -70,6 +70,36 @@ class TrainVerticalSliceTests(unittest.TestCase):
         result = run_train_search(booking, "Prenota da Lecco a Monza domani.", request_at=NOW, provider=provider)
         self.assertEqual(result["status"], "HOLD")
         self.assertEqual(len(provider.requests), 0)
+
+    def test_explicit_morning_not_dropped_from_provider_query(self):
+        provider = RecordingProvider()
+        contract = c(g("find", "treno", "transport", [f("origin", "Lecco"), f("destination", "Monza")],
+                       temporal=[t("search_date", "domani")]))
+        result = run_train_search(contract, "Domani mattina cerca un treno da Lecco a Monza.",
+                                  request_at=NOW, provider=provider)
+        self.assertEqual(result["status"], "HOLD")
+        self.assertIn("HOLD_OMITTED_DAYPART", result["reason_codes"])
+        self.assertEqual(provider.requests, [])
+
+    def test_zero_direct_results_do_not_claim_complete_search(self):
+        provider = RecordingProvider()
+        contract = c(g("find", "treno", "transport", [f("origin", "Lecco"), f("destination", "Monza")],
+                       temporal=[t("search_date", "domani")]))
+        result = run_train_search(contract, "Domani cerca un treno da Lecco a Monza.",
+                                  request_at=NOW, provider=provider)
+        self.assertEqual(result["status"], "HOLD_INCOMPLETE_COVERAGE")
+        self.assertTrue(result["provider_called"])
+        self.assertFalse(result["execution_permitted"])
+
+    def test_wrong_sort_direction_cannot_reach_provider(self):
+        provider = RecordingProvider()
+        contract = c(g("find", "treno", "transport", [f("origin", "Lecco"), f("destination", "Monza")],
+                       temporal=[t("search_date", "domani")],
+                       modifiers={"sort": {"field": "duration", "direction": "desc"}}))
+        result = run_train_search(contract, "Domani trova treni da Lecco a Monza ordinati dalla durata minore.",
+                                  request_at=NOW, provider=provider)
+        self.assertEqual(result["status"], "HOLD")
+        self.assertEqual(provider.requests, [])
 
 
 if __name__ == "__main__":

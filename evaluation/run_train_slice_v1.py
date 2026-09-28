@@ -19,7 +19,7 @@ from jase.train_vertical_slice_v1 import run_train_search  # noqa: E402
 PANEL = ROOT / "benchmarks/train_slice_v1/blind.jsonl"
 PREDICTIONS = ROOT / "benchmarks/outputs/qwen-v26-train-slice-v1/cases.jsonl"
 FEED = ROOT / "data/provider_cache/trenord_gtfs_2026-09-26.zip"
-OUT = ROOT / "evaluation/train_slice_v1"
+DEFAULT_OUT = ROOT / "evaluation/train_slice_v1"
 EXPECTED_PANEL_SHA = "339aad6389e9076e4a2f08436dbe44fcc9f920c3fa58f8f79e204df83ae96783"
 REQUEST_AT = datetime(2026, 9, 28, 12, tzinfo=ZoneInfo("Europe/Rome"))
 
@@ -51,16 +51,20 @@ def compact(result: dict) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--output-dir", default=str(DEFAULT_OUT))
     args = parser.parse_args()
+    out = Path(args.output_dir).resolve()
+    if ROOT not in out.parents:
+        raise ValueError("Output directory must be inside repository")
     if hashlib.sha256(PANEL.read_bytes()).hexdigest() != EXPECTED_PANEL_SHA:
         raise RuntimeError("Frozen train panel hash changed")
     gold = rows(PANEL)
     predicted = {row["id"]: row for row in rows(PREDICTIONS)}
     if len(gold) != 61 or len(predicted) != 61:
         raise RuntimeError("Incomplete panel or Qwen V26 inference")
-    OUT.mkdir(exist_ok=True)
-    output = OUT / "replay.jsonl"
-    summary_path = OUT / "summary.json"
+    out.mkdir(exist_ok=True)
+    output = out / "replay.jsonl"
+    summary_path = out / "summary.json"
     if (output.exists() or summary_path.exists()) and not args.overwrite:
         raise FileExistsError("Replay already exists; do not silently overwrite")
     provider = GtfsSnapshotTrainProvider(FEED)

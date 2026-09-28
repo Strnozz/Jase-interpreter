@@ -19,7 +19,7 @@ Ogni vincolo hard nel GoalContract deve essere tradotto in una restrizione provi
 | `between 08:00,10:00` | intervallo chiuso sul ruolo specificato |
 | `search_time=mattina/pomeriggio/sera` | fascia di partenza configurata e dichiarata nel risultato; HOLD se ruolo non determinabile |
 
-La differenza inclusivo/esclusivo nelle parole naturali non è rappresentata in modo completo dagli operatori GoalContract 1.3 (`before`, `after`, `between`, `eq`). V1 deve preservare la frase e il criterio scelto nella provenance oppure tenere in HOLD i casi limite. Non trasforma mai un termine di arrivo in uguaglianza di partenza. Combinazioni temporalmente impossibili restano in HOLD. Orari GTFS oltre 24:00 sono relativi al giorno di servizio; conversione in datetime locale esplicita.
+La differenza inclusivo/esclusivo nelle parole naturali non è rappresentata in modo completo dagli operatori GoalContract 1.3 (`before`, `after`, `between`, `eq`). V1 registra un flag `inclusive` quando «entro», «non oltre» o «non prima» compare nella richiesta; gli altri `before/after` sono stretti. Non trasforma mai un termine di arrivo in uguaglianza di partenza. Combinazioni temporalmente impossibili restano in HOLD. Orari GTFS oltre 24:00 sono relativi al giorno di servizio; conversione in datetime locale esplicita. Nei giorni di cambio ora legale/solare V1 tiene in HOLD, poiché un orario locale ripetuto o inesistente richiede una disambiguazione ulteriore.
 
 ## Filtri, ordinamento e supporto effettivo
 

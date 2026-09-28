@@ -1,0 +1,20 @@
+{
+  "provider_id": "trenord_gtfs_lombardia",
+  "source_kind": "REAL_PROVIDER",
+  "access_mode": "verified_official_static_feed_snapshot",
+  "download_url": "https://www.dati.lombardia.it/download/3z4k-mxz9",
+  "metadata_url": "https://www.dati.lombardia.it/api/views/3z4k-mxz9.json",
+  "source_filename": "trenord_gtfs.zip",
+  "cache_filename": "data/provider_cache/trenord_gtfs_2026-09-26.zip",
+  "sha256": "b4296f145b42ccb35c26085470ff4b3fd5dffe533251c0aab312312a73820ad6",
+  "size_bytes": 1660043,
+  "license": "Creative Commons Attribution 4.0 International",
+  "attribution": "Regione Lombardia / Trenord",
+  "publisher_modified_date_reported": "2026-09-26",
+  "verified_on": "2026-09-28",
+  "service_date_min": "2026-07-26",
+  "service_date_max": "2026-12-12",
+  "timezone": "Europe/Rome",
+  "data_scope": "scheduled_Trenord_rail_in_GTFS_not_realtime_not_fares_not_inventory",
+  "writes_available": false
+}

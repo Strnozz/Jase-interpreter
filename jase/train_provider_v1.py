@@ -10,7 +10,7 @@ import unicodedata
 import zipfile
 from collections import defaultdict
 from dataclasses import asdict, dataclass
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from typing import Protocol
 from zoneinfo import ZoneInfo
@@ -173,20 +173,23 @@ class GtfsSnapshotTrainProvider:
     def resolve_station(self, value: str) -> tuple[str, ...]:
         normalized = _norm(value)
         exact = self.by_name.get(normalized)
-        if exact:
-            return tuple(sorted(exact))
         # Explicit city names are station groups, never a single guessed stop.
         city_groups = {"milano", "como", "varese", "brescia", "novara"}
         if normalized in city_groups:
-            ids = [ident for ident, name in self.stops.items()
-                   if _norm(name).startswith(normalized + " ")]
+            ids = [ident for ident, name in self.stops.items() if
+                   _norm(name) == normalized or _norm(name).startswith(normalized + " ")]
             if ids:
                 return tuple(sorted(ids))
+        if exact:
+            return tuple(sorted(exact))
         raise UnresolvedStation(value)
 
     def search(self, request: TrainSearchRequest) -> list[TrainSearchResult]:
         if not self.coverage_start <= request.travel_date <= self.coverage_end:
             raise UnsupportedConstraint("travel_date_outside_feed_coverage")
+        if (datetime.combine(request.travel_date, time(0), TIMEZONE).utcoffset() !=
+                datetime.combine(request.travel_date, time(12), TIMEZONE).utcoffset()):
+            raise UnsupportedConstraint("dst_transition_day_requires_explicit_schedule_handling")
         if request.train_category not in {None, "regional"}:
             raise UnsupportedConstraint("train_category_not_in_feed")
         if not 1 <= request.limit <= 100:
