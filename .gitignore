@@ -33,6 +33,8 @@ training/v27_conversational_launch.json
 training/v27_conversational_launch.log
 training/v27_conversational_launch.out.log
 training/v27_conversational_launch.err.log
+evaluation/v37_eval_chain.json
+evaluation/v37_eval_chain.log
 training/granite41_download*.log
 training/granite41_challenger_launch*.log
 training/granite41_challenger_launch.json
