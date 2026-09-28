@@ -21,7 +21,8 @@ UNKNOWN = "UNKNOWN"
 _NUMBERS = {"uno": 1, "una": 1, "due": 2, "tre": 3, "quattro": 4, "cinque": 5,
             "sei": 6, "sette": 7, "otto": 8, "nove": 9, "dieci": 10}
 _OPEN_NOW = re.compile(r"\b(?:apert[oaie]|open)\b.{0,32}\b(?:ora|adesso|now)\b", re.I)
-_DIRECT = re.compile(r"\b(?:dirett[oaie]|senza scali|nonstop|non-stop)\b", re.I)
+_DIRECT = re.compile(r"\b(?:dirett[oaie]|senza scali|senza cambi|nonstop|non-stop)\b", re.I)
+_REGIONAL = re.compile(r"\bregional[ei]\b", re.I)
 _BARE_CLOCK = re.compile(r"\b(?:alle|entro le|dopo le|prima delle)\s+(\d{1,2})(?![:\d])\b", re.I)
 
 
@@ -75,6 +76,8 @@ def ground_value(field: str, value: Any, user_text: str, *,
     if _DIRECT.search(user_text) and ((field == "stops" and type(value) is int and value == 0) or
                                       (field == "direct" and value is True)):
         return Evidence(DETERMINISTIC_DERIVATION, field, value, note="explicit_direct_route_phrase")
+    if field == "train_category" and value == "regional" and _REGIONAL.search(user_text):
+        return Evidence(DETERMINISTIC_DERIVATION, field, value, note="explicit_regional_train_phrase")
     if field in {"arrival_time", "departure_time", "notification_time", "action_time", "search_time"}:
         match = re.fullmatch(r"(\d{2}):00", str(value))
         clock_mentions = list(_BARE_CLOCK.finditer(user_text))

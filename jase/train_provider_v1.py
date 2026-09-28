@@ -34,6 +34,7 @@ class TimeConstraint:
     operator: str  # after, before, between, eq
     start: str  # HH:MM
     end: str | None = None
+    inclusive: bool = False
 
 
 @dataclass(frozen=True)
@@ -99,9 +100,9 @@ def _time_ok(value: datetime, constraint: TimeConstraint) -> bool:
     current = value.hour * 60 + value.minute
     bound = _minutes(constraint.start)
     if constraint.operator == "after":
-        return current > bound
+        return current >= bound if constraint.inclusive else current > bound
     if constraint.operator == "before":
-        return current < bound
+        return current <= bound if constraint.inclusive else current < bound
     if constraint.operator == "eq":
         return current == bound
     if constraint.operator == "between":
@@ -163,6 +164,11 @@ class GtfsSnapshotTrainProvider:
                     self.service_by_date[row["date"]].add(row["service_id"])
         for entries in self.times_by_trip.values():
             entries.sort()
+        active_dates = sorted(key for key, services in self.service_by_date.items() if services)
+        if not active_dates:
+            raise ValueError("GTFS feed contains no active service dates")
+        self.coverage_start = date(int(active_dates[0][:4]), int(active_dates[0][4:6]), int(active_dates[0][6:]))
+        self.coverage_end = date(int(active_dates[-1][:4]), int(active_dates[-1][4:6]), int(active_dates[-1][6:]))
 
     def resolve_station(self, value: str) -> tuple[str, ...]:
         normalized = _norm(value)
@@ -179,6 +185,8 @@ class GtfsSnapshotTrainProvider:
         raise UnresolvedStation(value)
 
     def search(self, request: TrainSearchRequest) -> list[TrainSearchResult]:
+        if not self.coverage_start <= request.travel_date <= self.coverage_end:
+            raise UnsupportedConstraint("travel_date_outside_feed_coverage")
         if request.train_category not in {None, "regional"}:
             raise UnsupportedConstraint("train_category_not_in_feed")
         if not 1 <= request.limit <= 100:

@@ -1,0 +1,23 @@
+{
+  "version": "train-v1",
+  "extends": "v3.json",
+  "extends_sha256": "9a8d2e384e3418974955dc712372eb813564d7da4544281871d1d70ed61d5560",
+  "replace_capability": {
+    "capability_id": "find.train",
+    "version": "train-v1",
+    "action": "find",
+    "target_type": "transport",
+    "target_names": ["treno"],
+    "aliases": ["treno regionale", "regionale", "train"],
+    "required_slots": ["fact.origin", "fact.destination", "temporal.search_date"],
+    "optional_slots": ["fact.stops", "fact.direct", "fact.train_category", "fact.train_service", "fact.travel_class", "fact.price", "fact.duration"],
+    "supported_modifiers": ["limit", "sort"],
+    "supported_temporal_roles": ["search_date", "search_time", "departure_time", "arrival_time"],
+    "supported_reference_types": ["result_ordinal", "cheapest_result"],
+    "required_policies": [],
+    "provider_binding": "mock_catalog",
+    "consequentiality": "read",
+    "confirmation_required": false,
+    "execution_status": "mock_only"
+  }
+}

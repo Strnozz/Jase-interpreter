@@ -14,6 +14,7 @@ from typing import Any
 REGISTRY_PATH = Path(__file__).resolve().parents[1] / "configs/capabilities/v1.json"
 REGISTRY_V2_PATH = REGISTRY_PATH.with_name("v2.json")
 REGISTRY_V3_PATH = REGISTRY_PATH.with_name("v3.json")
+REGISTRY_TRAIN_V1_PATH = REGISTRY_PATH.with_name("train_v1.json")
 
 
 @dataclass(frozen=True)
@@ -77,7 +78,7 @@ class Capability:
 
 class CapabilityRegistry:
     def __init__(self, version: str, capabilities: tuple[Capability, ...]):
-        if version not in {"1", "2", "3"}:
+        if version not in {"1", "2", "3", "train-v1"}:
             raise ValueError("Unsupported capability registry version")
         ids = [item.capability_id for item in capabilities]
         if len(ids) != len(set(ids)):
@@ -88,6 +89,20 @@ class CapabilityRegistry:
     @classmethod
     def load(cls, path: Path = REGISTRY_PATH) -> "CapabilityRegistry":
         raw = json.loads(path.read_text(encoding="utf-8"))
+        if raw.get("version") == "train-v1":
+            if set(raw) != {"version", "extends", "extends_sha256", "replace_capability"} or raw["extends"] != "v3.json":
+                raise ValueError("Invalid train registry extension envelope")
+            parent = path.with_name("v3.json")
+            if hashlib.sha256(parent.read_bytes()).hexdigest() != raw["extends_sha256"]:
+                raise ValueError("Train registry parent hash changed")
+            base = cls.load(parent)
+            replacement = Capability.from_dict(raw["replace_capability"])
+            if replacement.capability_id != "find.train" or replacement.action != "find" or replacement.target_type != "transport" or replacement.consequentiality != "read" or replacement.execution_status != "mock_only":
+                raise ValueError("Train registry may only narrow/extend read-only find.train")
+            if sum(cap.capability_id == "find.train" for cap in base.capabilities) != 1:
+                raise ValueError("Expected exactly one parent train capability")
+            return cls("train-v1", tuple(replacement if cap.capability_id == "find.train" else cap
+                                          for cap in base.capabilities))
         if raw.get("version") in {"2", "3"}:
             parent = {"2": "v1.json", "3": "v2.json"}[raw["version"]]
             if set(raw) != {"version", "extends", "extends_sha256", "capabilities"} or raw["extends"] != parent:

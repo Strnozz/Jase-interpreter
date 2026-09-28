@@ -243,7 +243,8 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
         for key, value in goal.get("modifiers", {}).items():
             slot = f"modifiers.{key}"
             supplied.add(slot)
-            if key not in cap.supported_modifiers or (key == "sort" and value.get("field") not in _SORT_FIELDS):
+            allowed_sort = _SORT_FIELDS | ({"departure_time", "arrival_time"} if cap.capability_id == "find.train" else set())
+            if key not in cap.supported_modifiers or (key == "sort" and value.get("field") not in allowed_sort):
                 step_codes.append("HOLD_UNMAPPED_SLOT")
                 result["semantic_conflicts"].append({"goal": ident, "slot": slot, "reason": "modifier_not_registered"})
             if key != "sort":
