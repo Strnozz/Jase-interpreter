@@ -1,0 +1,50 @@
+{
+  "variant": "before",
+  "cases": 60,
+  "panel_sha256": "c0e4d08208406cc4d1198ee84b432d6ee8fc5eaf678ad641dbcbf3074fb41ac7",
+  "prediction_sha256": "2524d629362d059acf19af1924f867c19391c7d8aa62b154ca05ed6e682bc759",
+  "planner_sha256": "d5b8fb2c9a6e9c51395254ebf70ee6fa193ca08456236eabafa16d1ed19dac24",
+  "registry_sha256": "32f54a8246c86e7105869283eb58d8db1de14628156563b4594414b08bf6b0c7",
+  "guard_sha256": "1b57cd3c80db7684299c58d05209e2de6af4e8e54e6b3abae247f5cb9ab40754",
+  "status_counts": {
+    "HOLD_GUARD": 28,
+    "READY_FOR_DRY_RUN": 6,
+    "HOLD": 22,
+    "NO_ACTION": 4
+  },
+  "reason_counts": {
+    "open_now_missing": 2,
+    "unknown_planner_field": 5,
+    "invalid_json": 2,
+    "HOLD_POLICY_REQUIRED": 2,
+    "HOLD_UNGROUNDED_FACT": 10,
+    "HOLD_NO_CAPABILITY": 6,
+    "schema": 10,
+    "HOLD_UNMAPPED_SLOT": 4,
+    "wrong_block_phase": 1,
+    "conflicting_hard_equality": 2,
+    "temporal_fact_without_role": 1,
+    "temporal_role_action_mismatch": 1,
+    "cardinality_lost": 2,
+    "compare_cardinality_missing": 2,
+    "compare_count_missing_v4": 2,
+    "HOLD_MISSING_INFORMATION": 7,
+    "notify_target_mismatch": 1,
+    "HOLD_CONFIRMATION_PENDING": 5,
+    "alias_requires_planner_mapping": 1,
+    "explicit_origin_missing": 1,
+    "result_limit_missing_v2": 1,
+    "explicit_no_book_policy_missing_v5": 1,
+    "explicit_no_booking_policy_missing": 1,
+    "missing_required_information": 1,
+    "restaurant_booking_slots_missing": 1
+  },
+  "canonical_exact_raw": 9,
+  "guard_accept_raw": 39,
+  "exact_held": 3,
+  "execution_permitted": false,
+  "limits": [
+    "Gold agent-authored, not independently human-reviewed",
+    "Provider execution is disabled"
+  ]
+}
