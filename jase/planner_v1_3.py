@@ -9,14 +9,14 @@ import json
 import re
 from typing import Any, Mapping
 
-from .capability_registry_v1 import Capability, CapabilityRegistry, REGISTRY_V2_PATH
+from .capability_registry_v1 import Capability, CapabilityRegistry, REGISTRY_V3_PATH
 from .provenance_v1 import (DETERMINISTIC_DERIVATION, MODEL_INFERENCE,
                             TRUSTED_CONVERSATION_CONTEXT, USER_EXPLICIT,
                             ground_value)
 from .semantic_guard_v1_3 import ACCEPT
 from .semantic_guard_v1_3_routing_v5 import check_contract
 
-VERSION = "1.3-dry-run-2"
+VERSION = "1.3-dry-run-3"
 _TRUSTED = {USER_EXPLICIT, TRUSTED_CONVERSATION_CONTEXT, DETERMINISTIC_DERIVATION,
             "PROVIDER_RESULT", "CAPABILITY_RESULT"}
 _CONTEXT_FIELDS = {"has_car", "party_size", "user_location", "vehicle_location", "pet", "lodging_owned"}
@@ -32,17 +32,18 @@ _FORBIDS = {
     "book": re.compile(r"\b(?:senza|non)\s+(?:prenotare|prenotarlo|prenotarla|riservare)\b|\bnessuna prenotazione\b|\b(?:decido|deciderò|scelgo|sceglierò)\s+dopo\b|\bdecido\s+io\s+quale\b", re.I),
     "buy": re.compile(r"\b(?:senza|non)\s+(?:comprare|acquistare|ordinare|fare acquisti)\b|\bniente acquisti\b|\bnon acquistare nulla\b", re.I),
     "rent": re.compile(r"\b(?:senza|non)\s+(?:affittare|noleggiare|prenderne)\b|\bsolo ricerche\b", re.I),
-    "hire": re.compile(r"\b(?:senza|non)\s+(?:assumere|ingaggiare|incaricare)\b|\bnessun incarico\b", re.I),
+    "hire": re.compile(r"\b(?:senza|non)\s+(?:assumere|ingaggiare|incaricare|incaricarlo|incaricarla|ingaggiarlo|ingaggiarla|assumerlo|assumerla)\b|\bnessun incarico\b", re.I),
 }
 _FORBID_TYPES = {"book": {"accommodation", "place", "transport", "appointment"},
                  "buy": {"product", "food", "transport", "place"},
                  "rent": {"vehicle"}, "hire": {"professional_service"}}
 _AVAILABILITY_REQUEST = re.compile(r"\b(?:disponibil[ei]|visitabil[ei]|apert[oaie])\b", re.I)
+_STAY_PERIOD = re.compile(r"\bper\s+(?:(?:un|il|la)\s+)?(?:fine settimana|weekend|stanotte|stasera)\b", re.I)
 _DAY_PART = {"mattino", "mattina", "pomeriggio", "sera", "serata", "notte"}
 _GENERIC_LANDMARK = {"stazione", "centro", "porto", "aeroporto"}
 
 
-def _shell(status: str, codes: list[str] | None = None, registry_version: str = "2") -> dict[str, Any]:
+def _shell(status: str, codes: list[str] | None = None, registry_version: str = "3") -> dict[str, Any]:
     return {"planner_version": VERSION, "registry_version": registry_version, "planner_status": status,
             "reason_codes": codes or [], "resolved_capabilities": [], "goal_bindings": [],
             "resolved_references": [], "missing_slots": [], "unresolved_references": [],
@@ -119,7 +120,7 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
     never grants provider execution. Missing slots come from the registry, not
     from the model's `missing` array.
     """
-    registry = registry or CapabilityRegistry.load(REGISTRY_V2_PATH)
+    registry = registry or CapabilityRegistry.load(REGISTRY_V3_PATH)
     trusted_context = trusted_context or {}
     results_by_goal = results_by_goal or {}
     external_bindings_by_goal = external_bindings_by_goal or {}
@@ -192,6 +193,8 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
                 evidence = ground_value(name, value, user_text, trusted_context=trusted_context,
                                         provider_values=provider_values, capability_values=capability_values)
                 bindings[slot] = {"value": value, "operator": item["op"], "provenance": evidence.as_dict()}
+                if item.get("currency"):
+                    bindings[slot]["currency"] = item["currency"]
                 if evidence.source not in _TRUSTED:
                     step_codes.append("HOLD_UNGROUNDED_FACT")
                     result["provenance_issues"].append({"goal": ident, "slot": slot,
@@ -222,7 +225,8 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
                     result["semantic_conflicts"].append({"goal": ident, "slot": "fact.message",
                                                          "reason": "explicit_reminder_clause_not_preserved"})
         if cap.consequentiality == "read":
-            if (_AVAILABILITY_REQUEST.search(user_text) and
+            if ((_AVAILABILITY_REQUEST.search(user_text) or
+                 (goal["target"]["type"] in {"accommodation", "place"} and _STAY_PERIOD.search(user_text))) and
                     goal["target"]["type"] in {"place", "accommodation", "professional_service"} and
                     not any(item["field"] in {"availability", "open_now"} for item in goal["facts"])):
                 step_codes.append("HOLD_AVAILABILITY_MISSING")
@@ -248,7 +252,9 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
                     step_codes.append("HOLD_UNGROUNDED_FACT")
                     result["provenance_issues"].append({"goal": ident, "slot": slot,
                                                        "evidence": evidence.as_dict()})
-            bindings[slot] = value
+            bindings[slot] = ({"value": value, "provenance": evidence.as_dict()}
+                              if key != "sort" else {"value": value, "provenance":
+                                                     {"source": MODEL_INFERENCE, "note": "sort_not_grounded"}})
         for context_item in contract.get("context", []):
             field = context_item["field"]
             if field not in _CONTEXT_FIELDS:
@@ -257,6 +263,9 @@ def plan_contract(raw: str | dict[str, Any], user_text: str, *,
                                                      "reason": "context_field_not_registered"})
             evidence = ground_value(field, context_item.get("value"), user_text,
                                     trusted_context=trusted_context)
+            bindings[f"context.{field}"] = {"value": context_item.get("value"),
+                                             "operator": context_item["op"],
+                                             "provenance": evidence.as_dict()}
             if evidence.source not in _TRUSTED:
                 step_codes.append("HOLD_UNGROUNDED_FACT")
                 result["provenance_issues"].append({"goal": ident, "slot": f"context.{field}",

@@ -13,6 +13,7 @@ from typing import Any
 
 REGISTRY_PATH = Path(__file__).resolve().parents[1] / "configs/capabilities/v1.json"
 REGISTRY_V2_PATH = REGISTRY_PATH.with_name("v2.json")
+REGISTRY_V3_PATH = REGISTRY_PATH.with_name("v3.json")
 
 
 @dataclass(frozen=True)
@@ -76,7 +77,7 @@ class Capability:
 
 class CapabilityRegistry:
     def __init__(self, version: str, capabilities: tuple[Capability, ...]):
-        if version not in {"1", "2"}:
+        if version not in {"1", "2", "3"}:
             raise ValueError("Unsupported capability registry version")
         ids = [item.capability_id for item in capabilities]
         if len(ids) != len(set(ids)):
@@ -87,22 +88,26 @@ class CapabilityRegistry:
     @classmethod
     def load(cls, path: Path = REGISTRY_PATH) -> "CapabilityRegistry":
         raw = json.loads(path.read_text(encoding="utf-8"))
-        if raw.get("version") == "2":
-            if set(raw) != {"version", "extends", "extends_sha256", "capabilities"} or raw["extends"] != "v1.json":
-                raise ValueError("Invalid V2 registry envelope")
+        if raw.get("version") in {"2", "3"}:
+            parent = {"2": "v1.json", "3": "v2.json"}[raw["version"]]
+            if set(raw) != {"version", "extends", "extends_sha256", "capabilities"} or raw["extends"] != parent:
+                raise ValueError("Invalid registry extension envelope")
             base_path = path.with_name(raw["extends"])
             if hashlib.sha256(base_path.read_bytes()).hexdigest() != raw["extends_sha256"]:
-                raise ValueError("V2 registry base hash changed")
+                raise ValueError("Registry base hash changed")
             base = cls.load(base_path)
             additions = tuple(Capability.from_dict(x) for x in raw["capabilities"])
-            return cls("2", base.capabilities + additions)
+            return cls(raw["version"], base.capabilities + additions)
         if set(raw) != {"version", "capabilities"} or raw["version"] != "1":
             raise ValueError("Invalid registry envelope")
         return cls("1", tuple(Capability.from_dict(x) for x in raw["capabilities"]))
 
     def resolve(self, goal: dict[str, Any]) -> tuple[str, Capability | None]:
-        matches = [spec for spec in self.capabilities if spec.matches(goal["action"],
-                   goal["target"]["type"], goal["target"]["name"])]
+        action, target_type = goal["action"], goal["target"]["type"]
+        name = goal["target"]["name"].casefold().strip()
+        explicit = [spec for spec in self.capabilities if spec.action == action and
+                    spec.target_type == target_type and name in spec.target_names and name != "*"]
+        matches = explicit or [spec for spec in self.capabilities if spec.matches(action, target_type, name)]
         if not matches:
             return "HOLD_NO_CAPABILITY", None
         if len(matches) != 1:

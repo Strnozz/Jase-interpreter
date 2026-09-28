@@ -1,0 +1,61 @@
+{
+  "version": "3",
+  "extends": "v2.json",
+  "extends_sha256": "32f54a8246c86e7105869283eb58d8db1de14628156563b4594414b08bf6b0c7",
+  "capabilities": [
+    {
+      "capability_id": "find.veterinarian",
+      "version": "3.0",
+      "action": "find",
+      "target_type": "professional_service",
+      "target_names": ["veterinario", "veterinaria"],
+      "aliases": [],
+      "required_slots": ["fact.location"],
+      "optional_slots": ["fact.availability", "fact.open_now"],
+      "supported_modifiers": ["limit", "sort"],
+      "supported_temporal_roles": ["search_date", "search_time"],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.room",
+      "version": "3.0",
+      "action": "find",
+      "target_type": "accommodation",
+      "target_names": ["camera", "stanza", "pensione", "bed and breakfast"],
+      "aliases": ["b&b"],
+      "required_slots": ["fact.location"],
+      "optional_slots": ["fact.availability"],
+      "supported_modifiers": ["limit", "sort"],
+      "supported_temporal_roles": ["search_date", "search_time"],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    },
+    {
+      "capability_id": "find.technician",
+      "version": "3.0",
+      "action": "find",
+      "target_type": "professional_service",
+      "target_names": ["tecnico", "tecnica"],
+      "aliases": [],
+      "required_slots": ["fact.location", "fact.specialization"],
+      "optional_slots": ["fact.availability", "fact.open_now"],
+      "supported_modifiers": ["limit", "sort"],
+      "supported_temporal_roles": ["search_date", "search_time"],
+      "supported_reference_types": [],
+      "required_policies": [],
+      "provider_binding": "mock_catalog",
+      "consequentiality": "read",
+      "confirmation_required": false,
+      "execution_status": "mock_only"
+    }
+  ]
+}

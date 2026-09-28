@@ -27,7 +27,8 @@ class RegistryV2PlannerTests(unittest.TestCase):
 
     def test_registered_read_only_bus_can_be_planned(self):
         item = goal("find", "transport", "autobus", {"origin": "Potenza", "destination": "Melfi"})
-        result = plan_contract(task(item), "Trova autobus da Potenza a Melfi.")
+        result = plan_contract(task(item), "Trova autobus da Potenza a Melfi.",
+                               registry=CapabilityRegistry.load(REGISTRY_V2_PATH))
         self.assertEqual(result["planner_status"], "READY_FOR_DRY_RUN")
         self.assertEqual(result["registry_version"], "2")
         self.assertFalse(result["execution_permitted"])

@@ -10,8 +10,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from jase.capability_registry_v1 import REGISTRY_V2_PATH  # noqa: E402
+from jase.capability_registry_v1 import REGISTRY_V2_PATH, REGISTRY_V3_PATH  # noqa: E402
 from jase.planner_v1_3 import plan_contract  # noqa: E402
+from jase.planner_handoff_mock import prepare_mock_handoff  # noqa: E402
 
 PANEL = ROOT / "benchmarks/v36/blind.jsonl"
 PREDICTIONS = ROOT / "benchmarks/outputs/qwen-v26-v36-blind/cases.jsonl"
@@ -28,7 +29,7 @@ def load(path: Path) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--variant", required=True, choices=("before", "after"))
+    parser.add_argument("--variant", required=True, choices=("before", "after", "after_v2"))
     args = parser.parse_args()
     if sha(PANEL) != PANEL_SHA:
         raise RuntimeError("Frozen V36 panel changed")
@@ -42,7 +43,7 @@ def main() -> None:
     summary_file = dest / f"v36_qwen_v26_planner_{args.variant}_summary.json"
     if cases.exists() or summary_file.exists():
         raise FileExistsError("Replay variant is already recorded")
-    output, statuses, reasons = [], Counter(), Counter()
+    output, statuses, reasons, handoff_statuses = [], Counter(), Counter(), Counter()
     for ident in sorted(gold):
         text = gold[ident]["text"]
         predicted = plan_contract(candidate[ident]["raw"], text)
@@ -51,17 +52,26 @@ def main() -> None:
             raise RuntimeError("Execution permission escaped dry-run boundary")
         statuses[predicted["planner_status"]] += 1
         reasons.update(predicted["reason_codes"])
-        output.append({"id": ident, "family": gold[ident]["family"], "request": text,
+        handoff = prepare_mock_handoff(predicted) if args.variant != "before" else None
+        if handoff is not None:
+            handoff_statuses[handoff["status"]] += 1
+            if handoff["provider_called"] or handoff["execution_permitted"]:
+                raise RuntimeError("Mock handoff crossed execution boundary")
+        row = {"id": ident, "family": gold[ident]["family"], "request": text,
                        "review_flags": gold[ident]["review_flags"], "gold": gold[ident]["contract"],
                        "raw": candidate[ident]["raw"],
                        "canonical_exact_raw": candidate[ident]["metric"]["canonical_equal"],
                        "guard_accept_raw": candidate[ident]["metric"]["guard_accept"],
-                       "planner": predicted, "gold_planner": expected})
+                       "planner": predicted, "gold_planner": expected}
+        if handoff is not None:
+            row["mock_handoff"] = handoff
+        output.append(row)
     summary = {"variant": args.variant, "cases": len(output), "panel_sha256": sha(PANEL),
                "prediction_sha256": sha(PREDICTIONS), "planner_sha256": sha(ROOT / "jase/planner_v1_3.py"),
-               "registry_sha256": sha(REGISTRY_V2_PATH),
+               "registry_sha256": sha(REGISTRY_V2_PATH if args.variant == "before" else REGISTRY_V3_PATH),
                "guard_sha256": sha(ROOT / "jase/semantic_guard_v1_3_routing_v5.py"),
                "status_counts": dict(statuses), "reason_counts": dict(reasons),
+               "mock_handoff_status_counts": dict(handoff_statuses) if args.variant != "before" else None,
                "canonical_exact_raw": sum(row["canonical_exact_raw"] for row in output),
                "guard_accept_raw": sum(row["guard_accept_raw"] for row in output),
                "exact_held": sum(row["canonical_exact_raw"] and row["planner"]["planner_status"] not in
